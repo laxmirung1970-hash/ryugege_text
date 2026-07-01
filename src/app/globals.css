@@ -2,16 +2,13 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #1f2933;
-  --navy: #0b1f3a;
-  --navy-soft: #16365f;
-  --bronze: #b88a44;
-  --orange: #e4572e;
-  --china-red: #d8242f;
-  --creator-yellow: #ffd24a;
-  --creator-pink: #f7b4c6;
-  --paper: #f7f8fa;
-  --line: #d9e2ec;
+  --foreground: #171717;
+  --charcoal: #171717;
+  --tour-red: #ef2f37;
+  --tour-red-dark: #8b1118;
+  --gold: #f4c35f;
+  --paper: #fbfbfb;
+  --line: #ead6a3;
 }
 
 @theme inline {
@@ -29,8 +26,8 @@ body {
 }
 
 ::selection {
-  background: rgba(184, 138, 68, 0.24);
-  color: var(--navy);
+  background: rgba(244, 195, 95, 0.34);
+  color: var(--charcoal);
 }
 
 .font-heading {

@@ -16,11 +16,11 @@ const sarabun = Sarabun({
 
 export const metadata: Metadata = {
   title: {
-    default: "RyuGeGe China Tour",
-    template: "%s | RyuGeGe China Tour",
+    default: "RyuGeGe Tour",
+    template: "%s | RyuGeGe Tour",
   },
   description:
-    "Private China business tour and safe facilitation for Thai SME owners, importers, and purchasing teams.",
+    "Founder-led business trips, China sourcing tours, factory visits, and Thai-Chinese facilitation for SME owners, importers, and purchasing teams.",
 };
 
 export default function RootLayout({

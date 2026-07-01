@@ -50,7 +50,7 @@ function FieldLabel({
   return (
     <label
       htmlFor={htmlFor}
-      className="text-sm font-semibold text-[#0B1F3A]"
+      className="text-sm font-semibold text-[#171717]"
     >
       {children}
     </label>
@@ -58,14 +58,14 @@ function FieldLabel({
 }
 
 const inputClass =
-  "mt-2 w-full rounded-md border border-[#CBD5E1] bg-white px-4 py-3 text-base text-[#1F2933] outline-none transition focus:border-[#D8242F] focus:ring-[3px] focus:ring-[#FFD24A]/45";
+  "mt-2 w-full rounded-md border border-[#E4D2A7] bg-white px-4 py-3 text-base text-[#1F2933] outline-none transition focus:border-[#EF2F37] focus:ring-[3px] focus:ring-[#F4C35F]/45";
 
 export function InquiryForm() {
   const [form, setForm] = useState<FormState>(initialState);
 
   const lineMessage = useMemo(() => {
     return [
-      "สวัสดีครับริว สนใจปรึกษาทริปจีนกับ RyuGeGe",
+      "สวัสดีครับริว สนใจปรึกษาทริปกับ RyuGeGe Tour",
       `ชื่อ: ${form.fullName || "-"}`,
       `บริษัท/ธุรกิจ: ${form.company || "-"}`,
       `โทร: ${form.phone || "-"}`,
@@ -237,7 +237,7 @@ export function InquiryForm() {
       </p>
       <button
         type="submit"
-        className="mt-5 w-full rounded-md bg-[#D8242F] px-5 py-4 text-base font-bold text-white shadow-[0_12px_28px_rgba(216,36,47,0.28)] transition hover:bg-[#B91E28] focus:outline-none focus:ring-[3px] focus:ring-[#FFD24A]/45"
+        className="mt-5 w-full rounded-md bg-[#EF2F37] px-5 py-4 text-base font-bold text-white shadow-[0_12px_28px_rgba(239,47,55,0.28)] transition hover:bg-[#C91F27] focus:outline-none focus:ring-[3px] focus:ring-[#F4C35F]/45"
       >
         ส่งข้อมูลเพื่อประเมินทริป
       </button>
