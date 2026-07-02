@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { type ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
 export type HeroSlide = {
   image: string;
@@ -10,15 +10,19 @@ export type HeroSlide = {
 };
 
 /**
- * Auto-rotating hero carousel (borrowed structure from china4trip's hero).
- * Pure client-side so it works with `output: "export"`. Pauses on hover/focus
- * and respects prefers-reduced-motion by not auto-advancing.
+ * Full-bleed hero background carousel. Renders crossfading images behind
+ * `children` (the hero copy, server-rendered) plus a subtle scrim, a rotating
+ * slide label, and dot controls. Pure client-side so it works with
+ * `output: "export"`. Auto-advance pauses on hover/focus and is disabled under
+ * prefers-reduced-motion.
  */
 export function HeroCarousel({
   slides,
-  intervalMs = 5000,
+  children,
+  intervalMs = 5500,
 }: {
   slides: HeroSlide[];
+  children: ReactNode;
   intervalMs?: number;
 }) {
   const [active, setActive] = useState(0);
@@ -48,91 +52,69 @@ export function HeroCarousel({
 
   return (
     <div
-      className="relative min-h-[460px] overflow-hidden rounded-lg border border-white/15 bg-[#1a0909] shadow-[0_30px_90px_rgba(54,0,4,0.34)]"
+      className="relative isolate overflow-hidden"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
       onBlurCapture={() => setPaused(false)}
       aria-roledescription="carousel"
     >
+      {/* Backgrounds */}
       {slides.map((slide, index) => (
         <div
           key={slide.title}
-          className={`absolute inset-0 transition-opacity duration-700 ${
-            index === active ? "opacity-100" : "pointer-events-none opacity-0"
+          aria-hidden
+          className={`absolute inset-0 -z-10 transition-opacity duration-1000 ease-out ${
+            index === active ? "opacity-100" : "opacity-0"
           }`}
-          aria-hidden={index !== active}
         >
           <div
-            className="absolute inset-0 bg-cover bg-center"
+            className={`absolute inset-0 bg-cover bg-center ${
+              index === active ? "animate-kenburns" : ""
+            }`}
             style={{ backgroundImage: `url(${slide.image})` }}
           />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(42,0,3,0.92),rgba(176,22,29,0.62),rgba(8,11,18,0.7))]" />
-          <div className="relative flex min-h-[460px] flex-col justify-between p-6 text-white sm:p-8">
-            <div className="flex items-start justify-between gap-4">
-              <div className="max-w-md">
-                <p className="text-sm font-bold uppercase tracking-[0.18em] text-gold">
-                  {slide.kicker}
-                </p>
-                <h2 className="font-heading mt-3 text-3xl font-black leading-tight text-gold-light sm:text-4xl">
-                  {slide.title}
-                </h2>
-              </div>
-              <div className="hidden rounded-md border border-gold/40 bg-black/28 px-4 py-3 text-right backdrop-blur sm:block">
-                <span className="block text-xs font-bold uppercase tracking-[0.16em] text-gold">
-                  Founder-led
-                </span>
-                <span className="mt-1 block text-lg font-black">
-                  RyuGeGe Tour
-                </span>
-              </div>
-            </div>
-            <p className="max-w-lg text-sm font-semibold leading-6 text-white/85">
-              {slide.caption}
-            </p>
-          </div>
         </div>
       ))}
 
-      {/* Prev / next */}
-      {count > 1 ? (
-        <>
-          <button
-            type="button"
-            onClick={() => go(active - 1)}
-            aria-label="สไลด์ก่อนหน้า"
-            className="absolute left-3 top-1/2 z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full border border-white/30 bg-black/30 text-white backdrop-blur transition hover:bg-black/50"
-          >
-            ‹
-          </button>
-          <button
-            type="button"
-            onClick={() => go(active + 1)}
-            aria-label="สไลด์ถัดไป"
-            className="absolute right-3 top-1/2 z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full border border-white/30 bg-black/30 text-white backdrop-blur transition hover:bg-black/50"
-          >
-            ›
-          </button>
+      {/* Scrim: dark on the left for text legibility + warm glow top-right */}
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(20,6,7,0.94)_0%,rgba(27,17,14,0.82)_40%,rgba(27,17,14,0.45)_72%,rgba(27,17,14,0.35)_100%)]" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_82%_18%,rgba(244,195,95,0.22),transparent_42%)]" />
 
-          {/* Dots */}
-          <div className="absolute inset-x-0 bottom-4 z-10 flex justify-center gap-2">
-            {slides.map((slide, index) => (
-              <button
-                key={slide.title}
-                type="button"
-                onClick={() => setActive(index)}
-                aria-label={`ไปสไลด์ที่ ${index + 1}`}
-                aria-current={index === active}
-                className={`h-2 rounded-full transition-all ${
-                  index === active
-                    ? "w-6 bg-gold"
-                    : "w-2 bg-white/45 hover:bg-white/70"
-                }`}
-              />
-            ))}
+      {/* Overlay content */}
+      {children}
+
+      {/* Rotating slide label + dots */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10">
+        <div className="mx-auto flex max-w-7xl items-end justify-between gap-4 px-4 pb-6 sm:px-6 lg:px-8 lg:pb-8">
+          <div key={active} className="animate-fade-in hidden sm:block">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">
+              {slides[active].kicker}
+            </p>
+            <p className="mt-1 font-heading text-lg font-bold text-white/90">
+              {slides[active].title}
+            </p>
           </div>
-        </>
-      ) : null}
+          {count > 1 ? (
+            <div className="pointer-events-auto flex items-center gap-2">
+              {slides.map((slide, index) => (
+                <button
+                  key={slide.title}
+                  type="button"
+                  onClick={() => go(index)}
+                  aria-label={`ไปสไลด์ที่ ${index + 1}`}
+                  aria-current={index === active}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    index === active
+                      ? "w-8 bg-gold"
+                      : "w-3 bg-white/40 hover:bg-white/70"
+                  }`}
+                />
+              ))}
+            </div>
+          ) : null}
+        </div>
+      </div>
     </div>
   );
 }

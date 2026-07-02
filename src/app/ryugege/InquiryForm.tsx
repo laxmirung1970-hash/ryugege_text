@@ -55,7 +55,7 @@ function FieldLabel({
 }
 
 const inputClass =
-  "mt-2 w-full rounded-md border border-sand bg-white px-4 py-3 text-base text-charcoal outline-none transition focus:border-tour-red focus:ring-[3px] focus:ring-gold/45";
+  "mt-2 w-full rounded-xl border border-sand bg-cream/40 px-4 py-3 text-base text-charcoal outline-none transition focus:border-tour-red focus:bg-white focus:ring-[3px] focus:ring-gold/40";
 
 export function InquiryForm() {
   const [form, setForm] = useState<FormState>(initialState);
@@ -89,7 +89,7 @@ export function InquiryForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-lg border border-sand bg-white p-5 shadow-[var(--shadow-card)] sm:p-6"
+      className="rounded-3xl border border-sand/70 bg-white p-6 shadow-[var(--shadow-soft)] sm:p-8"
     >
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
@@ -234,7 +234,7 @@ export function InquiryForm() {
       </p>
       <button
         type="submit"
-        className="mt-5 w-full rounded-md bg-tour-red px-5 py-4 text-base font-bold text-white shadow-[var(--shadow-cta)] transition hover:bg-tour-red-dark focus:outline-none focus:ring-[3px] focus:ring-gold/45"
+        className="mt-5 w-full rounded-full bg-tour-red px-5 py-4 text-base font-bold text-white shadow-[var(--shadow-cta)] transition hover:bg-tour-red-dark focus:outline-none focus:ring-[3px] focus:ring-gold/45"
       >
         ส่งข้อมูลเพื่อประเมินทริป
       </button>

@@ -6,6 +6,8 @@ import { SiteHeader, type NavItem } from "./SiteHeader";
 import { Icon, type IconName } from "./icons";
 import { LINE_URL } from "./constants";
 
+const PHONE = "092 842 2121";
+
 type SocialLink = {
   label: string;
   value: string;
@@ -20,7 +22,6 @@ type TripCard = {
   description: string;
   tags: string[];
   image: string;
-  accent: string;
 };
 
 type ServiceCard = {
@@ -114,7 +115,7 @@ const socialLinks: SocialLink[] = [
   },
   {
     label: "Phone",
-    value: "092 842 2121",
+    value: PHONE,
     href: "tel:0928422121",
     icon: "phone",
   },
@@ -125,13 +126,12 @@ const heroProof = [
   "ล่ามจีน-ไทย-อังกฤษ",
   "Private Business Trip",
   "Founder-led Service",
-  "ต่อยอดตลาดอื่นในอนาคต",
 ];
 
 const heroSlides: HeroSlide[] = [
   {
     image:
-      "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?auto=format&fit=crop&w=1600&q=80",
     kicker: "Canton Fair / Factory",
     title: "พาเดินงานแฟร์และดูโรงงานจีน",
     caption:
@@ -139,7 +139,7 @@ const heroSlides: HeroSlide[] = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&w=1600&q=80",
     kicker: "Sourcing Market",
     title: "ลงตลาดค้าส่งของจริง",
     caption:
@@ -147,19 +147,17 @@ const heroSlides: HeroSlide[] = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1600&q=80",
     kicker: "Interpretation",
     title: "มีล่ามธุรกิจเดินไปกับคุณ",
-    caption:
-      "แปลโดยดูบริบทธุรกิจและการต่อรอง ไม่ใช่แค่แปลคำต่อคำ",
+    caption: "แปลโดยดูบริบทธุรกิจและการต่อรอง ไม่ใช่แค่แปลคำต่อคำ",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1600&q=80",
     kicker: "Private Business Trip",
     title: "ทริปส่วนตัวสำหรับผู้บริหาร",
-    caption:
-      "ดูแลภาษา เส้นทาง ร้านอาหาร และจังหวะการเดินทางในทริปเดียว",
+    caption: "ดูแลภาษา เส้นทาง ร้านอาหาร และจังหวะการเดินทางในทริปเดียว",
   },
 ];
 
@@ -180,7 +178,7 @@ const contactCards = [
   },
   {
     title: "ช่องทางตรง",
-    value: "092 842 2121",
+    value: PHONE,
     copy: "โทรหรือฝากข้อมูลไว้ แล้วเลือกช่องทางที่สะดวกสำหรับการคุยรายละเอียด",
     href: "tel:0928422121",
     icon: "phone" as IconName,
@@ -241,7 +239,6 @@ const tripCards: TripCard[] = [
     tags: ["Canton Fair", "Factory", "Supplier Meeting"],
     image:
       "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=80",
-    accent: "bg-tour-red",
   },
   {
     city: "Yiwu",
@@ -252,7 +249,6 @@ const tripCards: TripCard[] = [
     tags: ["Wholesale", "Retail Ideas", "SME"],
     image:
       "https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&w=1200&q=80",
-    accent: "bg-[#d8a536]",
   },
   {
     city: "Foshan / Zhongshan",
@@ -263,7 +259,6 @@ const tripCards: TripCard[] = [
     tags: ["Furniture", "Lighting", "Interior"],
     image:
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-    accent: "bg-maroon",
   },
   {
     city: "Shenzhen",
@@ -274,7 +269,6 @@ const tripCards: TripCard[] = [
     tags: ["Electronics", "Gadget", "Innovation"],
     image:
       "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1200&q=80",
-    accent: "bg-[#202a37]",
   },
   {
     city: "Premium Private",
@@ -285,7 +279,6 @@ const tripCards: TripCard[] = [
     tags: ["Private", "Executive", "Culture"],
     image:
       "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1200&q=80",
-    accent: "bg-[#b88632]",
   },
   {
     city: "Future Market",
@@ -296,7 +289,6 @@ const tripCards: TripCard[] = [
     tags: ["Custom Route", "Expansion", "Strategy"],
     image:
       "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80",
-    accent: "bg-[#0f1f2e]",
   },
 ];
 
@@ -453,6 +445,8 @@ const jsonLd = {
   },
 };
 
+/* ------------------------------------------------------------------ atoms */
+
 function CtaLink({
   href,
   children,
@@ -461,63 +455,86 @@ function CtaLink({
 }: {
   href: string;
   children: ReactNode;
-  variant?: "primary" | "secondary" | "dark" | "line";
+  variant?: "primary" | "ghost" | "outline" | "line";
   className?: string;
 }) {
   const styles = {
     primary:
       "bg-tour-red text-white shadow-[var(--shadow-cta)] hover:bg-tour-red-dark",
-    secondary:
-      "border border-tour-red bg-white text-tour-red hover:bg-[#fff1f1]",
-    dark: "bg-charcoal text-white hover:bg-[#263241]",
+    outline:
+      "border border-tour-red/40 bg-white text-tour-red hover:border-tour-red hover:bg-tour-red/5",
+    ghost:
+      "border border-white/30 bg-white/5 text-white backdrop-blur hover:bg-white/15",
     line: "bg-line-green text-white shadow-[var(--shadow-line)] hover:bg-line-green-dark",
   };
 
   return (
     <a
       href={href}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-5 py-3 text-center text-sm font-bold transition focus:outline-none focus:ring-[3px] focus:ring-gold/45 ${styles[variant]} ${className}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-3 text-center text-sm font-bold transition focus:outline-none focus:ring-2 focus:ring-gold/60 focus:ring-offset-2 focus:ring-offset-transparent ${styles[variant]} ${className}`}
     >
       {children}
     </a>
   );
 }
 
-function SectionHeading({
-  eyebrow,
+function SectionLabel({
+  index,
+  label,
+  light = false,
+  center = false,
+}: {
+  index: string;
+  label: string;
+  light?: boolean;
+  center?: boolean;
+}) {
+  return (
+    <div className={`flex items-center gap-3 ${center ? "justify-center" : ""}`}>
+      <span className="font-heading text-sm font-black text-tour-red">
+        {index}
+      </span>
+      <span className="h-px w-8 bg-tour-red/40" />
+      <span
+        className={`text-xs font-bold uppercase tracking-[0.22em] ${
+          light ? "text-gold" : "text-ink-soft"
+        }`}
+      >
+        {label}
+      </span>
+    </div>
+  );
+}
+
+function SplitHeading({
+  index,
+  label,
   title,
   copy,
   light = false,
 }: {
-  eyebrow?: string;
+  index: string;
+  label: string;
   title: string;
   copy?: string;
   light?: boolean;
 }) {
   return (
-    <div className="mx-auto max-w-4xl text-center">
-      {eyebrow ? (
-        <p
-          className={`mb-3 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.18em] ${
-            light ? "text-gold" : "text-tour-red"
+    <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-end">
+      <div className="max-w-2xl">
+        <SectionLabel index={index} label={label} light={light} />
+        <h2
+          className={`font-heading mt-5 text-3xl font-black leading-[1.08] sm:text-4xl lg:text-[2.75rem] ${
+            light ? "text-white" : "text-charcoal"
           }`}
         >
-          <span className="h-px w-6 bg-current opacity-60" />
-          {eyebrow}
-          <span className="h-px w-6 bg-current opacity-60" />
-        </p>
-      ) : null}
-      <h2
-        className={`font-heading text-3xl font-bold leading-tight sm:text-4xl ${
-          light ? "text-white" : "text-charcoal"
-        }`}
-      >
-        {title}
-      </h2>
+          {title}
+        </h2>
+      </div>
       {copy ? (
         <p
-          className={`mt-4 text-lg leading-8 ${
-            light ? "text-white/78" : "text-ink"
+          className={`text-base leading-7 lg:pb-2 ${
+            light ? "text-white/72" : "text-ink"
           }`}
         >
           {copy}
@@ -527,55 +544,39 @@ function SectionHeading({
   );
 }
 
-function BrandMark() {
+function CenteredHeading({
+  index,
+  label,
+  title,
+  copy,
+  light = false,
+}: {
+  index: string;
+  label: string;
+  title: string;
+  copy?: string;
+  light?: boolean;
+}) {
   return (
-    <span className="grid size-14 shrink-0 place-items-center rounded-md bg-[linear-gradient(135deg,#ef2f37,#9d1118)] text-center text-[11px] font-black uppercase leading-tight text-gold-light shadow-[0_10px_24px_rgba(157,17,24,0.24)]">
-      Ryu
-      <br />
-      Tour
-    </span>
-  );
-}
-
-function TripCardView({ trip }: { trip: TripCard }) {
-  return (
-    <article className="group overflow-hidden rounded-lg bg-white shadow-[var(--shadow-card)] transition duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)]">
-      <div
-        className="relative min-h-[300px] bg-cover bg-center transition-transform duration-500 group-hover:scale-[1.04]"
-        style={{
-          backgroundImage: `linear-gradient(180deg,rgba(0,0,0,0.08),rgba(0,0,0,0.74)), url(${trip.image})`,
-        }}
+    <div className="mx-auto max-w-3xl text-center">
+      <SectionLabel index={index} label={label} light={light} center />
+      <h2
+        className={`font-heading mt-5 text-3xl font-black leading-[1.1] sm:text-4xl ${
+          light ? "text-white" : "text-charcoal"
+        }`}
       >
-        <span
-          className={`absolute left-5 top-5 rounded-md px-3 py-2 text-xs font-black uppercase tracking-[0.14em] text-white ${trip.accent}`}
+        {title}
+      </h2>
+      {copy ? (
+        <p
+          className={`mt-4 text-lg leading-8 ${
+            light ? "text-white/72" : "text-ink"
+          }`}
         >
-          {trip.city}
-        </span>
-        <div className="absolute inset-x-0 bottom-0 p-5 text-white">
-          <p className="text-sm font-bold text-gold-light">{trip.subtitle}</p>
-          <h3 className="font-heading mt-2 text-2xl font-bold leading-tight">
-            {trip.title}
-          </h3>
-        </div>
-      </div>
-      <div className="p-5">
-        <p className="leading-7 text-ink">{trip.description}</p>
-        <div className="mt-5 flex flex-wrap gap-2">
-          {trip.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-md border border-sand bg-[#fff8e7] px-3 py-1.5 text-xs font-bold text-maroon"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        <CtaLink href={LINE_URL} variant="secondary" className="mt-6 w-full">
-          ถามเส้นทางนี้
-          <Icon name="arrow-right" className="size-4" />
-        </CtaLink>
-      </div>
-    </article>
+          {copy}
+        </p>
+      ) : null}
+    </div>
   );
 }
 
@@ -588,12 +589,13 @@ function CheckList({ items, light = false }: { items: string[]; light?: boolean 
     >
       {items.map((item) => (
         <li key={item} className="flex gap-2.5">
-          <Icon
-            name="check"
-            className={`mt-0.5 size-4 shrink-0 ${
-              light ? "text-gold" : "text-tour-red"
+          <span
+            className={`mt-0.5 grid size-5 shrink-0 place-items-center rounded-full ${
+              light ? "bg-gold/20 text-gold" : "bg-tour-red/10 text-tour-red"
             }`}
-          />
+          >
+            <Icon name="check" className="size-3.5" />
+          </span>
           <span>{item}</span>
         </li>
       ))}
@@ -601,11 +603,69 @@ function CheckList({ items, light = false }: { items: string[]; light?: boolean 
   );
 }
 
+function BrandMark() {
+  return (
+    <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-[linear-gradient(140deg,#ef2f37,#8b1118)] text-center text-[10px] font-black uppercase leading-tight text-gold-light shadow-[0_10px_24px_rgba(139,17,24,0.28)]">
+      Ryu
+      <br />
+      Tour
+    </span>
+  );
+}
+
+function TripCardView({ trip }: { trip: TripCard }) {
+  return (
+    <article className="group relative flex flex-col overflow-hidden rounded-3xl bg-white shadow-[var(--shadow-soft)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)]">
+      <div className="relative aspect-[4/3] overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-[1.07]"
+          style={{ backgroundImage: `url(${trip.image})` }}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_38%,rgba(20,6,7,0.82)_100%)]" />
+        <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1.5 text-xs font-black uppercase tracking-[0.12em] text-maroon backdrop-blur">
+          {trip.city}
+        </span>
+        <div className="absolute inset-x-0 bottom-0 p-5 text-white">
+          <p className="text-xs font-bold uppercase tracking-[0.14em] text-gold-light">
+            {trip.subtitle}
+          </p>
+          <h3 className="font-heading mt-1.5 text-2xl font-bold leading-tight">
+            {trip.title}
+          </h3>
+        </div>
+      </div>
+      <div className="flex flex-1 flex-col p-6">
+        <p className="leading-7 text-ink">{trip.description}</p>
+        <div className="mt-5 flex flex-wrap gap-2">
+          {trip.tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full bg-cream-deep px-3 py-1.5 text-xs font-bold text-maroon"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+        <a
+          href={LINE_URL}
+          className="group/link mt-6 inline-flex items-center gap-2 text-sm font-bold text-tour-red"
+        >
+          ถามเส้นทางนี้
+          <Icon
+            name="arrow-right"
+            className="size-4 transition-transform group-hover/link:translate-x-1"
+          />
+        </a>
+      </div>
+    </article>
+  );
+}
+
 function ReviewClipCard({ clip, index }: { clip: ReviewClip; index: number }) {
   return (
-    <article className="min-w-[250px] max-w-[280px] flex-1">
+    <article className="w-[260px] shrink-0 snap-start sm:w-[280px]">
       <a href={clip.href} className="group block" aria-label={clip.title}>
-        <div className="relative aspect-[9/16] overflow-hidden rounded-lg border border-sand bg-[#151515] shadow-[0_18px_42px_rgba(0,0,0,0.18)]">
+        <div className="relative aspect-[9/16] overflow-hidden rounded-3xl bg-[#151515] shadow-[var(--shadow-soft)]">
           {clip.embedUrl ? (
             <iframe
               src={clip.embedUrl}
@@ -617,19 +677,19 @@ function ReviewClipCard({ clip, index }: { clip: ReviewClip; index: number }) {
           ) : (
             <>
               <div
-                className="absolute inset-0 bg-cover bg-center opacity-70 transition-transform duration-500 group-hover:scale-105"
+                className="absolute inset-0 bg-cover bg-center opacity-75 transition-transform duration-700 group-hover:scale-105"
                 style={{
                   backgroundImage: `url(${
                     clip.thumbnail ?? tripCards[index % tripCards.length].image
                   })`,
                 }}
               />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,10,0.08),rgba(157,17,24,0.74),rgba(0,0,0,0.92))]" />
-              <div className="absolute left-4 top-4 rounded-md bg-tour-red px-3 py-1.5 text-xs font-black text-white">
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,10,0.05),rgba(139,17,24,0.72),rgba(0,0,0,0.92))]" />
+              <div className="absolute left-4 top-4 rounded-full bg-white/90 px-2.5 py-1 text-xs font-black text-maroon">
                 9:16
               </div>
               <div className="absolute inset-0 grid place-items-center">
-                <span className="grid size-16 place-items-center rounded-full border-2 border-white bg-white/18 text-2xl font-black text-white backdrop-blur transition group-hover:scale-105">
+                <span className="grid size-16 place-items-center rounded-full border border-white/70 bg-white/15 text-xl text-white backdrop-blur transition group-hover:scale-110">
                   ▶
                 </span>
               </div>
@@ -637,10 +697,10 @@ function ReviewClipCard({ clip, index }: { clip: ReviewClip; index: number }) {
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-gold-light">
                   {clip.platform}
                 </p>
-                <h3 className="font-heading mt-2 text-xl font-bold leading-tight">
+                <h3 className="font-heading mt-1.5 text-lg font-bold leading-tight">
                   {clip.title}
                 </h3>
-                <p className="mt-3 text-xs font-semibold text-white/72">
+                <p className="mt-2 text-xs font-semibold text-white/72">
                   รอใส่ลิงก์หรือ embed คลิปจริง
                 </p>
               </div>
@@ -652,6 +712,8 @@ function ReviewClipCard({ clip, index }: { clip: ReviewClip; index: number }) {
   );
 }
 
+/* ------------------------------------------------------------------ page */
+
 export default function RyuGeGePage() {
   return (
     <>
@@ -659,127 +721,112 @@ export default function RyuGeGePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="min-h-screen bg-white text-charcoal">
-        {/* Top bar */}
-        <div className="bg-tour-red text-white">
-          <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-2 text-xs font-bold sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-            <div className="flex flex-wrap items-center gap-3">
-              {socialLinks.slice(0, 4).map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  aria-label={link.label}
-                  className="grid size-7 place-items-center rounded-md bg-white/15 transition hover:bg-white/30"
-                >
-                  <Icon name={link.icon} className="size-4" />
-                </a>
-              ))}
-            </div>
-            <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
-              <span>ทีมทริปธุรกิจจีน</span>
-              <span className="opacity-60">|</span>
-              <span>TEL 092 842 2121</span>
-              <span className="opacity-60">|</span>
-              <span>LINE สำหรับปรึกษาทริป</span>
-            </p>
-          </div>
-        </div>
-
-        <SiteHeader navItems={navItems} lineUrl={LINE_URL} />
+      <div className="min-h-screen bg-cream text-charcoal">
+        <SiteHeader navItems={navItems} lineUrl={LINE_URL} phone={PHONE} />
 
         <main id="top">
-          {/* Hero */}
-          <section className="relative overflow-hidden bg-maroon">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,214,112,0.24),transparent_30%),linear-gradient(135deg,#220000_0%,#b51620_48%,#111827_100%)]" />
-            <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:px-8 lg:py-16">
-              <div className="self-center text-white">
-                <p className="mb-4 inline-flex items-center gap-2 rounded-md border border-gold/48 bg-black/22 px-3 py-2 text-sm font-black text-gold-light">
-                  <Icon name="sparkles" className="size-4" />
-                  RyuGeGe Tour สำหรับเจ้าของธุรกิจที่อยากไปจีนอย่างมีแผน
-                </p>
-                <h1 className="font-heading max-w-3xl text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">
-                  พาบินไปดูตลาดจีน งานแฟร์ โรงงาน และซัพพลายเออร์ แบบมีคนช่วยคิดทุกจุดสำคัญ
-                </h1>
-                <p className="mt-6 max-w-2xl text-lg leading-8 text-white/84">
-                  บริการทริปธุรกิจจีนและการประสานงานแบบ Private โดย ริว
-                  (RyuGeGe) สำหรับ SME เจ้าของแบรนด์ ผู้นำเข้า และทีมจัดซื้อที่อยากไปจีนแบบมั่นใจขึ้น
-                </p>
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <CtaLink href={LINE_URL} variant="line">
-                    <Icon name="chat" className="size-4" />
-                    ปรึกษาแผนทริปฟรี
-                  </CtaLink>
-                  <CtaLink href="#trips" variant="secondary">
-                    ดูทริปแนะนำ
-                  </CtaLink>
-                </div>
-                <div className="mt-7 flex flex-wrap gap-2">
-                  {heroProof.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-md border border-white/18 bg-white/10 px-3 py-2 text-sm font-bold text-white backdrop-blur"
-                    >
-                      {item}
+          {/* Hero — full-bleed carousel, the first intentional dark moment */}
+          <section className="relative bg-espresso text-white">
+            <HeroCarousel slides={heroSlides}>
+              <div className="mx-auto flex min-h-[88vh] max-w-7xl flex-col justify-center px-4 pb-28 pt-20 sm:px-6 lg:px-8">
+                <div className="max-w-3xl animate-fade-in">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-black/20 px-4 py-2 text-sm font-bold text-gold-light backdrop-blur">
+                    <Icon name="sparkles" className="size-4" />
+                    ทริปธุรกิจจีนแบบ Founder-led
+                  </span>
+                  <h1 className="font-heading mt-6 text-4xl font-black leading-[1.04] tracking-tight sm:text-6xl lg:text-7xl">
+                    พาบินไปดูตลาดจีน
+                    <span className="block text-gold-light">
+                      งานแฟร์ · โรงงาน · ซัพพลายเออร์
                     </span>
-                  ))}
+                  </h1>
+                  <p className="mt-6 max-w-xl text-lg leading-8 text-white/80">
+                    บริการทริปธุรกิจจีนและการประสานงานแบบ Private โดย ริว (RyuGeGe)
+                    สำหรับ SME เจ้าของแบรนด์ ผู้นำเข้า และทีมจัดซื้อที่อยากไปจีนอย่างมีแผน
+                  </p>
+                  <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                    <CtaLink href={LINE_URL} variant="line">
+                      <Icon name="chat" className="size-4" />
+                      ปรึกษาแผนทริปฟรี
+                    </CtaLink>
+                    <CtaLink href="#trips" variant="ghost">
+                      ดูทริปแนะนำ
+                      <Icon name="arrow-right" className="size-4" />
+                    </CtaLink>
+                  </div>
+                  <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
+                    {heroProof.map((item) => (
+                      <span
+                        key={item}
+                        className="flex items-center gap-2 text-sm font-semibold text-white/75"
+                      >
+                        <Icon name="check" className="size-4 text-gold" />
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
-              <div className="self-center">
-                <HeroCarousel slides={heroSlides} />
-              </div>
-            </div>
+            </HeroCarousel>
           </section>
 
-          {/* Contact quick cards */}
-          <section className="border-y border-sand-soft bg-white py-8">
-            <div className="mx-auto grid max-w-7xl gap-4 px-4 sm:px-6 lg:grid-cols-3 lg:px-8">
-              {contactCards.map((item) => (
-                <a
-                  key={item.title}
-                  href={item.href}
-                  className="group flex items-start gap-4 rounded-lg border border-sand bg-white p-5 shadow-[0_12px_28px_rgba(17,24,39,0.08)] transition hover:-translate-y-0.5 hover:border-tour-red"
-                >
-                  <span className="grid size-12 shrink-0 place-items-center rounded-md bg-[#fff1f1] text-tour-red transition group-hover:bg-tour-red group-hover:text-white">
-                    <Icon name={item.icon} className="size-6" />
-                  </span>
-                  <span>
-                    <p className="text-sm font-black text-tour-red">{item.title}</p>
-                    <h2 className="font-heading mt-1 text-xl font-bold text-charcoal">
-                      {item.value}
-                    </h2>
-                    <p className="mt-2 text-sm leading-6 text-ink">{item.copy}</p>
-                  </span>
-                </a>
-              ))}
+          {/* Floating contact card overlapping the hero */}
+          <section className="relative z-20 -mt-16 lg:-mt-24">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="overflow-hidden rounded-3xl bg-white shadow-[var(--shadow-lift)] ring-1 ring-sand/60 sm:grid sm:grid-cols-3 sm:divide-x sm:divide-sand/50">
+                {contactCards.map((item) => (
+                  <a
+                    key={item.title}
+                    href={item.href}
+                    className="group flex items-start gap-4 p-6 transition hover:bg-cream lg:p-7"
+                  >
+                    <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-tour-red/10 text-tour-red transition group-hover:bg-tour-red group-hover:text-white">
+                      <Icon name={item.icon} className="size-6" />
+                    </span>
+                    <span className="min-w-0">
+                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-ink-soft">
+                        {item.title}
+                      </p>
+                      <h2 className="font-heading mt-1 text-lg font-bold text-charcoal">
+                        {item.value}
+                      </h2>
+                      <p className="mt-1.5 text-sm leading-6 text-ink">
+                        {item.copy}
+                      </p>
+                    </span>
+                  </a>
+                ))}
+              </div>
             </div>
           </section>
 
           {/* Value proposition */}
-          <section className="bg-paper py-16 sm:py-20">
+          <section className="py-20 sm:py-28">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <SectionHeading
-                eyebrow="Shortcut to China Market"
-                title="RyuGeGe Tour ช่วยทำให้ทริปจีนกลายเป็นการเดินทางธุรกิจที่จับต้องได้"
+              <SplitHeading
+                index="01"
+                label="Why RyuGeGe"
+                title="ทำให้ทริปจีนกลายเป็นการเดินทางธุรกิจที่จับต้องได้"
                 copy="แนวทางคล้ายการมีทีมพาลงตลาดจริง แต่ปรับให้เหมาะกับแบรนด์เล็ก ทีมจัดซื้อ และเจ้าของธุรกิจที่ต้องการความใกล้ชิดกว่า"
               />
-              <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {shortcutBenefits.map((benefit) => (
                   <article
                     key={benefit.title}
-                    className="group rounded-lg border border-sand bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-tour-red hover:shadow-[var(--shadow-card)]"
+                    className="group relative overflow-hidden rounded-3xl bg-white p-7 shadow-[var(--shadow-soft)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)]"
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="grid size-12 place-items-center rounded-md bg-[#fff1f1] text-tour-red transition group-hover:bg-tour-red group-hover:text-white">
-                        <Icon name={benefit.icon} className="size-6" />
-                      </span>
-                      <span className="font-heading text-3xl font-black text-sand">
-                        {benefit.label}
-                      </span>
-                    </div>
-                    <h3 className="font-heading mt-5 text-xl font-bold leading-tight text-charcoal">
+                    <span className="pointer-events-none absolute -right-1 -top-4 font-heading text-7xl font-black text-cream-deep">
+                      {benefit.label}
+                    </span>
+                    <span className="relative grid size-14 place-items-center rounded-2xl bg-cream text-tour-red transition group-hover:bg-tour-red group-hover:text-white">
+                      <Icon name={benefit.icon} className="size-7" />
+                    </span>
+                    <h3 className="font-heading relative mt-6 text-xl font-bold leading-snug text-charcoal">
                       {benefit.title}
                     </h3>
-                    <p className="mt-3 text-sm leading-7 text-ink">{benefit.copy}</p>
+                    <p className="relative mt-3 text-sm leading-7 text-ink">
+                      {benefit.copy}
+                    </p>
                   </article>
                 ))}
               </div>
@@ -787,15 +834,15 @@ export default function RyuGeGePage() {
           </section>
 
           {/* Trips */}
-          <section id="trips" className="bg-charcoal py-16 text-white sm:py-20">
+          <section id="trips" className="scroll-mt-24 py-20 sm:py-28">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <SectionHeading
-                light
-                eyebrow="Recommended Trips"
+              <SplitHeading
+                index="02"
+                label="Recommended Trips"
                 title="ทริปทัวร์ซื้อสินค้าและดูงานจีนแนะนำ"
                 copy="จัดกลุ่มเส้นทางตามเมืองและเป้าหมายธุรกิจ ในสไตล์ RyuGeGe Tour: founder-led, private และยืดหยุ่นกับโจทย์ของลูกค้า"
               />
-              <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              <div className="mt-14 grid gap-7 md:grid-cols-2 xl:grid-cols-3">
                 {tripCards.map((trip) => (
                   <TripCardView key={trip.title} trip={trip} />
                 ))}
@@ -804,32 +851,33 @@ export default function RyuGeGePage() {
           </section>
 
           {/* Services */}
-          <section id="services" className="bg-white py-16 sm:py-20">
+          <section id="services" className="scroll-mt-24 bg-cream-deep/50 py-20 sm:py-28">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <SectionHeading
-                eyebrow="Core Services"
-                title="บริการหลักที่ช่วยให้ทริปธุรกิจเดินหน้าได้เป็นระบบ"
+              <SplitHeading
+                index="03"
+                label="Core Services"
+                title="บริการหลักที่ช่วยให้ทริปธุรกิจเดินหน้าเป็นระบบ"
                 copy="ตั้งแต่ก่อนบิน ระหว่างเดินทาง จนถึงการติดตามหลังจบทริป"
               />
-              <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
+              <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
                 {serviceCards.map((service) => (
                   <article
                     key={service.title}
-                    className="group flex flex-col rounded-lg border border-[#e8e8e8] bg-paper p-5 transition hover:-translate-y-1 hover:border-tour-red hover:bg-white hover:shadow-[var(--shadow-card)]"
+                    className="group flex flex-col rounded-3xl bg-white p-6 shadow-[var(--shadow-soft)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)]"
                   >
-                    <span className="grid size-12 place-items-center rounded-md bg-tour-red text-white shadow-[var(--shadow-cta)]">
+                    <span className="grid size-12 place-items-center rounded-2xl bg-tour-red text-white shadow-[var(--shadow-cta)]">
                       <Icon name={service.icon} className="size-6" />
                     </span>
-                    <span className="mt-4 text-xs font-black uppercase tracking-[0.14em] text-tour-red">
+                    <span className="mt-5 text-xs font-black uppercase tracking-[0.16em] text-tour-red">
                       {service.eyebrow}
                     </span>
-                    <h3 className="font-heading mt-1 text-xl font-bold leading-tight text-charcoal">
+                    <h3 className="font-heading mt-1 text-lg font-bold leading-snug text-charcoal">
                       {service.title}
                     </h3>
                     <p className="mt-3 text-sm leading-7 text-ink">
                       {service.description}
                     </p>
-                    <div className="mt-5">
+                    <div className="mt-5 border-t border-sand/60 pt-5">
                       <CheckList items={service.includes} />
                     </div>
                   </article>
@@ -839,158 +887,155 @@ export default function RyuGeGePage() {
           </section>
 
           {/* Review clips */}
-          <section id="clips" className="bg-[#f5f5f5] py-16 sm:py-20">
+          <section id="clips" className="scroll-mt-24 py-20 sm:py-28">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
-                <div>
-                  <p className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-tour-red">
-                    <span className="h-px w-6 bg-current opacity-60" />
-                    Social Proof Clips
-                  </p>
-                  <h2 className="font-heading mt-3 text-3xl font-black leading-tight text-tour-red sm:text-4xl">
-                    คลิปรีวิวทริปธุรกิจที่รวม CEO เจ้าของแบรนด์ไปกับเรามากที่สุด!!
-                  </h2>
-                  <p className="mt-4 text-lg leading-8 text-ink">
-                    ออกแบบพื้นที่สำหรับคลิปแนวตั้ง 9:16 จาก Facebook Reels,
-                    Instagram, TikTok หรือ YouTube Shorts เมื่อมีลิงก์จริงสามารถใส่ในข้อมูลชุดเดียวได้ทันที
-                  </p>
-                  <div className="mt-6 flex flex-wrap gap-3">
-                    {socialLinks.slice(0, 3).map((link) => (
-                      <CtaLink key={link.label} href={link.href} variant="secondary">
-                        <Icon name={link.icon} className="size-4" />
-                        {link.label}
-                      </CtaLink>
-                    ))}
-                  </div>
-                </div>
-                <div className="no-scrollbar flex gap-5 overflow-x-auto pb-3">
-                  {reviewClips.map((clip, index) => (
-                    <ReviewClipCard key={clip.title} clip={clip} index={index} />
-                  ))}
-                </div>
+              <SplitHeading
+                index="04"
+                label="Social Proof Clips"
+                title="คลิปรีวิวทริปธุรกิจที่พา CEO และเจ้าของแบรนด์ไปจริง"
+                copy="พื้นที่สำหรับคลิปแนวตั้ง 9:16 จาก Facebook Reels, Instagram, TikTok หรือ YouTube Shorts — ใส่ลิงก์จริงได้ในข้อมูลชุดเดียว"
+              />
+              <div className="no-scrollbar mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4">
+                {reviewClips.map((clip, index) => (
+                  <ReviewClipCard key={clip.title} clip={clip} index={index} />
+                ))}
+              </div>
+              <div className="mt-6 flex flex-wrap gap-3">
+                {socialLinks.slice(0, 3).map((link) => (
+                  <CtaLink key={link.label} href={link.href} variant="outline">
+                    <Icon name={link.icon} className="size-4" />
+                    {link.label}
+                  </CtaLink>
+                ))}
               </div>
             </div>
           </section>
 
           {/* Testimonials */}
-          <section id="testimonials" className="bg-white py-16 sm:py-20">
+          <section id="testimonials" className="scroll-mt-24 pb-20 sm:pb-28">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <SectionHeading
-                eyebrow="Testimonials"
+              <CenteredHeading
+                index="05"
+                label="Testimonials"
                 title="เสียงจากลูกค้าที่ไว้วางใจ"
                 copy="ยังไม่ใส่คำรีวิวปลอม พื้นที่นี้เตรียมไว้สำหรับรีวิวจริงที่ลูกค้าอนุมัติให้เผยแพร่แล้ว"
               />
-              <div className="mt-10 grid gap-5 md:grid-cols-3">
+              <div className="mt-12 grid gap-6 md:grid-cols-3">
                 {testimonials.map((item) => (
                   <article
                     key={item.name}
-                    className="rounded-lg border border-dashed border-[#d7c08a] bg-[#fffaf0] p-6"
+                    className="relative rounded-3xl border border-dashed border-sand bg-white/60 p-7"
                   >
-                    <p className="text-sm font-black uppercase tracking-[0.16em] text-tour-red">
-                      Review slot
-                    </p>
-                    <h3 className="font-heading mt-4 text-xl font-bold text-charcoal">
-                      {item.name}
-                    </h3>
-                    <p className="mt-1 text-sm font-bold text-maroon">{item.role}</p>
-                    <p className="mt-5 leading-7 text-ink">
+                    <span className="font-heading text-5xl font-black leading-none text-tour-red/25">
+                      &ldquo;
+                    </span>
+                    <p className="-mt-3 leading-7 text-ink">
                       {item.quote ?? item.focus}
                     </p>
-                    <div className="mt-6 h-2 w-24 rounded-full bg-tour-red/30" />
+                    <div className="mt-6 border-t border-sand/70 pt-4">
+                      <h3 className="font-heading text-lg font-bold text-charcoal">
+                        {item.name}
+                      </h3>
+                      <p className="mt-0.5 text-sm font-semibold text-tour-red">
+                        {item.role}
+                      </p>
+                    </div>
+                    <span className="absolute right-6 top-6 rounded-full bg-cream-deep px-2.5 py-1 text-[10px] font-black uppercase tracking-wide text-ink-soft">
+                      Review slot
+                    </span>
                   </article>
                 ))}
               </div>
             </div>
           </section>
 
-          {/* Founder */}
-          <section id="founder" className="bg-charcoal py-16 text-white sm:py-20">
-            <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
-              <div className="relative min-h-[420px] overflow-hidden rounded-lg border border-white/12 bg-[#2b0508]">
+          {/* Founder — second intentional dark moment */}
+          <section id="founder" className="scroll-mt-24 bg-espresso py-20 text-white sm:py-28">
+            <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:px-8">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] ring-1 ring-white/10">
                 <div
-                  className="absolute inset-0 bg-cover bg-center opacity-50"
+                  className="absolute inset-0 bg-cover bg-center"
                   style={{
                     backgroundImage:
                       "url(https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=80)",
                   }}
                 />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.1),rgba(0,0,0,0.88))]" />
-                <div className="absolute inset-x-0 bottom-0 p-6">
-                  <p className="text-sm font-black uppercase tracking-[0.18em] text-gold-light">
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,6,7,0.1),rgba(20,6,7,0.9))]" />
+                <div className="absolute inset-x-0 bottom-0 p-7">
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold-light">
                     Founder-led
                   </p>
-                  <h2 className="font-heading mt-3 text-4xl font-black">
+                  <h3 className="font-heading mt-2 text-3xl font-black">
                     Ryu Puriwat
-                  </h2>
-                  <p className="mt-3 max-w-lg leading-7 text-white/78">
+                  </h3>
+                  <p className="mt-2 max-w-sm text-sm leading-6 text-white/72">
                     ผู้ประสานงานจีน-ไทยที่ผสมพื้นฐานวิศวกรรม ภาษา วัฒนธรรมจีน
                     และการสื่อสารเชิงธุรกิจ
                   </p>
                 </div>
               </div>
-              <div className="self-center">
-                <p className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-gold">
-                  <span className="h-px w-6 bg-current opacity-60" />
-                  Why RyuGeGe Tour
-                </p>
-                <h2 className="font-heading mt-3 text-3xl font-black leading-tight sm:text-4xl">
+              <div>
+                <SectionLabel index="06" label="Why RyuGeGe Tour" light />
+                <h2 className="font-heading mt-5 text-3xl font-black leading-[1.1] sm:text-4xl lg:text-[2.6rem]">
                   ไปจีนกับคนที่ช่วยแปลความหมายทางธุรกิจ ไม่ใช่แค่พาเดินทาง
                 </h2>
-                <p className="mt-5 text-lg leading-8 text-white/78">
+                <p className="mt-5 text-lg leading-8 text-white/75">
                   ริวช่วยเชื่อมระหว่างเจ้าของธุรกิจไทยกับบริบทจริงในจีน ตั้งแต่การเตรียมคำถาม
                   การสื่อสารหน้างาน ไปจนถึงการสรุปประเด็นที่ต้องนำกลับมาตัดสินใจ
                 </p>
-                <div className="mt-7 rounded-lg border border-white/12 bg-white/7 p-5">
+                <div className="mt-8 rounded-3xl border border-white/10 bg-white/[0.06] p-6">
                   <CheckList items={credentials} light />
                 </div>
               </div>
             </div>
           </section>
 
-          {/* Process */}
-          <section className="bg-white py-16 sm:py-20">
+          {/* Process — timeline */}
+          <section className="py-20 sm:py-28">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <SectionHeading
-                eyebrow="Working Process"
+              <CenteredHeading
+                index="07"
+                label="Working Process"
                 title="เริ่มต้นง่าย แต่ทำงานเป็นระบบ"
               />
-              <div className="mt-10 grid gap-4 md:grid-cols-5">
-                {processSteps.map(([title, copy], index) => (
-                  <article
-                    key={title}
-                    className="relative rounded-lg border border-sand bg-paper p-5"
-                  >
-                    <span className="font-heading text-3xl font-black text-tour-red">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="font-heading mt-4 text-lg font-bold text-charcoal">
-                      {title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-6 text-ink">{copy}</p>
-                  </article>
-                ))}
+              <div className="relative mt-16">
+                <div className="absolute left-6 top-0 bottom-0 w-px bg-sand md:left-0 md:right-0 md:top-6 md:bottom-auto md:h-px md:w-full" />
+                <div className="grid gap-10 md:grid-cols-5 md:gap-6">
+                  {processSteps.map(([title, copy], index) => (
+                    <div key={title} className="relative pl-16 md:pl-0">
+                      <span className="absolute left-0 top-0 grid size-12 place-items-center rounded-full bg-tour-red font-heading text-lg font-black text-white shadow-[var(--shadow-cta)] md:relative">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <h3 className="font-heading text-lg font-bold text-charcoal md:mt-5">
+                        {title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-6 text-ink">{copy}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </section>
 
           {/* Inquiry */}
-          <section id="inquiry" className="bg-[#fff4f4] py-16 sm:py-20">
+          <section id="inquiry" className="scroll-mt-24 bg-cream-deep/50 py-20 sm:py-28">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <SectionHeading
-                eyebrow="Start Your Trip"
+              <CenteredHeading
+                index="08"
+                label="Start Your Trip"
                 title="เล่าเป้าหมายทริป แล้วให้ริวช่วยประเมินเส้นทางที่เหมาะ"
                 copy="ฟอร์มจะช่วยจัดข้อมูลเบื้องต้นก่อนคุยจริง เพื่อให้คำแนะนำเรื่องเมือง จำนวนวัน และรูปแบบบริการแม่นขึ้น"
               />
-              <div className="mt-10 grid gap-6 lg:grid-cols-[1.12fr_0.88fr]">
+              <div className="mt-12 grid gap-6 lg:grid-cols-[1.12fr_0.88fr]">
                 <InquiryForm />
-                <aside className="rounded-lg bg-charcoal p-6 text-white shadow-[0_18px_60px_rgba(17,24,39,0.16)]">
-                  <p className="text-sm font-black uppercase tracking-[0.18em] text-gold-light">
+                <aside className="flex flex-col rounded-3xl bg-espresso p-7 text-white shadow-[var(--shadow-lift)]">
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold-light">
                     Faster reply
                   </p>
-                  <h3 className="font-heading mt-4 text-3xl font-black leading-tight">
+                  <h3 className="font-heading mt-4 text-2xl font-black leading-tight sm:text-3xl">
                     อยากคุยเร็วกว่า? แอด LINE เพื่อปรึกษาเบื้องต้นฟรี
                   </h3>
-                  <p className="mt-4 leading-8 text-white/76">
+                  <p className="mt-4 leading-8 text-white/74">
                     ส่งสินค้าเป้าหมาย เมืองที่สนใจ ช่วงเวลาเดินทาง จำนวนคน
                     และงบประมาณคร่าว ๆ เพื่อให้ริวช่วยประเมินทริป
                   </p>
@@ -998,78 +1043,83 @@ export default function RyuGeGePage() {
                     <Icon name="chat" className="size-4" />
                     ปรึกษาฟรีทาง LINE
                   </CtaLink>
-                  <div className="mt-8 rounded-lg border border-white/14 bg-white/8 p-4 text-sm leading-6 text-white/76">
-                    เหมาะสำหรับ: เจ้าของธุรกิจ SME, ผู้นำเข้า, เจ้าของแบรนด์,
-                    ทีมจัดซื้อ, ผู้บริหารที่ต้องการทริปส่วนตัว
+                  <div className="mt-auto pt-8">
+                    <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-4 text-sm leading-6 text-white/74">
+                      เหมาะสำหรับ: เจ้าของธุรกิจ SME, ผู้นำเข้า, เจ้าของแบรนด์,
+                      ทีมจัดซื้อ, ผู้บริหารที่ต้องการทริปส่วนตัว
+                    </div>
                   </div>
                 </aside>
               </div>
             </div>
           </section>
 
-          {/* FAQ */}
-          <section id="faq" className="bg-tour-red py-16 text-white sm:py-20">
-            <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-              <SectionHeading light title="FAQ คำถามที่พบบ่อย" />
-              <div className="mt-10 space-y-3">
+          {/* FAQ — on cream, off the old red band */}
+          <section id="faq" className="scroll-mt-24 py-20 sm:py-28">
+            <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+              <CenteredHeading index="09" label="FAQ" title="คำถามที่พบบ่อย" />
+              <div className="mt-12 space-y-3">
                 {faqs.map(([question, answer]) => (
                   <details
                     key={question}
-                    className="group rounded-lg border border-white/20 bg-white/10 p-5 shadow-sm"
+                    className="group rounded-2xl border border-sand/70 bg-white p-5 shadow-[var(--shadow-soft)] transition open:border-tour-red/30"
                   >
                     <summary className="flex cursor-pointer items-start justify-between gap-4">
-                      <span className="font-heading text-lg font-bold text-white">
+                      <span className="font-heading text-lg font-bold text-charcoal">
                         {question}
                       </span>
-                      <span className="faq-marker mt-1 grid size-7 shrink-0 place-items-center rounded-md border border-white/32 text-gold-light transition">
+                      <span className="faq-marker mt-0.5 grid size-7 shrink-0 place-items-center rounded-full bg-tour-red/10 text-lg text-tour-red transition">
                         +
                       </span>
                     </summary>
-                    <p className="mt-4 leading-8 text-white/82">{answer}</p>
+                    <p className="mt-4 leading-8 text-ink">{answer}</p>
                   </details>
                 ))}
               </div>
             </div>
           </section>
 
-          {/* Final CTA */}
-          <section className="bg-charcoal py-16 text-white sm:py-20">
-            <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-gold-light">
-                RyuGeGe Tour
-              </p>
-              <h2 className="font-heading mt-4 text-3xl font-black leading-tight sm:text-4xl">
-                พร้อมวางแผนทริปธุรกิจจีนให้คุ้มค่ากว่าการไปลองผิดลองถูกหรือยัง?
-              </h2>
-              <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-white/76">
-                เริ่มจากคุยเป้าหมายก่อน ริวจะช่วยประเมินว่าเมือง เส้นทาง จำนวนวัน
-                และรูปแบบบริการไหนเหมาะที่สุด
-              </p>
-              <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-                <CtaLink href={LINE_URL} variant="line">
-                  <Icon name="chat" className="size-4" />
-                  ปรึกษาฟรีทาง LINE
-                </CtaLink>
-                <CtaLink href="#inquiry" variant="secondary">
-                  กรอกข้อมูลทริป
-                </CtaLink>
+          {/* Final CTA — contained dark card, third intentional dark moment */}
+          <section className="px-4 pb-24 sm:px-6 lg:px-8">
+            <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2.5rem] bg-espresso px-6 py-16 text-center text-white shadow-[var(--shadow-lift)] sm:px-12 sm:py-20">
+              <div className="absolute inset-0 -z-0 bg-[radial-gradient(circle_at_50%_0%,rgba(244,195,95,0.18),transparent_55%),radial-gradient(circle_at_85%_90%,rgba(239,47,55,0.22),transparent_45%)]" />
+              <div className="relative">
+                <p className="text-xs font-bold uppercase tracking-[0.24em] text-gold-light">
+                  RyuGeGe Tour
+                </p>
+                <h2 className="font-heading mx-auto mt-5 max-w-3xl text-3xl font-black leading-[1.12] sm:text-[2.75rem]">
+                  พร้อมวางแผนทริปธุรกิจจีนให้คุ้มค่ากว่าการไปลองผิดลองถูกหรือยัง?
+                </h2>
+                <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-white/74">
+                  เริ่มจากคุยเป้าหมายก่อน ริวจะช่วยประเมินว่าเมือง เส้นทาง จำนวนวัน
+                  และรูปแบบบริการไหนเหมาะที่สุด
+                </p>
+                <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+                  <CtaLink href={LINE_URL} variant="line">
+                    <Icon name="chat" className="size-4" />
+                    ปรึกษาฟรีทาง LINE
+                  </CtaLink>
+                  <CtaLink href="#inquiry" variant="ghost">
+                    กรอกข้อมูลทริป
+                  </CtaLink>
+                </div>
               </div>
             </div>
           </section>
         </main>
 
         {/* Footer */}
-        <footer className="bg-charcoal pb-24 pt-12 text-white sm:pb-12">
-          <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 md:grid-cols-4 lg:px-8">
-            <div>
+        <footer className="bg-espresso pb-24 pt-16 text-white sm:pb-14">
+          <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 md:grid-cols-4 lg:px-8">
+            <div className="md:col-span-1">
               <div className="flex items-center gap-3">
                 <BrandMark />
                 <p className="font-heading text-xl font-black text-white">
                   RyuGeGe Tour
                 </p>
               </div>
-              <p className="mt-3 text-sm font-bold text-gold-light">
-                Business Trip & Safe Facilitation
+              <p className="mt-4 max-w-xs text-sm leading-6 text-white/60">
+                ทริปธุรกิจจีน ดูงานแฟร์ โรงงาน และประสานงานจีน-ไทย โดยทีม founder-led
               </p>
               <div className="mt-5 flex flex-wrap gap-2">
                 {socialLinks.map((link) => (
@@ -1077,7 +1127,7 @@ export default function RyuGeGePage() {
                     key={link.label}
                     href={link.href}
                     aria-label={link.label}
-                    className="grid size-9 place-items-center rounded-md border border-white/15 bg-white/8 text-white transition hover:border-gold hover:text-gold"
+                    className="grid size-9 place-items-center rounded-full border border-white/12 bg-white/5 text-white transition hover:border-gold hover:text-gold"
                   >
                     <Icon name={link.icon} className="size-4" />
                   </a>
@@ -1085,8 +1135,10 @@ export default function RyuGeGePage() {
               </div>
             </div>
             <div>
-              <p className="font-heading font-bold text-white">Links</p>
-              <div className="mt-3 space-y-2 text-sm text-white/70">
+              <p className="font-heading text-sm font-bold uppercase tracking-[0.14em] text-white/50">
+                Links
+              </p>
+              <div className="mt-4 space-y-2.5 text-sm text-white/70">
                 {navItems
                   .filter((item) => item.href)
                   .slice(0, 5)
@@ -1102,8 +1154,10 @@ export default function RyuGeGePage() {
               </div>
             </div>
             <div>
-              <p className="font-heading font-bold text-white">Service Areas</p>
-              <p className="mt-3 text-sm leading-7 text-white/70">
+              <p className="font-heading text-sm font-bold uppercase tracking-[0.14em] text-white/50">
+                Service Areas
+              </p>
+              <p className="mt-4 text-sm leading-7 text-white/70">
                 Guangzhou / Canton Fair
                 <br />
                 Yiwu
@@ -1114,15 +1168,17 @@ export default function RyuGeGePage() {
               </p>
             </div>
             <div>
-              <p className="font-heading font-bold text-white">Contact</p>
-              <p className="mt-3 text-sm leading-7 text-white/70">
+              <p className="font-heading text-sm font-bold uppercase tracking-[0.14em] text-white/50">
+                Contact
+              </p>
+              <p className="mt-4 text-sm leading-7 text-white/70">
                 Facebook: Ryu Gege
                 <br />
                 IG: ryugegechannel
                 <br />
                 Email: ryupuriwat2000@gmail.com
                 <br />
-                Phone: 092 842 2121
+                Phone: {PHONE}
                 <br />
                 LINE: เติมลิงก์จริงใน constants.ts
               </p>
@@ -1131,12 +1187,13 @@ export default function RyuGeGePage() {
         </footer>
 
         {/* Mobile sticky CTA bar */}
-        <div className="fixed inset-x-0 bottom-0 z-50 border-t border-sand bg-white p-3 shadow-[0_-12px_28px_rgba(17,24,39,0.12)] sm:hidden">
+        <div className="fixed inset-x-0 bottom-0 z-50 border-t border-sand/70 bg-cream/95 p-3 backdrop-blur sm:hidden">
           <div className="mx-auto flex max-w-md gap-2">
             <CtaLink href={LINE_URL} variant="line" className="flex-1">
+              <Icon name="chat" className="size-4" />
               LINE
             </CtaLink>
-            <CtaLink href="#trips" variant="secondary" className="flex-1">
+            <CtaLink href="#trips" variant="outline" className="flex-1">
               ดูทริป
             </CtaLink>
           </div>
@@ -1146,7 +1203,7 @@ export default function RyuGeGePage() {
         <a
           href={LINE_URL}
           aria-label="ปรึกษาทาง LINE"
-          className="fixed bottom-6 right-6 z-40 hidden items-center gap-2 rounded-md bg-line-green px-5 py-4 text-sm font-bold text-white shadow-[0_16px_40px_rgba(6,199,85,0.28)] transition hover:bg-line-green-dark lg:inline-flex"
+          className="fixed bottom-6 right-6 z-40 hidden items-center gap-2 rounded-full bg-line-green px-5 py-4 text-sm font-bold text-white shadow-[var(--shadow-line)] transition hover:bg-line-green-dark lg:inline-flex"
         >
           <Icon name="chat" className="size-5" />
           LINE
