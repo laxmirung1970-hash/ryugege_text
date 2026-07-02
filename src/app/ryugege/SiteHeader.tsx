@@ -28,7 +28,13 @@ export function SiteHeader({
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeId, setActiveId] = useState<string>("top");
   const headerRef = useRef<HTMLElement>(null);
+
+  const activeHref = `#${activeId}`;
+  const isActive = (item: NavItem) =>
+    item.href === activeHref ||
+    (item.children?.some((child) => child.href === activeHref) ?? false);
 
   useEffect(() => {
     function onPointerDown(event: MouseEvent) {
@@ -54,6 +60,44 @@ export function SiteHeader({
       document.removeEventListener("keydown", onKey);
       window.removeEventListener("scroll", onScroll);
     };
+  }, []);
+
+  // Scroll-spy: highlight the nav item for the section crossing viewport centre.
+  useEffect(() => {
+    if (!("IntersectionObserver" in window)) return;
+    const ids = [
+      "top",
+      "trips",
+      "services",
+      "clips",
+      "testimonials",
+      "founder",
+      "inquiry",
+      "faq",
+    ];
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    if (!sections.length) return;
+
+    const visible = new Set<string>();
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) visible.add(entry.target.id);
+          else visible.delete(entry.target.id);
+        }
+        for (const id of ids) {
+          if (visible.has(id)) {
+            setActiveId(id);
+            break;
+          }
+        }
+      },
+      { rootMargin: "-45% 0px -45% 0px" },
+    );
+    sections.forEach((section) => io.observe(section));
+    return () => io.disconnect();
   }, []);
 
   return (
@@ -95,7 +139,9 @@ export function SiteHeader({
                     )
                   }
                   aria-expanded={openMenu === item.label}
-                  className="flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-semibold text-charcoal/80 transition hover:bg-cream-deep hover:text-tour-red"
+                  className={`flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-semibold transition hover:bg-cream-deep hover:text-tour-red ${
+                    isActive(item) ? "text-tour-red" : "text-charcoal/80"
+                  }`}
                 >
                   {item.label}
                   <Icon
@@ -124,7 +170,9 @@ export function SiteHeader({
               <a
                 key={item.label}
                 href={item.href}
-                className="rounded-full px-3.5 py-2 text-sm font-semibold text-charcoal/80 transition hover:bg-cream-deep hover:text-tour-red"
+                className={`rounded-full px-3.5 py-2 text-sm font-semibold transition hover:bg-cream-deep hover:text-tour-red ${
+                  isActive(item) ? "text-tour-red" : "text-charcoal/80"
+                }`}
               >
                 {item.label}
               </a>

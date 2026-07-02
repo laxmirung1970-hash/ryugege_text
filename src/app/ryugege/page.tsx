@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { InquiryForm } from "./InquiryForm";
 import { HeroCarousel, type HeroSlide } from "./HeroCarousel";
 import { SiteHeader, type NavItem } from "./SiteHeader";
+import { PageEffects } from "./PageEffects";
 import { Icon, type IconName } from "./icons";
 import { LINE_URL } from "./constants";
 
@@ -17,11 +18,13 @@ type SocialLink = {
 
 type TripCard = {
   city: string;
+  kind: string;
   title: string;
   subtitle: string;
   description: string;
   tags: string[];
   image: string;
+  price: string | null;
 };
 
 type ServiceCard = {
@@ -65,9 +68,9 @@ const navItems: NavItem[] = [
     label: "ทริปแนะนำ",
     children: [
       { label: "กวางโจว / Canton Fair", href: "#trips" },
-      { label: "อี้อู / ตลาดค้าส่ง", href: "#trips" },
-      { label: "ฝอซาน + จงซาน", href: "#trips" },
-      { label: "เซินเจิ้น / Electronics", href: "#trips" },
+      { label: "กวางโจว / ดูโรงงาน", href: "#trips" },
+      { label: "ซีอาน / วัฒนธรรม (Leisure)", href: "#trips" },
+      { label: "ยูนนาน / Business + Leisure", href: "#trips" },
       { label: "ทริปส่วนตัวผู้บริหาร", href: "#trips" },
       { label: "Custom Business Trip", href: "#trips" },
     ],
@@ -126,6 +129,37 @@ const heroProof = [
   "ล่ามจีน-ไทย-อังกฤษ",
   "Private Business Trip",
   "Founder-led Service",
+];
+
+const marqueeWords = [
+  "Guangzhou",
+  "Canton Fair",
+  "Xi'an",
+  "Yunnan",
+  "Factory Visit",
+  "Supplier Meeting",
+  "Business Sourcing",
+  "Interpreter",
+  "Private Trip",
+  "Safe Facilitation",
+];
+
+const problemCards: { icon: IconName; title: string; copy: string }[] = [
+  {
+    icon: "languages",
+    title: "กำแพงภาษาที่มากกว่าการแปล",
+    copy: "ล่ามทั่วไปแปลได้ แต่ช่วย “ต่อรองธุรกิจ” ไม่เป็น ทำให้พลาดเงื่อนไข ราคา และโอกาสสำคัญตรงหน้างาน",
+  },
+  {
+    icon: "shield",
+    title: "ความเสี่ยงเรื่องความน่าเชื่อถือ",
+    copy: "ในเว็บดูดี แต่ไปถึงจริงอาจเป็นเพียงคนกลางหรือห้องแถว ไม่รู้จะประเมินโรงงานและซัพพลายเออร์อย่างไรให้มั่นใจ",
+  },
+  {
+    icon: "clock",
+    title: "เสียเวลาและต้นทุนโดยเปล่า",
+    copy: "จัดการเดินทาง เส้นทาง และนัดหมายเองยุ่งยาก ไม่รู้จะเริ่มตรงไหนให้คุ้มค่าที่สุดในเวลาที่มีจำกัด",
+  },
 ];
 
 const heroSlides: HeroSlide[] = [
@@ -232,63 +266,75 @@ const shortcutBenefits: {
 const tripCards: TripCard[] = [
   {
     city: "Guangzhou",
+    kind: "Business",
     title: "กวางโจว / Canton Fair",
-    subtitle: "งานแฟร์ สินค้าโรงงาน และซัพพลายเออร์",
+    subtitle: "งานแฟร์ที่ใหญ่ที่สุดของจีน",
     description:
       "เหมาะกับเจ้าของแบรนด์ ผู้นำเข้า และทีมจัดซื้อที่ต้องการเดินงานแฟร์แบบมีเป้าหมาย ช่วยเตรียมคำถามและสรุปดีลหน้างาน",
-    tags: ["Canton Fair", "Factory", "Supplier Meeting"],
+    tags: ["Canton Fair", "Sourcing", "Supplier Meeting"],
     image:
       "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=80",
+    price: "฿25,000–28,000",
   },
   {
-    city: "Yiwu",
-    title: "อี้อู / Wholesale Market",
-    subtitle: "เมืองค้าส่ง สินค้าไลฟ์สไตล์ และสินค้าทุนเริ่มต้น",
+    city: "Guangzhou",
+    kind: "Business",
+    title: "กวางโจว / Factory Visit",
+    subtitle: "ดูโรงงานจริงและพบซัพพลายเออร์",
     description:
-      "เหมาะกับผู้เริ่มนำเข้าสินค้า ร้านค้าออนไลน์ และทีมที่ต้องการเห็นสินค้าหลากหลายหมวดในพื้นที่เดียว",
-    tags: ["Wholesale", "Retail Ideas", "SME"],
-    image:
-      "https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    city: "Foshan / Zhongshan",
-    title: "ฝอซาน + จงซาน",
-    subtitle: "เฟอร์นิเจอร์ วัสดุก่อสร้าง ไฟ และงานแต่งบ้าน",
-    description:
-      "เหมาะกับเจ้าของโครงการ อินทีเรียร์ ร้านวัสดุ และแบรนด์ที่ต้องการดูสินค้าขนาดใหญ่หรือคุยโรงงานเฉพาะทาง",
-    tags: ["Furniture", "Lighting", "Interior"],
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    city: "Shenzhen",
-    title: "เซินเจิ้น / Electronics",
-    subtitle: "สินค้าเทคโนโลยี อุปกรณ์ และตลาดนวัตกรรม",
-    description:
-      "เหมาะกับทีมที่สนใจอุปกรณ์อิเล็กทรอนิกส์ แก็ดเจ็ต และสินค้าที่ต้องดูสเปก ตัวอย่าง และความน่าเชื่อถือของคู่ค้า",
-    tags: ["Electronics", "Gadget", "Innovation"],
+      "พาเจาะลึกโรงงานและคุยกับซัพพลายเออร์โดยตรง ช่วยตั้งคำถามเรื่องคุณภาพ ราคา MOQ และระยะผลิต เพื่อประเมินคู่ค้าอย่างมั่นใจ",
+    tags: ["Factory Tour", "Negotiation", "Quality Check"],
     image:
       "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1200&q=80",
+    price: "฿25,000–28,000",
   },
   {
-    city: "Premium Private",
-    title: "ทริปจีนส่วนตัวสำหรับผู้บริหาร",
-    subtitle: "ธุรกิจ ผ่อนคลาย และวัฒนธรรมในทริปเดียว",
+    city: "Xi'an",
+    kind: "Premium Leisure",
+    title: "ซีอาน / วัฒนธรรมและประวัติศาสตร์",
+    subtitle: "เมืองหลวงเก่า กองทัพทหารดินเผา และจีนแท้",
     description:
-      "เหมาะกับผู้บริหาร ครอบครัว หรือทีมเล็กที่ต้องการทริปส่วนตัว มีคนดูแลภาษา เส้นทาง ร้านอาหาร และจังหวะการเดินทาง",
-    tags: ["Private", "Executive", "Culture"],
+      "ทริปส่วนตัวแบบพรีเมียมสำหรับครอบครัวหรือกลุ่มเพื่อน สัมผัสจีนแท้ ๆ แบบไม่เร่งรีบ พร้อมคนดูแลภาษา เส้นทาง และจังหวะเดินทาง",
+    tags: ["Culture", "Family", "Private"],
+    image:
+      "https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&w=1200&q=80",
+    price: "฿15,000–18,000",
+  },
+  {
+    city: "Yunnan",
+    kind: "Hybrid",
+    title: "ยูนนาน / Business + Leisure",
+    subtitle: "ผสมงานธุรกิจกับการพักผ่อนในทริปเดียว",
+    description:
+      "เหมาะกับผู้ที่อยากดูโอกาสธุรกิจใหม่ ๆ พร้อมสัมผัสธรรมชาติและวัฒนธรรมของจีนตอนใต้ ปรับสัดส่วนธุรกิจ-ท่องเที่ยวได้ตามเป้าหมาย",
+    tags: ["Hybrid", "Nature", "Opportunity"],
     image:
       "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1200&q=80",
+    price: "฿18,000",
   },
   {
-    city: "Future Market",
-    title: "Custom Business Trip",
-    subtitle: "เปิดโอกาสต่อยอดตลาดใหม่ในอนาคต",
+    city: "Private",
+    kind: "Executive",
+    title: "ทริปส่วนตัวสำหรับผู้บริหาร",
+    subtitle: "ออกแบบเฉพาะกลุ่ม 2–6 ท่าน",
     description:
-      "โครงสร้างบริการออกแบบให้ขยายได้ ไม่จำกัดแบรนด์ไว้เฉพาะจีน เมื่อมีตลาดอื่นที่เหมาะกับลูกค้า สามารถเพิ่มเส้นทางได้ทันที",
+      "ทริปส่วนตัวที่จัดตามเป้าหมายของคุณโดยเฉพาะ ทั้งธุรกิจและการพักผ่อน มีคนดูแลภาษา รถ ที่พัก และร้านอาหารระดับพรีเมียม",
+    tags: ["Private Group", "Custom", "VIP"],
+    image:
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+    price: null,
+  },
+  {
+    city: "Custom",
+    kind: "Flexible",
+    title: "Custom Business Trip",
+    subtitle: "เปิดโอกาสต่อยอดเส้นทางใหม่ในอนาคต",
+    description:
+      "โครงสร้างบริการออกแบบให้ขยายได้ ไม่จำกัดไว้เฉพาะ 3 เมืองหลัก เมื่อมีเมืองหรือตลาดอื่นที่เหมาะกับลูกค้า สามารถเพิ่มเส้นทางได้",
     tags: ["Custom Route", "Expansion", "Strategy"],
     image:
       "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80",
+    price: null,
   },
 ];
 
@@ -385,10 +431,11 @@ const testimonials: Testimonial[] = [
 ];
 
 const credentials = [
-  "ปริญญาตรีและโทด้าน Aeronautical Engineering จาก Northwestern Polytechnical University ประเทศจีน",
-  "เคยได้รับทุนการศึกษาเต็มจำนวนในจีน และเคยเป็นนักเรียนแลกเปลี่ยน AFS ประเทศจีน",
+  "ปริญญาโท 2 ใบ — วิศวกรรมการบิน (Northwestern Polytechnical University, ซีอาน) และเทคโนโลยีสื่อสังคม (ม.รังสิต) เข้าใจทั้งกระบวนการผลิตและการตลาด",
+  "ใช้ชีวิตและเรียนในประเทศจีนกว่า 5 ปี เคยได้ทุนการศึกษาเต็มจำนวน และเคยเป็นนักเรียนแลกเปลี่ยน AFS",
+  "สื่อสารจีนระดับเจ้าของภาษา และเข้าใจการเจรจาธุรกิจในบริบทจีน (Guanxi)",
   "มีประสบการณ์ล่ามจีน-ไทย-อังกฤษในบริบทธุรกิจ อุตสาหกรรม และวิศวกรรม",
-  "เข้าใจทั้งภาษา วัฒนธรรมจีน การเดินทาง และการสื่อสารเชิงธุรกิจ",
+  "อยู่ระหว่างเตรียมสอบใบมัคคุเทศก์ทั่วไป (บัตรบรอนซ์เงิน) เพื่อดูแลการเดินทางอย่างถูกต้อง",
   "Founder-led service: ปีแรกดูแลคุณภาพด้วยตัวริวเองเป็นหลัก",
 ];
 
@@ -430,12 +477,13 @@ const jsonLd = {
   ],
   description:
     "Founder-led China business trip facilitation for Thai SME owners, importers, executives, and purchasing teams.",
-  areaServed: ["China", "Thailand", "Guangzhou", "Yiwu", "Foshan", "Zhongshan", "Shenzhen"],
+  areaServed: ["China", "Thailand", "Guangzhou", "Xi'an", "Yunnan"],
   serviceType: [
-    "Business trip planning",
+    "Private business trip planning",
     "China factory visit facilitation",
     "Canton Fair business trip",
-    "Thai Chinese interpretation support",
+    "Premium private leisure tour",
+    "Thai Chinese interpretation and safe facilitation",
   ],
   founder: {
     "@type": "Person",
@@ -471,7 +519,7 @@ function CtaLink({
   return (
     <a
       href={href}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-3 text-center text-sm font-bold transition focus:outline-none focus:ring-2 focus:ring-gold/60 focus:ring-offset-2 focus:ring-offset-transparent ${styles[variant]} ${className}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-3 text-center text-sm font-bold transition duration-200 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-gold/60 focus:ring-offset-2 focus:ring-offset-transparent ${styles[variant]} ${className}`}
     >
       {children}
     </a>
@@ -625,6 +673,9 @@ function TripCardView({ trip }: { trip: TripCard }) {
         <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1.5 text-xs font-black uppercase tracking-[0.12em] text-maroon backdrop-blur">
           {trip.city}
         </span>
+        <span className="absolute right-4 top-4 rounded-full bg-charcoal/70 px-3 py-1.5 text-xs font-bold text-gold-light backdrop-blur">
+          {trip.kind}
+        </span>
         <div className="absolute inset-x-0 bottom-0 p-5 text-white">
           <p className="text-xs font-bold uppercase tracking-[0.14em] text-gold-light">
             {trip.subtitle}
@@ -646,16 +697,33 @@ function TripCardView({ trip }: { trip: TripCard }) {
             </span>
           ))}
         </div>
-        <a
-          href={LINE_URL}
-          className="group/link mt-6 inline-flex items-center gap-2 text-sm font-bold text-tour-red"
-        >
-          ถามเส้นทางนี้
-          <Icon
-            name="arrow-right"
-            className="size-4 transition-transform group-hover/link:translate-x-1"
-          />
-        </a>
+        <div className="mt-auto flex items-end justify-between gap-3 pt-6">
+          <span className="text-sm text-ink">
+            {trip.price ? (
+              <>
+                เริ่มต้น{" "}
+                <span className="font-heading text-lg font-black text-charcoal">
+                  {trip.price}
+                </span>{" "}
+                / ท่าน
+              </>
+            ) : (
+              <span className="font-semibold text-charcoal">
+                ราคาตามการออกแบบทริป
+              </span>
+            )}
+          </span>
+          <a
+            href={LINE_URL}
+            className="group/link inline-flex shrink-0 items-center gap-2 text-sm font-bold text-tour-red"
+          >
+            สอบถาม
+            <Icon
+              name="arrow-right"
+              className="size-4 transition-transform group-hover/link:translate-x-1"
+            />
+          </a>
+        </div>
       </div>
     </article>
   );
@@ -722,11 +790,12 @@ export default function RyuGeGePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="min-h-screen bg-cream text-charcoal">
+        <PageEffects />
         <SiteHeader navItems={navItems} lineUrl={LINE_URL} phone={PHONE} />
 
-        <main id="top">
+        <main>
           {/* Hero — full-bleed carousel, the first intentional dark moment */}
-          <section className="relative bg-espresso text-white">
+          <section id="top" className="relative bg-espresso text-white">
             <HeroCarousel slides={heroSlides}>
               <div className="mx-auto flex min-h-[88vh] max-w-7xl flex-col justify-center px-4 pb-28 pt-20 sm:px-6 lg:px-8">
                 <div className="max-w-3xl animate-fade-in">
@@ -736,13 +805,14 @@ export default function RyuGeGePage() {
                   </span>
                   <h1 className="font-heading mt-6 text-4xl font-black leading-[1.04] tracking-tight sm:text-6xl lg:text-7xl">
                     พาบินไปดูตลาดจีน
-                    <span className="block text-gold-light">
+                    <span className="text-gradient-gold block">
                       งานแฟร์ · โรงงาน · ซัพพลายเออร์
                     </span>
                   </h1>
                   <p className="mt-6 max-w-xl text-lg leading-8 text-white/80">
-                    บริการทริปธุรกิจจีนและการประสานงานแบบ Private โดย ริว (RyuGeGe)
-                    สำหรับ SME เจ้าของแบรนด์ ผู้นำเข้า และทีมจัดซื้อที่อยากไปจีนอย่างมีแผน
+                    บริการทริปธุรกิจจีนแบบ Private โดย ริว (RyuGeGe) วิศวกร ป.โท
+                    ผู้ใช้ชีวิตในจีนกว่า 5 ปี — สำหรับ SME เจ้าของแบรนด์ ผู้นำเข้า
+                    และทีมจัดซื้อที่อยากไปจีนอย่างมีแผน
                   </p>
                   <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                     <CtaLink href={LINE_URL} variant="line">
@@ -800,16 +870,66 @@ export default function RyuGeGePage() {
             </div>
           </section>
 
-          {/* Value proposition */}
+          {/* Marquee strip */}
+          <section className="pt-14 sm:pt-20">
+            <div className="marquee border-y border-sand/60 py-4">
+              <div className="marquee__track">
+                {[...marqueeWords, ...marqueeWords].map((word, index) => (
+                  <span
+                    key={`${word}-${index}`}
+                    aria-hidden={index >= marqueeWords.length}
+                    className="flex items-center gap-4 text-lg font-black uppercase tracking-[0.14em] text-ink-soft"
+                  >
+                    {word}
+                    <span className="size-1.5 rounded-full bg-tour-red/50" />
+                  </span>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Problem / agitation */}
           <section className="py-20 sm:py-28">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <SplitHeading
                 index="01"
+                label="The Problem"
+                title="ไปดูโรงงานและงานแฟร์จีนเอง เสี่ยงกว่าที่คิด"
+                copy="ปัญหาที่เจ้าของธุรกิจและทีมจัดซื้อเจอบ่อย เมื่อไปจีนโดยไม่มีคนที่เข้าใจทั้งภาษาและธุรกิจไปด้วย"
+              />
+              <div className="reveal-stagger mt-14 grid gap-6 md:grid-cols-3">
+                {problemCards.map((problem) => (
+                  <article
+                    key={problem.title}
+                    className="relative overflow-hidden rounded-3xl border border-tour-red/15 bg-white p-7 shadow-[var(--shadow-soft)]"
+                  >
+                    <span className="absolute inset-y-0 left-0 w-1 bg-tour-red/70" />
+                    <span className="grid size-14 place-items-center rounded-2xl bg-tour-red/10 text-tour-red">
+                      <Icon name={problem.icon} className="size-7" />
+                    </span>
+                    <h3 className="font-heading mt-6 text-xl font-bold leading-snug text-charcoal">
+                      {problem.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-7 text-ink">{problem.copy}</p>
+                  </article>
+                ))}
+              </div>
+              <p className="mt-8 text-center text-base font-semibold text-ink">
+                นี่คือเหตุผลที่การมี “คนที่เข้าใจทั้งภาษาและธุรกิจ” เดินไปกับคุณ ช่วยลดความเสี่ยงได้จริง
+              </p>
+            </div>
+          </section>
+
+          {/* Value proposition */}
+          <section className="py-20 sm:py-28">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <SplitHeading
+                index="02"
                 label="Why RyuGeGe"
                 title="ทำให้ทริปจีนกลายเป็นการเดินทางธุรกิจที่จับต้องได้"
                 copy="แนวทางคล้ายการมีทีมพาลงตลาดจริง แต่ปรับให้เหมาะกับแบรนด์เล็ก ทีมจัดซื้อ และเจ้าของธุรกิจที่ต้องการความใกล้ชิดกว่า"
               />
-              <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="reveal-stagger mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {shortcutBenefits.map((benefit) => (
                   <article
                     key={benefit.title}
@@ -837,16 +957,20 @@ export default function RyuGeGePage() {
           <section id="trips" className="scroll-mt-24 py-20 sm:py-28">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <SplitHeading
-                index="02"
+                index="03"
                 label="Recommended Trips"
-                title="ทริปทัวร์ซื้อสินค้าและดูงานจีนแนะนำ"
-                copy="จัดกลุ่มเส้นทางตามเมืองและเป้าหมายธุรกิจ ในสไตล์ RyuGeGe Tour: founder-led, private และยืดหยุ่นกับโจทย์ของลูกค้า"
+                title="เส้นทางแนะนำ: ธุรกิจ วัฒนธรรม และไฮบริด"
+                copy="โฟกัส 3 เมืองหลักตามเป้าหมายลูกค้า — กวางโจว (ธุรกิจ / Canton Fair), ซีอาน (วัฒนธรรม / พักผ่อน) และยูนนาน (ผสมธุรกิจ-ท่องเที่ยว) พร้อมทริปส่วนตัวและเส้นทางออกแบบเอง"
               />
-              <div className="mt-14 grid gap-7 md:grid-cols-2 xl:grid-cols-3">
+              <div className="reveal-stagger mt-14 grid gap-7 md:grid-cols-2 xl:grid-cols-3">
                 {tripCards.map((trip) => (
                   <TripCardView key={trip.title} trip={trip} />
                 ))}
               </div>
+              <p className="mt-8 text-sm leading-6 text-ink-soft">
+                * ราคาเริ่มต้นต่อท่าน (กรุ๊ป 4–6 ท่าน) ขึ้นอยู่กับเมือง จำนวนวัน จำนวนผู้เดินทาง
+                และช่วงเวลา — สรุปราคาจริงหลังปรึกษาและออกแบบทริปร่วมกัน
+              </p>
             </div>
           </section>
 
@@ -854,12 +978,12 @@ export default function RyuGeGePage() {
           <section id="services" className="scroll-mt-24 bg-cream-deep/50 py-20 sm:py-28">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <SplitHeading
-                index="03"
+                index="04"
                 label="Core Services"
                 title="บริการหลักที่ช่วยให้ทริปธุรกิจเดินหน้าเป็นระบบ"
                 copy="ตั้งแต่ก่อนบิน ระหว่างเดินทาง จนถึงการติดตามหลังจบทริป"
               />
-              <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+              <div className="reveal-stagger mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
                 {serviceCards.map((service) => (
                   <article
                     key={service.title}
@@ -890,12 +1014,12 @@ export default function RyuGeGePage() {
           <section id="clips" className="scroll-mt-24 py-20 sm:py-28">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <SplitHeading
-                index="04"
+                index="05"
                 label="Social Proof Clips"
                 title="คลิปรีวิวทริปธุรกิจที่พา CEO และเจ้าของแบรนด์ไปจริง"
                 copy="พื้นที่สำหรับคลิปแนวตั้ง 9:16 จาก Facebook Reels, Instagram, TikTok หรือ YouTube Shorts — ใส่ลิงก์จริงได้ในข้อมูลชุดเดียว"
               />
-              <div className="no-scrollbar mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4">
+              <div className="reveal-stagger no-scrollbar mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4">
                 {reviewClips.map((clip, index) => (
                   <ReviewClipCard key={clip.title} clip={clip} index={index} />
                 ))}
@@ -915,12 +1039,12 @@ export default function RyuGeGePage() {
           <section id="testimonials" className="scroll-mt-24 pb-20 sm:pb-28">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <CenteredHeading
-                index="05"
+                index="06"
                 label="Testimonials"
                 title="เสียงจากลูกค้าที่ไว้วางใจ"
                 copy="ยังไม่ใส่คำรีวิวปลอม พื้นที่นี้เตรียมไว้สำหรับรีวิวจริงที่ลูกค้าอนุมัติให้เผยแพร่แล้ว"
               />
-              <div className="mt-12 grid gap-6 md:grid-cols-3">
+              <div className="reveal-stagger mt-12 grid gap-6 md:grid-cols-3">
                 {testimonials.map((item) => (
                   <article
                     key={item.name}
@@ -952,7 +1076,7 @@ export default function RyuGeGePage() {
           {/* Founder — second intentional dark moment */}
           <section id="founder" className="scroll-mt-24 bg-espresso py-20 text-white sm:py-28">
             <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:px-8">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] ring-1 ring-white/10">
+              <div className="reveal relative aspect-[4/5] overflow-hidden rounded-[2rem] ring-1 ring-white/10">
                 <div
                   className="absolute inset-0 bg-cover bg-center"
                   style={{
@@ -969,13 +1093,13 @@ export default function RyuGeGePage() {
                     Ryu Puriwat
                   </h3>
                   <p className="mt-2 max-w-sm text-sm leading-6 text-white/72">
-                    ผู้ประสานงานจีน-ไทยที่ผสมพื้นฐานวิศวกรรม ภาษา วัฒนธรรมจีน
-                    และการสื่อสารเชิงธุรกิจ
+                    วิศวกร ป.โท · ใช้ชีวิตในจีนกว่า 5 ปี ผู้ประสานงานจีน-ไทยที่ผสาน
+                    พื้นฐานวิศวกรรม ภาษา วัฒนธรรมจีน และการเจรจาธุรกิจ
                   </p>
                 </div>
               </div>
-              <div>
-                <SectionLabel index="06" label="Why RyuGeGe Tour" light />
+              <div className="reveal">
+                <SectionLabel index="07" label="Why RyuGeGe Tour" light />
                 <h2 className="font-heading mt-5 text-3xl font-black leading-[1.1] sm:text-4xl lg:text-[2.6rem]">
                   ไปจีนกับคนที่ช่วยแปลความหมายทางธุรกิจ ไม่ใช่แค่พาเดินทาง
                 </h2>
@@ -994,13 +1118,13 @@ export default function RyuGeGePage() {
           <section className="py-20 sm:py-28">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <CenteredHeading
-                index="07"
+                index="08"
                 label="Working Process"
                 title="เริ่มต้นง่าย แต่ทำงานเป็นระบบ"
               />
               <div className="relative mt-16">
                 <div className="absolute left-6 top-0 bottom-0 w-px bg-sand md:left-0 md:right-0 md:top-6 md:bottom-auto md:h-px md:w-full" />
-                <div className="grid gap-10 md:grid-cols-5 md:gap-6">
+                <div className="reveal-stagger grid gap-10 md:grid-cols-5 md:gap-6">
                   {processSteps.map(([title, copy], index) => (
                     <div key={title} className="relative pl-16 md:pl-0">
                       <span className="absolute left-0 top-0 grid size-12 place-items-center rounded-full bg-tour-red font-heading text-lg font-black text-white shadow-[var(--shadow-cta)] md:relative">
@@ -1021,12 +1145,12 @@ export default function RyuGeGePage() {
           <section id="inquiry" className="scroll-mt-24 bg-cream-deep/50 py-20 sm:py-28">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <CenteredHeading
-                index="08"
+                index="09"
                 label="Start Your Trip"
                 title="เล่าเป้าหมายทริป แล้วให้ริวช่วยประเมินเส้นทางที่เหมาะ"
                 copy="ฟอร์มจะช่วยจัดข้อมูลเบื้องต้นก่อนคุยจริง เพื่อให้คำแนะนำเรื่องเมือง จำนวนวัน และรูปแบบบริการแม่นขึ้น"
               />
-              <div className="mt-12 grid gap-6 lg:grid-cols-[1.12fr_0.88fr]">
+              <div className="reveal mt-12 grid gap-6 lg:grid-cols-[1.12fr_0.88fr]">
                 <InquiryForm />
                 <aside className="flex flex-col rounded-3xl bg-espresso p-7 text-white shadow-[var(--shadow-lift)]">
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold-light">
@@ -1057,8 +1181,8 @@ export default function RyuGeGePage() {
           {/* FAQ — on cream, off the old red band */}
           <section id="faq" className="scroll-mt-24 py-20 sm:py-28">
             <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-              <CenteredHeading index="09" label="FAQ" title="คำถามที่พบบ่อย" />
-              <div className="mt-12 space-y-3">
+              <CenteredHeading index="10" label="FAQ" title="คำถามที่พบบ่อย" />
+              <div className="reveal-stagger mt-12 space-y-3">
                 {faqs.map(([question, answer]) => (
                   <details
                     key={question}
@@ -1081,7 +1205,7 @@ export default function RyuGeGePage() {
 
           {/* Final CTA — contained dark card, third intentional dark moment */}
           <section className="px-4 pb-24 sm:px-6 lg:px-8">
-            <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2.5rem] bg-espresso px-6 py-16 text-center text-white shadow-[var(--shadow-lift)] sm:px-12 sm:py-20">
+            <div className="reveal relative mx-auto max-w-6xl overflow-hidden rounded-[2.5rem] bg-espresso px-6 py-16 text-center text-white shadow-[var(--shadow-lift)] sm:px-12 sm:py-20">
               <div className="absolute inset-0 -z-0 bg-[radial-gradient(circle_at_50%_0%,rgba(244,195,95,0.18),transparent_55%),radial-gradient(circle_at_85%_90%,rgba(239,47,55,0.22),transparent_45%)]" />
               <div className="relative">
                 <p className="text-xs font-bold uppercase tracking-[0.24em] text-gold-light">
@@ -1160,11 +1284,11 @@ export default function RyuGeGePage() {
               <p className="mt-4 text-sm leading-7 text-white/70">
                 Guangzhou / Canton Fair
                 <br />
-                Yiwu
+                Xi&apos;an (Culture)
                 <br />
-                Foshan / Zhongshan
+                Yunnan (Hybrid)
                 <br />
-                Shenzhen
+                Private / Custom Route
               </p>
             </div>
             <div>
