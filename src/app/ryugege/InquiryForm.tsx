@@ -48,17 +48,14 @@ function FieldLabel({
   children: React.ReactNode;
 }) {
   return (
-    <label
-      htmlFor={htmlFor}
-      className="text-sm font-semibold text-[#171717]"
-    >
+    <label htmlFor={htmlFor} className="text-sm font-semibold text-charcoal">
       {children}
     </label>
   );
 }
 
 const inputClass =
-  "mt-2 w-full rounded-md border border-[#E4D2A7] bg-white px-4 py-3 text-base text-[#1F2933] outline-none transition focus:border-[#EF2F37] focus:ring-[3px] focus:ring-[#F4C35F]/45";
+  "mt-2 w-full rounded-md border border-sand bg-white px-4 py-3 text-base text-charcoal outline-none transition focus:border-tour-red focus:ring-[3px] focus:ring-gold/45";
 
 export function InquiryForm() {
   const [form, setForm] = useState<FormState>(initialState);
@@ -92,7 +89,7 @@ export function InquiryForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-lg border border-[#D9E2EC] bg-white p-5 shadow-[0_18px_60px_rgba(11,31,58,0.08)] sm:p-6"
+      className="rounded-lg border border-sand bg-white p-5 shadow-[var(--shadow-card)] sm:p-6"
     >
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
@@ -232,12 +229,12 @@ export function InquiryForm() {
           onChange={(event) => updateField("message", event.target.value)}
         />
       </div>
-      <p className="mt-4 text-sm leading-6 text-[#52616B]">
+      <p className="mt-4 text-sm leading-6 text-ink">
         หากฟอร์มยังไม่พร้อมใช้งาน กรุณากดปุ่ม LINE เพื่อคุยกับริวโดยตรง
       </p>
       <button
         type="submit"
-        className="mt-5 w-full rounded-md bg-[#EF2F37] px-5 py-4 text-base font-bold text-white shadow-[0_12px_28px_rgba(239,47,55,0.28)] transition hover:bg-[#C91F27] focus:outline-none focus:ring-[3px] focus:ring-[#F4C35F]/45"
+        className="mt-5 w-full rounded-md bg-tour-red px-5 py-4 text-base font-bold text-white shadow-[var(--shadow-cta)] transition hover:bg-tour-red-dark focus:outline-none focus:ring-[3px] focus:ring-gold/45"
       >
         ส่งข้อมูลเพื่อประเมินทริป
       </button>
