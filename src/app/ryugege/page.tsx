@@ -25,6 +25,7 @@ type TripCard = {
   tags: string[];
   image: string;
   price: string | null;
+  href?: string;
 };
 
 type ServiceCard = {
@@ -299,6 +300,7 @@ const tripCards: TripCard[] = [
     image:
       "https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&w=1200&q=80",
     price: "฿15,000–18,000",
+    href: "./xian/",
   },
   {
     city: "Yunnan",
@@ -714,10 +716,10 @@ function TripCardView({ trip }: { trip: TripCard }) {
             )}
           </span>
           <a
-            href={LINE_URL}
+            href={trip.href ?? LINE_URL}
             className="group/link inline-flex shrink-0 items-center gap-2 text-sm font-bold text-tour-red"
           >
-            สอบถาม
+            {trip.href ? "ดูรายละเอียด" : "สอบถาม"}
             <Icon
               name="arrow-right"
               className="size-4 transition-transform group-hover/link:translate-x-1"
