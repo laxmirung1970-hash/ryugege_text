@@ -124,9 +124,40 @@ const days: Day[] = [
   },
 ];
 
-const priceRows = [
-  { pax: "4–6 ท่าน", price: "฿18,000" },
-  { pax: "7–9 ท่าน", price: "฿15,000" },
+type PriceTier = {
+  group: string;
+  vehicle: string;
+  rows: { label: string; price: string }[];
+};
+
+const priceTiers: PriceTier[] = [
+  {
+    group: "4–5 ท่าน",
+    vehicle: "รถ 7 ที่นั่ง",
+    rows: [
+      { label: "ผู้ใหญ่ (พักห้องละ 2 ท่าน)", price: "20,900" },
+      { label: "เด็ก 2–12 ปี (มีเตียง / ไม่มีเตียง)", price: "20,900" },
+      { label: "พักเดี่ยว จ่ายเพิ่ม", price: "5,000" },
+    ],
+  },
+  {
+    group: "6–7 ท่าน",
+    vehicle: "รถ 9–14 ที่นั่ง",
+    rows: [
+      { label: "ผู้ใหญ่ (พักห้องละ 2 ท่าน)", price: "17,900" },
+      { label: "เด็ก 2–12 ปี (มีเตียง / ไม่มีเตียง)", price: "17,900" },
+      { label: "พักเดี่ยว จ่ายเพิ่ม", price: "5,000" },
+    ],
+  },
+  {
+    group: "8–10 ท่าน",
+    vehicle: "รถ 14–18 ที่นั่ง",
+    rows: [
+      { label: "ผู้ใหญ่ (พักห้องละ 2 ท่าน)", price: "16,900" },
+      { label: "เด็ก 2–12 ปี (มีเตียง / ไม่มีเตียง)", price: "16,900" },
+      { label: "พักเดี่ยว จ่ายเพิ่ม", price: "5,000" },
+    ],
+  },
 ];
 
 const included = [
@@ -415,34 +446,48 @@ export default function XianPage() {
             </h2>
             <p className="mt-4 text-base leading-7 text-ink">
               ช่วงเวลาเดินทาง: <span className="font-bold text-charcoal">วันนี้ – กันยายน 2569</span>{" "}
-              · สำหรับกลุ่มส่วนตัว 4–9 ท่าน
+              · สำหรับกลุ่มส่วนตัว 4–10 ท่าน ·{" "}
+              <span className="font-bold text-charcoal">ราคาไม่รวมตั๋วเครื่องบิน</span>
             </p>
 
-            <div className="mt-10 overflow-x-auto rounded-3xl bg-white shadow-[var(--shadow-soft)]">
-              <table className="w-full min-w-[420px] text-left">
-                <thead>
-                  <tr className="border-b border-sand/70 text-xs font-black uppercase tracking-[0.1em] text-ink-soft">
-                    <th className="px-6 py-4">จำนวนผู้เดินทาง</th>
-                    <th className="px-6 py-4">ราคา / ท่าน</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {priceRows.map((r) => (
-                    <tr key={r.pax} className="border-b border-sand/40 last:border-0">
-                      <td className="px-6 py-5 font-semibold text-charcoal">{r.pax}</td>
-                      <td className="px-6 py-5">
-                        <span className="font-heading text-2xl font-black text-tour-red">
-                          {r.price}
+            <div className="mt-10 grid gap-6 lg:grid-cols-3">
+              {priceTiers.map((tier) => (
+                <div
+                  key={tier.group}
+                  className="overflow-hidden rounded-3xl bg-white shadow-[var(--shadow-soft)]"
+                >
+                  <div className="bg-espresso px-5 py-4 text-center text-white">
+                    <p className="font-heading text-lg font-black">{tier.group}</p>
+                    <p className="mt-0.5 text-xs font-semibold text-gold-light">
+                      {tier.vehicle}
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-[1fr_auto] gap-3 bg-cream-deep/60 px-5 py-2.5 text-[11px] font-black uppercase tracking-[0.06em] text-ink-soft">
+                    <span>จำนวนผู้เดินทาง</span>
+                    <span>ราคา / ท่าน</span>
+                  </div>
+                  <div>
+                    {tier.rows.map((row, i) => (
+                      <div
+                        key={row.label}
+                        className={`grid grid-cols-[1fr_auto] items-center gap-3 px-5 py-4 ${
+                          i > 0 ? "border-t border-sand/40" : ""
+                        }`}
+                      >
+                        <span className="text-sm leading-5 text-charcoal">{row.label}</span>
+                        <span className="font-heading text-lg font-black text-tour-red">
+                          ฿{row.price}
                         </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
             <p className="mt-4 text-sm leading-6 text-ink-soft">
-              * ราคาเริ่มต้นต่อท่าน <span className="font-bold text-charcoal">ไม่รวมตั๋วเครื่องบิน</span>{" "}
-              ขึ้นอยู่กับระดับที่พัก ช่วงเวลา และรายละเอียดที่ปรับร่วมกัน — สรุปราคาจริงหลังปรึกษา
+              * ราคาต่อท่าน <span className="font-bold text-charcoal">ไม่รวมตั๋วเครื่องบิน</span> ·
+              เด็กอายุต่ำกว่า 2 ปี สอบถามเพิ่มเติม · รายละเอียดที่พักและโปรแกรมปรับร่วมกันได้ —
+              สรุปราคาจริงหลังปรึกษา
             </p>
 
             <div className="mt-10 grid gap-6 md:grid-cols-2">

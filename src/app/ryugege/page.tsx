@@ -299,7 +299,7 @@ const tripCards: TripCard[] = [
     tags: ["Culture", "Family", "Private"],
     image:
       "https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&w=1200&q=80",
-    price: "฿15,000–18,000",
+    price: "฿16,900–20,900",
     href: "./xian/",
   },
   {
