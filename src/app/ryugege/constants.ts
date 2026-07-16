@@ -14,6 +14,7 @@ export const inquiryDefaults = {
     "Guangzhou / Canton Fair",
     "Xi'an",
     "Yunnan",
+    "Chaozhou / แต้จิ๋ว",
     "Other China city",
     "Not sure yet",
   ],

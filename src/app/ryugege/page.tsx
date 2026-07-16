@@ -68,10 +68,10 @@ const navItems: NavItem[] = [
   {
     label: "ทริปแนะนำ",
     children: [
-      { label: "กวางโจว / Canton Fair", href: "#trips" },
-      { label: "กวางโจว / ดูโรงงาน", href: "#trips" },
-      { label: "ซีอาน / วัฒนธรรม (Leisure)", href: "#trips" },
+      { label: "กวางโจว / Canton Fair + โรงงาน", href: "#trips" },
+      { label: "ซีอาน / วัฒนธรรม (Leisure)", href: "./xian/" },
       { label: "ยูนนาน / Business + Leisure", href: "#trips" },
+      { label: "แต้จิ๋ว / Chaozhou", href: "#trips" },
       { label: "ทริปส่วนตัวผู้บริหาร", href: "#trips" },
       { label: "Custom Business Trip", href: "#trips" },
     ],
@@ -137,12 +137,12 @@ const marqueeWords = [
   "Canton Fair",
   "Xi'an",
   "Yunnan",
+  "Chaozhou",
   "Factory Visit",
   "Supplier Meeting",
   "Business Sourcing",
   "Interpreter",
   "Private Trip",
-  "Safe Facilitation",
 ];
 
 const problemCards: { icon: IconName; title: string; copy: string }[] = [
@@ -268,25 +268,13 @@ const tripCards: TripCard[] = [
   {
     city: "Guangzhou",
     kind: "Business",
-    title: "กวางโจว / Canton Fair",
-    subtitle: "งานแฟร์ที่ใหญ่ที่สุดของจีน",
+    title: "กวางโจว / Canton Fair + โรงงาน",
+    subtitle: "งานแฟร์ ดูโรงงาน และพบซัพพลายเออร์",
     description:
-      "เหมาะกับเจ้าของแบรนด์ ผู้นำเข้า และทีมจัดซื้อที่ต้องการเดินงานแฟร์แบบมีเป้าหมาย ช่วยเตรียมคำถามและสรุปดีลหน้างาน",
-    tags: ["Canton Fair", "Sourcing", "Supplier Meeting"],
+      "เหมาะกับเจ้าของแบรนด์ ผู้นำเข้า และทีมจัดซื้อ เดินงานแฟร์แบบมีเป้าหมาย พร้อมเจาะลึกโรงงานและคุยซัพพลายเออร์โดยตรง ช่วยเตรียมคำถามและสรุปดีลหน้างาน",
+    tags: ["Canton Fair", "Factory Visit", "Supplier Meeting"],
     image:
       "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=80",
-    price: "฿25,000–28,000",
-  },
-  {
-    city: "Guangzhou",
-    kind: "Business",
-    title: "กวางโจว / Factory Visit",
-    subtitle: "ดูโรงงานจริงและพบซัพพลายเออร์",
-    description:
-      "พาเจาะลึกโรงงานและคุยกับซัพพลายเออร์โดยตรง ช่วยตั้งคำถามเรื่องคุณภาพ ราคา MOQ และระยะผลิต เพื่อประเมินคู่ค้าอย่างมั่นใจ",
-    tags: ["Factory Tour", "Negotiation", "Quality Check"],
-    image:
-      "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1200&q=80",
     price: "฿25,000–28,000",
   },
   {
@@ -313,6 +301,18 @@ const tripCards: TripCard[] = [
     image:
       "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1200&q=80",
     price: "฿18,000",
+  },
+  {
+    city: "Chaozhou",
+    kind: "Culture",
+    title: "แต้จิ๋ว / Chaozhou",
+    subtitle: "ถิ่นบรรพบุรุษ วัฒนธรรม และอาหารแต้จิ๋ว",
+    description:
+      "ทริปส่วนตัวเยือนเมืองแต้จิ๋ว บ้านเกิดชาวไทยเชื้อสายจีนแต้จิ๋ว ชมเมืองเก่า สะพานโบราณเซียงจื่อ วัดไคหยวน และลิ้มรสอาหารแต้จิ๋วต้นตำรับ",
+    tags: ["Teochew", "Heritage", "Food"],
+    image:
+      "https://images.unsplash.com/photo-1660120470355-58b72442426a?auto=format&fit=crop&w=1200&q=80",
+    price: null,
   },
   {
     city: "Private",
@@ -479,7 +479,7 @@ const jsonLd = {
   ],
   description:
     "Founder-led China business trip facilitation for Thai SME owners, importers, executives, and purchasing teams.",
-  areaServed: ["China", "Thailand", "Guangzhou", "Xi'an", "Yunnan"],
+  areaServed: ["China", "Thailand", "Guangzhou", "Xi'an", "Yunnan", "Chaozhou"],
   serviceType: [
     "Private business trip planning",
     "China factory visit facilitation",
@@ -1292,6 +1292,8 @@ export default function RyuGeGePage() {
                 Xi&apos;an (Culture)
                 <br />
                 Yunnan (Hybrid)
+                <br />
+                Chaozhou (Teochew)
                 <br />
                 Private / Custom Route
               </p>
