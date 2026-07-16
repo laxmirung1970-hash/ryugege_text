@@ -298,7 +298,7 @@ const tripCards: TripCard[] = [
       "ทริปส่วนตัวแบบพรีเมียมสำหรับครอบครัวหรือกลุ่มเพื่อน สัมผัสจีนแท้ ๆ แบบไม่เร่งรีบ พร้อมคนดูแลภาษา เส้นทาง และจังหวะเดินทาง",
     tags: ["Culture", "Family", "Private"],
     image:
-      "https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1547253807-593ee708edab?auto=format&fit=crop&w=1200&q=80",
     price: "฿16,900–20,900",
     href: "./xian/",
   },

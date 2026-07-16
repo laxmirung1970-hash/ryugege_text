@@ -73,7 +73,7 @@ const days: Day[] = [
     ],
     stay: "ซีอาน",
     image:
-      "https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1547253807-593ee708edab?auto=format&fit=crop&w=1000&q=80",
   },
   {
     day: "Day 2",
@@ -85,7 +85,7 @@ const days: Day[] = [
     ],
     stay: "ซีอาน",
     image:
-      "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1569685794205-a8fc87049f5d?auto=format&fit=crop&w=1000&q=80",
   },
   {
     day: "Day 3",
@@ -97,7 +97,7 @@ const days: Day[] = [
     ],
     stay: "ซีอาน",
     image:
-      "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1760419855307-3d43fd202b42?auto=format&fit=crop&w=1000&q=80",
   },
   {
     day: "Day 4",
@@ -109,7 +109,7 @@ const days: Day[] = [
     ],
     stay: "ซีอาน",
     image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1758543647734-c0a302acb3f6?auto=format&fit=crop&w=1000&q=80",
   },
   {
     day: "Day 5",
@@ -120,7 +120,7 @@ const days: Day[] = [
     ],
     stay: "-",
     image:
-      "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1547253807-593ee708edab?auto=format&fit=crop&w=1000&q=80",
   },
 ];
 
@@ -253,7 +253,7 @@ export default function XianPage() {
           className="absolute inset-0 -z-10 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url(https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&w=1600&q=80)",
+              "url(https://images.unsplash.com/photo-1547253807-593ee708edab?auto=format&fit=crop&w=1600&q=80)",
           }}
         />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(20,6,7,0.94),rgba(27,17,14,0.82)_45%,rgba(27,17,14,0.5))]" />
