@@ -715,18 +715,21 @@ function TripCardView({ trip }: { trip: TripCard }) {
               </span>
             )}
           </span>
-          <a
-            href={trip.href ?? LINE_URL}
-            className="group/link inline-flex shrink-0 items-center gap-2 text-sm font-bold text-tour-red"
-          >
+          <span className="inline-flex shrink-0 items-center gap-2 text-sm font-bold text-tour-red">
             {trip.href ? "ดูรายละเอียด" : "สอบถาม"}
             <Icon
               name="arrow-right"
-              className="size-4 transition-transform group-hover/link:translate-x-1"
+              className="size-4 transition-transform group-hover:translate-x-1"
             />
-          </a>
+          </span>
         </div>
       </div>
+      <a
+        href={trip.href ?? LINE_URL}
+        aria-label={trip.title}
+        className="absolute inset-0 z-10 rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-tour-red"
+        {...(trip.href ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+      />
     </article>
   );
 }
