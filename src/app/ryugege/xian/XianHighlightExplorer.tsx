@@ -53,7 +53,7 @@ export function XianHighlightExplorer({ highlights }: XianHighlightExplorerProps
             aria-haspopup="dialog"
             aria-controls="xian-highlight-dialog"
             aria-label={`อ่านรายละเอียด: ${highlight.thaiTitle}`}
-            className="group relative min-h-[315px] overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#2a1c17] text-left shadow-[0_20px_50px_rgba(0,0,0,0.22)] transition duration-300 hover:border-gold/45 hover:shadow-[0_28px_60px_rgba(0,0,0,0.32)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+            className="group relative aspect-[4/5] w-full overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#2a1c17] text-left shadow-[0_20px_50px_rgba(0,0,0,0.22)] transition duration-300 hover:border-gold/45 hover:shadow-[0_28px_60px_rgba(0,0,0,0.32)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
             onClick={(event) => {
               triggerRef.current = event.currentTarget;
               setActiveHighlight(highlight);
