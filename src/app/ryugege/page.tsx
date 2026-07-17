@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { InquiryForm } from "./InquiryForm";
 import { HeroCarousel, type HeroSlide } from "./HeroCarousel";
@@ -7,7 +8,9 @@ import { PageEffects } from "./PageEffects";
 import { Icon, type IconName } from "./icons";
 import { LINE_URL } from "./constants";
 
-const PHONE = "092 842 2121";
+const CONTACT_HREF = LINE_URL;
+const CONTACT_LABEL = "ปรึกษาฟรีทาง LINE Official";
+const CONTACT_ICON: IconName = "chat";
 
 type SocialLink = {
   label: string;
@@ -54,9 +57,9 @@ type Testimonial = {
 export const metadata: Metadata = {
   title: "ทริปธุรกิจจีน ดูงานแฟร์ โรงงาน และซัพพลายเออร์",
   description:
-    "RyuGeGe Tour บริการออกแบบทริปธุรกิจจีน พาเดินงานแฟร์ ดูโรงงาน พบซัพพลายเออร์ และประสานงานจีน-ไทยสำหรับเจ้าของธุรกิจ SME และทีมจัดซื้อ",
+    "Ryu Gege Tour บริการออกแบบทริปธุรกิจจีน พาเดินงานแฟร์ ดูโรงงาน พบซัพพลายเออร์ และประสานงานจีน-ไทยสำหรับเจ้าของธุรกิจ SME และทีมจัดซื้อ",
   openGraph: {
-    title: "RyuGeGe Tour | ทริปธุรกิจจีน ดูงานแฟร์ โรงงาน และซัพพลายเออร์",
+    title: "Ryu Gege Tour | ทริปธุรกิจจีน ดูงานแฟร์ โรงงาน และซัพพลายเออร์",
     description:
       "ทริปธุรกิจจีนแบบ founder-led สำหรับเจ้าของธุรกิจที่ต้องการไปจีนอย่างมีแผน มีคนช่วยคุย และมีคนช่วยประสาน",
     type: "website",
@@ -68,10 +71,10 @@ const navItems: NavItem[] = [
   {
     label: "ทริปแนะนำ",
     children: [
-      { label: "กวางโจว / Canton Fair + โรงงาน", href: "#trips" },
       { label: "ซีอาน / วัฒนธรรม (Leisure)", href: "./xian/" },
-      { label: "ยูนนาน / Business + Leisure", href: "#trips" },
       { label: "แต้จิ๋ว / Chaozhou", href: "#trips" },
+      { label: "กวางโจว / Canton Fair + โรงงาน", href: "#trips" },
+      { label: "ยูนนาน / Business + Leisure", href: "#trips" },
       { label: "ทริปส่วนตัวผู้บริหาร", href: "#trips" },
       { label: "Custom Business Trip", href: "#trips" },
     ],
@@ -100,10 +103,10 @@ const socialLinks: SocialLink[] = [
     icon: "facebook",
   },
   {
-    label: "Instagram",
-    value: "ryugegechannel",
-    href: "https://www.instagram.com/ryugegechannel",
-    icon: "instagram",
+    label: "โทรศัพท์",
+    value: "092 842 2121",
+    href: "tel:0928422121",
+    icon: "phone",
   },
   {
     label: "Website",
@@ -111,24 +114,12 @@ const socialLinks: SocialLink[] = [
     href: "https://www.ryu-gege.com/",
     icon: "globe",
   },
-  {
-    label: "Email",
-    value: "ryupuriwat2000@gmail.com",
-    href: "mailto:ryupuriwat2000@gmail.com",
-    icon: "mail",
-  },
-  {
-    label: "Phone",
-    value: PHONE,
-    href: "tel:0928422121",
-    icon: "phone",
-  },
 ];
 
 const heroProof = [
   "Canton Fair / Factory Visit",
   "ล่ามจีน-ไทย-อังกฤษ",
-  "Private Business Trip",
+  "Private Tour / Leisure",
   "Founder-led Service",
 ];
 
@@ -190,33 +181,33 @@ const heroSlides: HeroSlide[] = [
   {
     image:
       "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1600&q=80",
-    kicker: "Private Business Trip",
-    title: "ทริปส่วนตัวสำหรับผู้บริหาร",
-    caption: "ดูแลภาษา เส้นทาง ร้านอาหาร และจังหวะการเดินทางในทริปเดียว",
+    kicker: "Private Tour / Leisure",
+    title: "ทริปส่วนตัวในแบบที่คุณเลือก",
+    caption: "เที่ยวจีนแบบไม่ต้องมีเป้าหมายธุรกิจ พร้อมดูแลภาษา เส้นทาง และจังหวะการเดินทาง",
   },
 ];
 
 const contactCards = [
   {
     title: "ติดต่อสอบถามทันที",
-    value: "LINE RyuGeGe",
-    copy: "ส่งเป้าหมาย เมือง สินค้า และช่วงเวลาเดินทางเพื่อให้ริวประเมินเบื้องต้น",
-    href: LINE_URL,
-    icon: "chat" as IconName,
+    value: "LINE Official",
+    copy: "ส่งเป้าหมาย เมือง สินค้า และช่วงเวลาเดินทางเพื่อให้ทีมงานประเมินเบื้องต้น",
+    href: CONTACT_HREF,
+    icon: CONTACT_ICON,
   },
   {
     title: "เวลาให้คำปรึกษา",
     value: "ทุกวันตามนัดหมาย",
     copy: "เหมาะกับเจ้าของธุรกิจที่ต้องวางแผนนอกเวลาทำงานปกติ",
-    href: "#inquiry",
+    href: CONTACT_HREF,
     icon: "clock" as IconName,
   },
   {
-    title: "ช่องทางตรง",
-    value: PHONE,
-    copy: "โทรหรือฝากข้อมูลไว้ แล้วเลือกช่องทางที่สะดวกสำหรับการคุยรายละเอียด",
-    href: "tel:0928422121",
-    icon: "phone" as IconName,
+    title: "เริ่มปรึกษาทริป",
+    value: "LINE Official",
+    copy: "ส่งเป้าหมายและช่วงเวลาเดินทาง แล้วรับคำแนะนำเบื้องต้นผ่าน LINE",
+    href: CONTACT_HREF,
+    icon: "chat" as IconName,
   },
 ];
 
@@ -275,7 +266,7 @@ const tripCards: TripCard[] = [
     tags: ["Canton Fair", "Factory Visit", "Supplier Meeting"],
     image:
       "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=80",
-    price: "฿25,000–28,000",
+    price: null,
   },
   {
     city: "Xi'an",
@@ -287,7 +278,7 @@ const tripCards: TripCard[] = [
     tags: ["Culture", "Family", "Private"],
     image:
       "https://images.unsplash.com/photo-1547253807-593ee708edab?auto=format&fit=crop&w=1200&q=80",
-    price: "฿16,900–20,900",
+    price: "฿20,900",
     href: "./xian/",
   },
   {
@@ -300,7 +291,7 @@ const tripCards: TripCard[] = [
     tags: ["Hybrid", "Nature", "Opportunity"],
     image:
       "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1200&q=80",
-    price: "฿18,000",
+    price: null,
   },
   {
     city: "Chaozhou",
@@ -315,30 +306,32 @@ const tripCards: TripCard[] = [
     price: null,
   },
   {
-    city: "Private",
-    kind: "Executive",
-    title: "ทริปส่วนตัวสำหรับผู้บริหาร",
-    subtitle: "ออกแบบเฉพาะกลุ่ม 2–6 ท่าน",
+    city: "Private Tour",
+    kind: "Leisure",
+    title: "ออกแบบทัวร์ท่องเที่ยวส่วนตัว",
+    subtitle: "เที่ยวตามจังหวะของคุณในแบบที่ชอบ",
     description:
-      "ทริปส่วนตัวที่จัดตามเป้าหมายของคุณโดยเฉพาะ ทั้งธุรกิจและการพักผ่อน มีคนดูแลภาษา รถ ที่พัก และร้านอาหารระดับพรีเมียม",
-    tags: ["Private Group", "Custom", "VIP"],
+      "ออกแบบทริปเฉพาะสำหรับครอบครัวหรือกลุ่มเพื่อน เลือกเมือง ที่พัก ร้านอาหาร และจังหวะการเดินทางให้ตรงกับสไตล์ของคุณ",
+    tags: ["Family & Friends", "Private", "Flexible"],
     image:
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
     price: null,
   },
   {
-    city: "Custom",
-    kind: "Flexible",
-    title: "Custom Business Trip",
-    subtitle: "เปิดโอกาสต่อยอดเส้นทางใหม่ในอนาคต",
+    city: "Business Tour",
+    kind: "Business",
+    title: "ออกแบบทัวร์ธุรกิจ",
+    subtitle: "วางแผนตามเป้าหมายการเดินทางของธุรกิจ",
     description:
-      "โครงสร้างบริการออกแบบให้ขยายได้ ไม่จำกัดไว้เฉพาะ 3 เมืองหลัก เมื่อมีเมืองหรือตลาดอื่นที่เหมาะกับลูกค้า สามารถเพิ่มเส้นทางได้",
-    tags: ["Custom Route", "Expansion", "Strategy"],
+      "ออกแบบเส้นทางตามสินค้า ตลาด งานแฟร์ โรงงาน หรือคู่ค้าที่ต้องการพบ พร้อมวางจำนวนวันและลำดับการเดินทางให้คุ้มค่า",
+    tags: ["Market Visit", "Factory Visit", "Custom Route"],
     image:
       "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80",
     price: null,
   },
 ];
+
+const featuredTripOrder = ["Xi'an", "Chaozhou", "Guangzhou", "Yunnan"];
 
 const serviceCards: ServiceCard[] = [
   {
@@ -393,88 +386,103 @@ const processSteps = [
 
 const reviewClips: ReviewClip[] = [
   {
-    title: "เจ้าของธุรกิจเดินงานแฟร์พร้อมทีม",
-    platform: "Facebook / Reels",
-    href: "https://www.facebook.com/ryupuriwat/",
+    title: "ล่ามธุรกิจ ช่วยเจรจาและคุมต้นทุนนำเข้า",
+    platform: "TikTok",
+    href: "https://www.tiktok.com/@ryuchinesegege/video/7660610235119291655",
+    thumbnail: "/clips/business-interpreter-import.png",
   },
   {
-    title: "รีวิวบรรยากาศดูโรงงานและคุยซัพพลายเออร์",
-    platform: "Instagram / Short video",
-    href: "https://www.instagram.com/ryugegechannel",
+    title: "นำเข้าเสื้อผ้ากว่างโจว: ราคา ขนส่ง และสร้างแบรนด์",
+    platform: "TikTok",
+    href: "https://www.tiktok.com/@ryuchinesegege/video/7660609775029292295",
+    thumbnail: "/clips/guangzhou-clothing-import.png",
   },
   {
-    title: "สรุปคำถามที่ CEO ควรถามก่อนปิดดีล",
-    platform: "Facebook / Reels",
-    href: "https://www.facebook.com/ryupuriwat/",
+    title: "พบซัพพลายเออร์ตัวจริง อุ่นใจก่อนตัดสินใจ",
+    platform: "TikTok",
+    href: "https://www.tiktok.com/@ryuchinesegege/video/7660611888828484872",
+    thumbnail: "/clips/supplier-factory-visit.png",
   },
   {
-    title: "เบื้องหลังทริปส่วนตัวสำหรับเจ้าของแบรนด์",
-    platform: "Instagram / Story",
-    href: "https://www.instagram.com/ryugegechannel",
+    title: "พาดูงาน Kunming South Asia Expo เพื่อหาซัพพลายเออร์",
+    platform: "TikTok",
+    href: "https://www.tiktok.com/@ryuchinesegege/video/7660611267031321864",
+    thumbnail: "/clips/kunming-south-asia-expo.png",
   },
 ];
 
 const testimonials: Testimonial[] = [
   {
-    name: "Business Trip Client",
-    role: "เจ้าของธุรกิจ / ทีมจัดซื้อ",
-    focus: "พื้นที่สำหรับใส่รีวิวจริงหลังลูกค้าอนุมัติข้อความ",
+    name: "Weerayuth Mitsaman (คุณลิฟต์)",
+    role: "Kunming South Asia Expo 2026",
+    focus: "การดูแลตลอดทริปและมุมมองด้านธุรกิจ",
+    quote:
+      "ทีมผู้จัดดูแลได้ดี อาหารการกินอิ่มทุกมื้อ เกินความคาดหวังไว้มาก ถ้าใครอยากมาทัวร์ แนะนำ Ryu Gege เลยครับ ทั้งพาเที่ยว พากิน ดูมุมธุรกิจต่าง ๆ",
   },
   {
-    name: "Factory Visit Client",
-    role: "ผู้ประกอบการที่ต้องการดูโรงงาน",
-    focus: "พื้นที่สำหรับรีวิวผลลัพธ์ เช่น ความชัดเจนของการสื่อสารและแผนเดินทาง",
+    name: "Watcharakorn Srikerdkruen (คุณกร)",
+    role: "Kunming South Asia Expo 2026",
+    focus: "การดูแลและล่ามตลอดงาน",
+    quote:
+      "ทีมงานดูแลดีมาก มีล่ามตามแปลติดตัวตลอดเวลา คุณ Ryu Gege ให้ความช่วยเหลือตลอดทั้งงานเลย",
   },
   {
-    name: "Private Trip Client",
-    role: "ผู้บริหาร / ครอบครัว",
-    focus: "พื้นที่สำหรับเสียงลูกค้าทริปส่วนตัวและประสบการณ์การดูแลระหว่างเดินทาง",
+    name: "Minchisa Yingcharoenchanarat (คุณนิ)",
+    role: "ตลาดเสื้อผ้ากว่างโจว",
+    focus: "การดูแลและสนับสนุนระหว่างทริป",
+    quote: "ขอบคุณน้องริวมากนะคะ สำหรับการดูแลซัปพอร์ตอย่างดี ประทับใจมากค่ะ 🫶🏻🤍",
   },
 ];
 
 const credentials = [
   "ปริญญาโท 2 ใบ — วิศวกรรมการบิน (Northwestern Polytechnical University, ซีอาน) และเทคโนโลยีสื่อสังคม (ม.รังสิต) เข้าใจทั้งกระบวนการผลิตและการตลาด",
-  "ใช้ชีวิตและเรียนในประเทศจีนกว่า 5 ปี เคยได้ทุนการศึกษาเต็มจำนวน และเคยเป็นนักเรียนแลกเปลี่ยน AFS",
+  "ใช้ชีวิตและเรียนในประเทศจีนกว่า 5 ปี พร้อมประสบการณ์ติดต่อประสานงานกับจีนมากกว่า 10 ปี เคยได้ทุนการศึกษาเต็มจำนวน และเคยเป็นนักเรียนแลกเปลี่ยน AFS",
   "สื่อสารจีนระดับเจ้าของภาษา และเข้าใจการเจรจาธุรกิจในบริบทจีน (Guanxi)",
   "มีประสบการณ์ล่ามจีน-ไทย-อังกฤษในบริบทธุรกิจ อุตสาหกรรม และวิศวกรรม",
-  "อยู่ระหว่างเตรียมสอบใบมัคคุเทศก์ทั่วไป (บัตรบรอนซ์เงิน) เพื่อดูแลการเดินทางอย่างถูกต้อง",
   "Founder-led service: ปีแรกดูแลคุณภาพด้วยตัวริวเองเป็นหลัก",
 ];
 
 const faqs = [
   [
-    "RyuGeGe Tour ต่างจากทัวร์ทั่วไปอย่างไร?",
-    "จุดยืนหลักคือทริปธุรกิจแบบมีคนช่วยคิด ช่วยแปล และช่วยประสาน ไม่ใช่ทริปท่องเที่ยวทั่วไป ลูกค้าจะได้คุยเป้าหมายก่อนเดินทางและวางแผนตามสินค้า เมือง และคู่ค้าที่ต้องการพบ",
+    "Ryu Gege Tour ต่างจากทัวร์จีนทั่วไปอย่างไร?",
+    "เราออกแบบทริปจีนให้มีเป้าหมายชัดเจน ไม่ว่าจะเป็นการไปงานแฟร์ เยี่ยมโรงงาน คุยซัพพลายเออร์ หรือเที่ยวพักผ่อนแบบส่วนตัว คุณจึงไม่ได้แค่ “ไปจีน” แต่ได้เส้นทางที่เหมาะกับสิ่งที่คุณต้องการทำจริง",
   ],
   [
-    "ยังเน้นทริปจีนอยู่ไหม ถ้าเปลี่ยนชื่อเป็น RyuGeGe Tour?",
-    "ยังเน้นจีนเป็นตลาดหลักในตอนนี้ แต่ใช้ชื่อ RyuGeGe Tour เพื่อไม่ล็อกแบรนด์กับประเทศเดียว หากอนาคตมีตลาดอื่นที่เหมาะกับลูกค้า จะเพิ่มบริการได้ง่ายขึ้น",
+    "อยากหาสินค้าหรือซัพพลายเออร์จีน แต่ยังไม่รู้จะเริ่มจากเมืองไหน ทำอย่างไร?",
+    "เพียงบอกประเภทสินค้า งบประมาณ และเป้าหมายธุรกิจของคุณ เราช่วยแนะนำเมือง งานแฟร์ และแนวทางการวางเส้นทางที่เหมาะสม ก่อนออกเดินทาง เพื่อให้ทุกวันของทริปมีเป้าหมาย",
   ],
   [
-    "รับประกันว่าจะได้ซัพพลายเออร์ดีหรือได้กำไรไหม?",
-    "ไม่รับประกันผลกำไรหรือคุณภาพซัพพลายเออร์แทนการตัดสินใจของลูกค้า บริการนี้ช่วยลดความเสี่ยงด้านภาษา การเดินทาง และการสื่อสาร แต่การตัดสินใจทางธุรกิจยังเป็นของลูกค้า",
+    "Business Tour พาไปทำอะไรได้บ้าง?",
+    "สามารถออกแบบให้ครอบคลุมการไปงานแฟร์ เยี่ยมโรงงาน พบซัพพลายเออร์ สำรวจตลาดค้าส่ง และช่วยสื่อสารระหว่างการนัดหมายตามขอบเขตที่ตกลงกัน",
   ],
   [
-    "ไป Canton Fair อย่างเดียวได้ไหม?",
-    "ได้ สามารถออกแบบทริปเฉพาะ Canton Fair หรือผสมกับการดูโรงงาน พบซัพพลายเออร์ และสำรวจตลาดเพิ่มเติมได้",
+    "ไป Canton Fair หรือเยี่ยมโรงงานโดยไม่มีประสบการณ์ได้ไหม?",
+    "ได้ เราช่วยเตรียมความพร้อมเรื่องเส้นทาง การเดินทาง การนัดหมาย และสิ่งที่ควรถาม เพื่อให้คุณเข้าพบคู่ค้าอย่างมั่นใจและใช้เวลาในจีนได้คุ้มค่า",
   ],
   [
-    "ถ้ายังไม่รู้ว่าจะไปเมืองไหนดี เริ่มอย่างไร?",
-    "เริ่มจากคุยเป้าหมายสินค้า งบประมาณ และช่วงเวลาเดินทาง ริวจะช่วยประเมินเบื้องต้นว่าเมืองใดเหมาะกับโจทย์ของคุณมากที่สุด",
+    "Ryu Gege Tour รับประกันว่าจะได้ซัพพลายเออร์หรือปิดออร์เดอร์ไหม?",
+    "เราไม่รับประกันผลการเจรจาหรือคุณภาพสินค้าจากผู้ขาย เพราะเป็นการตัดสินใจทางธุรกิจของคุณ แต่เราช่วยให้คุณเข้าถึงแหล่งข้อมูลและคู่ค้าที่ตรงเป้าหมายขึ้น เพื่อประกอบการตัดสินใจอย่างรอบคอบ",
   ],
   [
-    "หลังจบทริปมีคนช่วยติดตามซัพพลายเออร์ต่อไหม?",
-    "มีบริการเสริมสำหรับการประสานงานหลังทริป เช่น ช่วยแปลข้อความ ช่วยสรุปประเด็น หรือช่วยติดตามเอกสารตามขอบเขตที่ตกลงกัน",
+    "หลังจบทริป ยังช่วยประสานงานกับซัพพลายเออร์ต่อได้ไหม?",
+    "สามารถสอบถามบริการช่วยติดตามหรือสื่อสารต่อหลังทริปได้ โดยประเมินตามลักษณะงานและขอบเขตที่ต้องการ",
+  ],
+  [
+    "ถ้าไม่ได้ไปทำธุรกิจ แต่อยากเที่ยวจีนแบบส่วนตัว ใช้บริการได้ไหม?",
+    "ได้ Private Tour ของเราออกแบบตามสไตล์ของคุณ เลือกเมือง โรงแรม ร้านอาหาร และกิจกรรมได้ เหมาะกับคู่รัก ครอบครัว หรือกลุ่มเพื่อนที่อยากเที่ยวจีนอย่างสบายใจ",
+  ],
+  [
+    "Private Tour มีจำนวนผู้เดินทางขั้นต่ำหรือไม่?",
+    "แจ้งจำนวนผู้เดินทางและช่วงเวลาที่สะดวกมาได้เลย เราจะออกแบบเส้นทางและเสนอราคาให้เหมาะกับกลุ่มของคุณ",
   ],
 ];
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "TravelAgency",
-  name: "RyuGeGe Tour",
+  name: "Ryu Gege Tour",
   sameAs: [
     "https://www.facebook.com/ryupuriwat/",
-    "https://www.instagram.com/ryugegechannel",
     "https://www.ryu-gege.com/",
   ],
   description:
@@ -655,10 +663,14 @@ function CheckList({ items, light = false }: { items: string[]; light?: boolean 
 
 function BrandMark() {
   return (
-    <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-[linear-gradient(140deg,#ef2f37,#8b1118)] text-center text-[10px] font-black uppercase leading-tight text-gold-light shadow-[0_10px_24px_rgba(139,17,24,0.28)]">
-      Ryu
-      <br />
-      Tour
+    <span className="grid size-12 shrink-0 place-items-center overflow-hidden rounded-2xl bg-white p-1 shadow-[0_10px_24px_rgba(139,17,24,0.2)]">
+      <Image
+        src="/ryugege-logo.webp"
+        alt="Ryu Gege Tour"
+        width={48}
+        height={48}
+        className="size-full object-contain"
+      />
     </span>
   );
 }
@@ -725,7 +737,7 @@ function TripCardView({ trip }: { trip: TripCard }) {
         </div>
       </div>
       <a
-        href={trip.href ?? LINE_URL}
+        href={trip.href ?? CONTACT_HREF}
         aria-label={trip.title}
         className="absolute inset-0 z-10 rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-tour-red"
         {...(trip.href ? {} : { target: "_blank", rel: "noopener noreferrer" })}
@@ -773,9 +785,7 @@ function ReviewClipCard({ clip, index }: { clip: ReviewClip; index: number }) {
                 <h3 className="font-heading mt-1.5 text-lg font-bold leading-tight">
                   {clip.title}
                 </h3>
-                <p className="mt-2 text-xs font-semibold text-white/72">
-                  รอใส่ลิงก์หรือ embed คลิปจริง
-                </p>
+                <p className="mt-2 text-xs font-semibold text-white/72">ดูคลิปบน TikTok</p>
               </div>
             </>
           )}
@@ -787,7 +797,7 @@ function ReviewClipCard({ clip, index }: { clip: ReviewClip; index: number }) {
 
 /* ------------------------------------------------------------------ page */
 
-export default function RyuGeGePage() {
+export default function RyuGegePage() {
   return (
     <>
       <script
@@ -796,7 +806,10 @@ export default function RyuGeGePage() {
       />
       <div className="min-h-screen bg-cream text-charcoal">
         <PageEffects />
-        <SiteHeader navItems={navItems} lineUrl={LINE_URL} phone={PHONE} />
+        <SiteHeader
+          navItems={navItems}
+          contactUrl={CONTACT_HREF}
+        />
 
         <main>
           {/* Hero — full-bleed carousel, the first intentional dark moment */}
@@ -806,23 +819,29 @@ export default function RyuGeGePage() {
                 <div className="max-w-3xl animate-fade-in">
                   <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-black/20 px-4 py-2 text-sm font-bold text-gold-light backdrop-blur">
                     <Icon name="sparkles" className="size-4" />
-                    ทริปธุรกิจจีนแบบ Founder-led
+                    ทริปจีนธุรกิจ + Private Tour โดย Ryu Gege
                   </span>
                   <h1 className="font-heading mt-6 text-4xl font-black leading-[1.04] tracking-tight sm:text-6xl lg:text-7xl">
                     พาบินไปดูตลาดจีน
                     <span className="text-gradient-gold block">
                       งานแฟร์ · โรงงาน · ซัพพลายเออร์
                     </span>
+                    <span className="mt-3 block text-[0.46em] font-bold leading-tight text-white/95 sm:text-[0.42em]">
+                      หรือ Private Tour ส่วนตัว — ไม่ต้องเป็นทริปธุรกิจก็ไปได้
+                    </span>
                   </h1>
                   <p className="mt-6 max-w-xl text-lg leading-8 text-white/80">
-                    บริการทริปธุรกิจจีนแบบ Private โดย ริว (RyuGeGe) วิศวกร ป.โท
-                    ผู้ใช้ชีวิตในจีนกว่า 5 ปี — สำหรับ SME เจ้าของแบรนด์ ผู้นำเข้า
-                    และทีมจัดซื้อที่อยากไปจีนอย่างมีแผน
+                    บริการทริปธุรกิจจีนและ Private Tour ส่วนตัวโดย ริว (Ryu Gege)
+                    วิศวกร ป.โท ผู้มีประสบการณ์ติดต่อประสานงานกับจีนมากกว่า 10 ปี
+                    — สำหรับทั้งคนทำธุรกิจและคนที่อยากเที่ยวจีนในแบบของตัวเอง
                   </p>
                   <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                    <CtaLink href={LINE_URL} variant="line">
-                      <Icon name="chat" className="size-4" />
-                      ปรึกษาแผนทริปฟรี
+                    <CtaLink
+                      href={CONTACT_HREF}
+                      variant="line"
+                    >
+                      <Icon name={CONTACT_ICON} className="size-4" />
+                      {CONTACT_LABEL}
                     </CtaLink>
                     <CtaLink href="#trips" variant="ghost">
                       ดูทริปแนะนำ
@@ -930,7 +949,7 @@ export default function RyuGeGePage() {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <SplitHeading
                 index="02"
-                label="Why RyuGeGe"
+                label="Why Ryu Gege"
                 title="ทำให้ทริปจีนกลายเป็นการเดินทางธุรกิจที่จับต้องได้"
                 copy="แนวทางคล้ายการมีทีมพาลงตลาดจริง แต่ปรับให้เหมาะกับแบรนด์เล็ก ทีมจัดซื้อ และเจ้าของธุรกิจที่ต้องการความใกล้ชิดกว่า"
               />
@@ -965,12 +984,22 @@ export default function RyuGeGePage() {
                 index="03"
                 label="Recommended Trips"
                 title="เส้นทางแนะนำ: ธุรกิจ วัฒนธรรม และไฮบริด"
-                copy="โฟกัส 3 เมืองหลักตามเป้าหมายลูกค้า — กวางโจว (ธุรกิจ / Canton Fair), ซีอาน (วัฒนธรรม / พักผ่อน) และยูนนาน (ผสมธุรกิจ-ท่องเที่ยว) พร้อมทริปส่วนตัวและเส้นทางออกแบบเอง"
+                copy="โฟกัส 4 เมืองหลักตามเป้าหมายลูกค้า — ซีอาน (วัฒนธรรม / พักผ่อน), แต้จิ๋ว (วัฒนธรรม / อาหาร), กว่างโจว (ธุรกิจ / Canton Fair) และยูนนาน (ผสมธุรกิจ-ท่องเที่ยว) พร้อมทริปส่วนตัวและเส้นทางออกแบบเอง"
               />
               <div className="reveal-stagger mt-14 grid gap-7 md:grid-cols-2 xl:grid-cols-3">
-                {tripCards.map((trip) => (
-                  <TripCardView key={trip.title} trip={trip} />
-                ))}
+                {[...tripCards]
+                  .sort((a, b) => {
+                    const aIndex = featuredTripOrder.indexOf(a.city);
+                    const bIndex = featuredTripOrder.indexOf(b.city);
+
+                    return (
+                      (aIndex === -1 ? Number.MAX_SAFE_INTEGER : aIndex) -
+                      (bIndex === -1 ? Number.MAX_SAFE_INTEGER : bIndex)
+                    );
+                  })
+                  .map((trip) => (
+                    <TripCardView key={trip.title} trip={trip} />
+                  ))}
               </div>
               <p className="mt-8 text-sm leading-6 text-ink-soft">
                 * ราคาเริ่มต้นต่อท่าน (กรุ๊ป 4–6 ท่าน) ขึ้นอยู่กับเมือง จำนวนวัน จำนวนผู้เดินทาง
@@ -1022,7 +1051,7 @@ export default function RyuGeGePage() {
                 index="05"
                 label="Social Proof Clips"
                 title="คลิปรีวิวทริปธุรกิจที่พา CEO และเจ้าของแบรนด์ไปจริง"
-                copy="พื้นที่สำหรับคลิปแนวตั้ง 9:16 จาก Facebook Reels, Instagram, TikTok หรือ YouTube Shorts — ใส่ลิงก์จริงได้ในข้อมูลชุดเดียว"
+                copy="คลิปแนวตั้ง 9:16 จาก TikTok — กดการ์ดเพื่อเปิดดูวิดีโอเต็ม"
               />
               <div className="reveal-stagger no-scrollbar mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4">
                 {reviewClips.map((clip, index) => (
@@ -1047,7 +1076,7 @@ export default function RyuGeGePage() {
                 index="06"
                 label="Testimonials"
                 title="เสียงจากลูกค้าที่ไว้วางใจ"
-                copy="ยังไม่ใส่คำรีวิวปลอม พื้นที่นี้เตรียมไว้สำหรับรีวิวจริงที่ลูกค้าอนุมัติให้เผยแพร่แล้ว"
+                copy="ประสบการณ์จริงจากลูกค้าที่เดินทางกับ Ryu Gege Tour"
               />
               <div className="reveal-stagger mt-12 grid gap-6 md:grid-cols-3">
                 {testimonials.map((item) => (
@@ -1070,7 +1099,7 @@ export default function RyuGeGePage() {
                       </p>
                     </div>
                     <span className="absolute right-6 top-6 rounded-full bg-cream-deep px-2.5 py-1 text-[10px] font-black uppercase tracking-wide text-ink-soft">
-                      Review slot
+                      Client Review
                     </span>
                   </article>
                 ))}
@@ -1085,8 +1114,7 @@ export default function RyuGeGePage() {
                 <div
                   className="absolute inset-0 bg-cover bg-center"
                   style={{
-                    backgroundImage:
-                      "url(https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=80)",
+                    backgroundImage: "url(/ryu-graduation.webp)",
                   }}
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,6,7,0.1),rgba(20,6,7,0.9))]" />
@@ -1098,13 +1126,14 @@ export default function RyuGeGePage() {
                     Ryu Puriwat
                   </h3>
                   <p className="mt-2 max-w-sm text-sm leading-6 text-white/72">
-                    วิศวกร ป.โท · ใช้ชีวิตในจีนกว่า 5 ปี ผู้ประสานงานจีน-ไทยที่ผสาน
-                    พื้นฐานวิศวกรรม ภาษา วัฒนธรรมจีน และการเจรจาธุรกิจ
+                    วิศวกร ป.โท · มีประสบการณ์ติดต่อประสานงานกับจีนมากกว่า 10 ปี
+                    ผู้ประสานงานจีน-ไทยที่ผสานพื้นฐานวิศวกรรม ภาษา วัฒนธรรมจีน
+                    และการเจรจาธุรกิจ
                   </p>
                 </div>
               </div>
               <div className="reveal">
-                <SectionLabel index="07" label="Why RyuGeGe Tour" light />
+                <SectionLabel index="07" label="Why Ryu Gege Tour" light />
                 <h2 className="font-heading mt-5 text-3xl font-black leading-[1.1] sm:text-4xl lg:text-[2.6rem]">
                   ไปจีนกับคนที่ช่วยแปลความหมายทางธุรกิจ ไม่ใช่แค่พาเดินทาง
                 </h2>
@@ -1162,15 +1191,19 @@ export default function RyuGeGePage() {
                     Faster reply
                   </p>
                   <h3 className="font-heading mt-4 text-2xl font-black leading-tight sm:text-3xl">
-                    อยากคุยเร็วกว่า? แอด LINE เพื่อปรึกษาเบื้องต้นฟรี
+                    อยากคุยเร็วกว่า? แอด LINE Official เพื่อปรึกษาเบื้องต้นฟรี
                   </h3>
                   <p className="mt-4 leading-8 text-white/74">
                     ส่งสินค้าเป้าหมาย เมืองที่สนใจ ช่วงเวลาเดินทาง จำนวนคน
                     และงบประมาณคร่าว ๆ เพื่อให้ริวช่วยประเมินทริป
                   </p>
-                  <CtaLink href={LINE_URL} variant="line" className="mt-7 w-full">
-                    <Icon name="chat" className="size-4" />
-                    ปรึกษาฟรีทาง LINE
+                  <CtaLink
+                    href={CONTACT_HREF}
+                    variant="line"
+                    className="mt-7 w-full"
+                  >
+                    <Icon name={CONTACT_ICON} className="size-4" />
+                    {CONTACT_LABEL}
                   </CtaLink>
                   <div className="mt-auto pt-8">
                     <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-4 text-sm leading-6 text-white/74">
@@ -1214,7 +1247,7 @@ export default function RyuGeGePage() {
               <div className="absolute inset-0 -z-0 bg-[radial-gradient(circle_at_50%_0%,rgba(244,195,95,0.18),transparent_55%),radial-gradient(circle_at_85%_90%,rgba(239,47,55,0.22),transparent_45%)]" />
               <div className="relative">
                 <p className="text-xs font-bold uppercase tracking-[0.24em] text-gold-light">
-                  RyuGeGe Tour
+                  Ryu Gege Tour
                 </p>
                 <h2 className="font-heading mx-auto mt-5 max-w-3xl text-3xl font-black leading-[1.12] sm:text-[2.75rem]">
                   พร้อมวางแผนทริปธุรกิจจีนให้คุ้มค่ากว่าการไปลองผิดลองถูกหรือยัง?
@@ -1224,9 +1257,12 @@ export default function RyuGeGePage() {
                   และรูปแบบบริการไหนเหมาะที่สุด
                 </p>
                 <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-                  <CtaLink href={LINE_URL} variant="line">
-                    <Icon name="chat" className="size-4" />
-                    ปรึกษาฟรีทาง LINE
+                  <CtaLink
+                    href={CONTACT_HREF}
+                    variant="line"
+                  >
+                    <Icon name={CONTACT_ICON} className="size-4" />
+                    {CONTACT_LABEL}
                   </CtaLink>
                   <CtaLink href="#inquiry" variant="ghost">
                     กรอกข้อมูลทริป
@@ -1244,7 +1280,7 @@ export default function RyuGeGePage() {
               <div className="flex items-center gap-3">
                 <BrandMark />
                 <p className="font-heading text-xl font-black text-white">
-                  RyuGeGe Tour
+                  Ryu Gege Tour
                 </p>
               </div>
               <p className="mt-4 max-w-xs text-sm leading-6 text-white/60">
@@ -1305,13 +1341,16 @@ export default function RyuGeGePage() {
               <p className="mt-4 text-sm leading-7 text-white/70">
                 Facebook: Ryu Gege
                 <br />
-                IG: ryugegechannel
+                โทร: <a href="tel:0928422121">092 842 2121</a>
                 <br />
-                Email: ryupuriwat2000@gmail.com
+                ติดต่อผ่าน LINE Official เท่านั้น
                 <br />
-                Phone: {PHONE}
-                <br />
-                LINE: เติมลิงก์จริงใน constants.ts
+                <a
+                  href={LINE_URL}
+                  className="font-bold text-gold transition hover:text-gold-light"
+                >
+                  เพิ่มเพื่อนเพื่อปรึกษาทริป
+                </a>
               </p>
             </div>
           </div>
@@ -1320,9 +1359,13 @@ export default function RyuGeGePage() {
         {/* Mobile sticky CTA bar */}
         <div className="fixed inset-x-0 bottom-0 z-50 border-t border-sand/70 bg-cream/95 p-3 backdrop-blur sm:hidden">
           <div className="mx-auto flex max-w-md gap-2">
-            <CtaLink href={LINE_URL} variant="line" className="flex-1">
-              <Icon name="chat" className="size-4" />
-              LINE
+            <CtaLink
+              href={CONTACT_HREF}
+              variant="line"
+              className="flex-1"
+            >
+              <Icon name={CONTACT_ICON} className="size-4" />
+              LINE Official
             </CtaLink>
             <CtaLink href="#trips" variant="outline" className="flex-1">
               ดูทริป
@@ -1332,12 +1375,12 @@ export default function RyuGeGePage() {
 
         {/* Desktop floating LINE button */}
         <a
-          href={LINE_URL}
-          aria-label="ปรึกษาทาง LINE"
+          href={CONTACT_HREF}
+          aria-label="ปรึกษาทาง LINE Official"
           className="fixed bottom-6 right-6 z-40 hidden items-center gap-2 rounded-full bg-line-green px-5 py-4 text-sm font-bold text-white shadow-[var(--shadow-line)] transition hover:bg-line-green-dark lg:inline-flex"
         >
-          <Icon name="chat" className="size-5" />
-          LINE
+          <Icon name={CONTACT_ICON} className="size-5" />
+          LINE Official
         </a>
       </div>
     </>

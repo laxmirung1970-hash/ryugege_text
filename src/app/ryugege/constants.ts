@@ -1,4 +1,4 @@
-export const LINE_URL: string = "https://lin.ee/REPLACE_WITH_REAL_LINE_URL";
+export const LINE_URL = "https://lin.ee/nxKOKBTR";
 
 export const inquiryDefaults = {
   tripTypes: [

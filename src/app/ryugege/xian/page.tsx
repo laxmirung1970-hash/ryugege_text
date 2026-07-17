@@ -1,126 +1,179 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { Icon, type IconName } from "../icons";
 import { LINE_URL } from "../constants";
 
-const PHONE = "092 842 2121";
+const CONTACT_HREF = LINE_URL;
+const CONTACT_LABEL = "ปรึกษาทาง LINE Official";
+const CONTACT_ICON: IconName = "chat";
 
 export const metadata: Metadata = {
   title: "ทริปซีอานส่วนตัว 5 วัน 4 คืน — วัฒนธรรมและประวัติศาสตร์",
   description:
-    "ทริปซีอานส่วนตัวโดยรถยนต์ส่วนตัว เฉพาะครอบครัวหรือกลุ่มเพื่อน 4–9 ท่าน เที่ยวกองทัพทหารดินเผา กำแพงเมืองโบราณ เขาหัวซาน โดย ริว (RyuGeGe) ล่ามไทย-จีน",
+    "ทริปซีอานส่วนตัวโดยรถยนต์ส่วนตัว สำหรับครอบครัวหรือกลุ่มเพื่อน 2 ท่านขึ้นไป เที่ยวกองทัพทหารดินเผา พระราชวังหัวชิง ฉางอันสิบสองชั่วยาม และลานสกีซีอาน โดย ริว (Ryu Gege) ล่ามไทย-จีน",
 };
 
-type Highlight = { icon: IconName; title: string; copy: string };
-type Vehicle = { name: string; seats: string; icon: IconName };
+type Highlight = {
+  icon: IconName;
+  title: string;
+  copy: string;
+  eyebrow: string;
+  tone: string;
+};
+type Vehicle = { name: string; seats: string; image: string };
 type Day = { day: string; title: string; places: string[]; stay: string; image: string };
 
 const heroMeta = [
   { icon: "clock" as IconName, label: "5 วัน 4 คืน" },
   { icon: "car" as IconName, label: "รถยนต์ส่วนตัว" },
   { icon: "chat" as IconName, label: "ล่ามไทย-จีน ดูแลเอง" },
-  { icon: "map-pin" as IconName, label: "4–9 ท่าน / กลุ่มส่วนตัว" },
+  { icon: "map-pin" as IconName, label: "2 ท่านขึ้นไป / กลุ่มส่วนตัว" },
 ];
 
 const highlights: Highlight[] = [
   {
     icon: "sparkles",
     title: "กองทัพทหารดินเผา",
+    eyebrow: "มรดกโลก",
+    tone: "from-[#40171a] via-[#7f2720] to-[#b45831]",
     copy: "มรดกโลกและสุสานจิ๋นซีฮ่องเต้ หนึ่งในการค้นพบทางโบราณคดีที่ยิ่งใหญ่ที่สุดของโลก",
   },
   {
-    icon: "shield",
-    title: "กำแพงเมืองโบราณซีอาน",
-    copy: "กำแพงเมืองที่สมบูรณ์ที่สุดในจีน ปั่นจักรยานหรือเดินชมวิวเมืองเก่าจากบนกำแพง",
+    icon: "store",
+    title: "ฉางอันสิบสองชั่วยาม",
+    eyebrow: "ย้อนยุคราชวงศ์ถัง",
+    tone: "from-[#5b2518] via-[#a75128] to-[#d28b45]",
+    copy:
+      "ย่านจำลองเมืองฉางอันสุดอลังการ สวมชุดฮั่นฝูเดินถ่ายรูป สัมผัสวิถีชีวิต วัฒนธรรม และการแสดงยุคราชวงศ์ถังแบบสมจริง",
   },
   {
-    icon: "store",
-    title: "ต้าถัง ปู้เย่เฉิง ยามค่ำ",
-    copy: "ย่านราชวงศ์ถังจำลอง ไฟประดับตระการตา บรรยากาศจีนโบราณกลางเมืองยามค่ำ",
+    icon: "shield",
+    title: "ลานสกีซีอาน (Xi'an Ski)",
+    eyebrow: "กิจกรรมหิมะ",
+    tone: "from-[#12364c] via-[#246782] to-[#65a6bc]",
+    copy:
+      "สนุกกับกิจกรรมหิมะได้ตลอดทั้งปี ท้าทายความเร็วบนลานสกีขนาดใหญ่ มีบริการทั้งแบบในร่มและกลางแจ้งตามสภาพอากาศ พร้อมอุปกรณ์ครบครัน",
   },
   {
     icon: "route",
-    title: "เขาหัวซาน (Mount Hua)",
-    copy: "หนึ่งใน 5 ภูเขาศักดิ์สิทธิ์ของจีน ขึ้นกระเช้าชมวิวหน้าผาและเส้นทางในตำนาน",
+    title: "ต้าถังซีซื่อ ยามค่ำ",
+    eyebrow: "ค่ำคืนในเมืองถัง",
+    tone: "from-[#2c1832] via-[#713040] to-[#ad5849]",
+    copy: "เดินเล่นตลาดยามค่ำคืน สัมผัสบรรยากาศเมืองถังและร้านค้าท้องถิ่นในย่านต้าถังซีซื่อ",
   },
   {
     icon: "languages",
     title: "ย่านมุสลิมและถนนอาหาร",
+    eyebrow: "รสชาติท้องถิ่น",
+    tone: "from-[#3a2a15] via-[#806126] to-[#bd9641]",
     copy: "หอระฆัง-หอกลอง ย่านตลาดเก่า และสตรีทฟู้ดขึ้นชื่อของซีอาน",
   },
   {
     icon: "check",
     title: "ส่วนตัวจริง ไม่รวมกรุ๊ป",
+    eyebrow: "เดินทางในแบบคุณ",
+    tone: "from-[#492018] via-[#8d3926] to-[#c46d37]",
     copy: "เดินทางเฉพาะกลุ่มของคุณ ปรับแผนได้ตามใจ มีริวดูแลภาษาและจังหวะเดินทางเอง",
   },
 ];
 
 const vehicles: Vehicle[] = [
-  { name: "รถเก๋ง / Sedan", seats: "2–3 ท่าน", icon: "car" },
-  { name: "SUV", seats: "3–4 ท่าน", icon: "car" },
-  { name: "รถตู้ VIP / Van", seats: "5–7 ท่าน", icon: "car" },
-  { name: "มินิบัส", seats: "8–9 ท่าน", icon: "car" },
+  { name: "รถ 5 ที่นั่ง", seats: "2 ท่าน", image: "/xian/vehicles/vehicle-5-seat-sedan.png" },
+  { name: "รถ 9 ที่นั่ง", seats: "4 ท่าน", image: "/xian/vehicles/vehicle-9-seat-van.png" },
+  { name: "รถ 14 ที่นั่ง", seats: "6 ท่าน", image: "/xian/vehicles/vehicle-14-seat-minibus.png" },
+  { name: "รถ 19 ที่นั่ง", seats: "8–10 ท่าน", image: "/xian/vehicles/vehicle-19-seat-coach.png" },
 ];
 
 const days: Day[] = [
   {
     day: "Day 1",
-    title: "ถึงซีอาน · เมืองเก่า",
+    title: "The Imperial Arrival · เดินทางถึงซีอาน",
     places: [
-      "รับที่สนามบินซีอานด้วยรถส่วนตัว",
-      "กำแพงเมืองโบราณซีอาน",
-      "ย่านมุสลิม · หอระฆัง · หอกลอง",
+      "เดินทางถึงสนามบินซีอาน (XIY) และรับสัมภาระ",
+      "เดินทางเข้าสู่ที่พักและพักผ่อนตามอัธยาศัย",
     ],
-    stay: "ซีอาน",
-    image:
-      "https://images.unsplash.com/photo-1547253807-593ee708edab?auto=format&fit=crop&w=1000&q=80",
+    stay: "Tang West Market Hotel",
+    image: "/xian/day-1-tang-west-market-hotel.jfif",
   },
   {
     day: "Day 2",
-    title: "ทหารดินเผา · หัวชิง",
+    title: "The Eighth Wonder · ทหารดินเผาและพระราชวังหัวชิง",
     places: [
       "กองทัพทหารดินเผา (มรดกโลก)",
-      "พระราชวังหัวชิงและบ่อน้ำพุร้อน",
-      "เย็น: ต้าถัง ปู้เย่เฉิง ยามค่ำ",
+      "เที่ยวชมพระราชวังหัวชิง",
+      "เดินเล่นตลาดยามค่ำคืนต้าถังซีซื่อ",
     ],
-    stay: "ซีอาน",
-    image:
-      "https://images.unsplash.com/photo-1569685794205-a8fc87049f5d?auto=format&fit=crop&w=1000&q=80",
+    stay: "Tang West Market Hotel",
+    image: "/xian/day-2-terracotta-warriors.webp",
   },
   {
     day: "Day 3",
-    title: "เขาหัวซาน",
+    title: "Time Traveler · ย้อนเวลาสู่ฉางอัน",
     places: [
-      "เดินทางสู่เขาหัวซานด้วยรถส่วนตัว",
-      "ขึ้นกระเช้าชมวิวหน้าผาและยอดเขา",
-      "อิสระเก็บภาพเส้นทางในตำนาน",
+      "เรียนรู้ศิลปะการต่อสู้หย่งชุน",
+      "เที่ยวชมย่านฉางอันสิบสองชั่วยาม",
+      "ถ่ายรูปเช็กอินที่หอระฆังและหอกลอง",
     ],
-    stay: "ซีอาน",
+    stay: "Tang West Market Hotel",
     image:
       "https://images.unsplash.com/photo-1760419855307-3d43fd202b42?auto=format&fit=crop&w=1000&q=80",
   },
   {
     day: "Day 4",
-    title: "เจดีย์ห่านป่า · พิพิธภัณฑ์",
+    title: "Winter Illusion · ลานสกีและถนนคนเดินต้าถัง",
     places: [
-      "เจดีย์ห่านป่าใหญ่ (ต้าเยี่ยนถ่า)",
-      "พิพิธภัณฑ์ประวัติศาสตร์ส่านซี",
-      "ย่านอาหาร Yongxingfang",
+      "สนุกกับกิจกรรมที่ลานสกีซีอาน",
+      "สักการะวัดต้าฉือเอิน และเดินเล่น Joy City",
+      "ชมแสงสียามค่ำคืนที่ถนนคนเดินต้าถังและบริเวณเจดีย์ห่านป่าใหญ่",
     ],
-    stay: "ซีอาน",
-    image:
-      "https://images.unsplash.com/photo-1758543647734-c0a302acb3f6?auto=format&fit=crop&w=1000&q=80",
+    stay: "Tang West Market Hotel",
+    image: "/xian/day-4-xian-ski.webp",
   },
   {
     day: "Day 5",
-    title: "อิสระ · เดินทางกลับ",
+    title: "The Grand Departure · ช้อปปิ้งและสปา",
     places: [
-      "อิสระช้อปปิ้งของฝากตามอัธยาศัย",
-      "ส่งที่สนามบินซีอานด้วยรถส่วนตัว",
+      "เที่ยวชมศาลเจ้าพ่อหลักเมืองซีอาน",
+      "เดินเล่นและหาอาหารอร่อยที่ย่านถนนคนเดินมุสลิม",
+      "ผ่อนคลายด้วยการแช่ออนเซ็นและสปา",
+      "เดินทางสู่สนามบินซีอาน (XIY)",
     ],
     stay: "-",
-    image:
-      "https://images.unsplash.com/photo-1547253807-593ee708edab?auto=format&fit=crop&w=1000&q=80",
+    image: "/xian/day-5-muslim-street.webp",
+  },
+];
+
+const itinerarySummary = [
+  {
+    day: "Day 1",
+    route: "เดินทางถึงซีอาน · เข้าที่พักพักผ่อนตามอัธยาศัย",
+    stay: "โรงแรม Tang West Market",
+    meals: { breakfast: false, lunch: false, dinner: false },
+  },
+  {
+    day: "Day 2",
+    route: "ทหารดินเผา · พระราชวังหัวชิง · ตลาดยามค่ำคืนต้าถังซีซื่อ",
+    stay: "โรงแรม Tang West Market",
+    meals: { breakfast: true, lunch: true, dinner: true },
+  },
+  {
+    day: "Day 3",
+    route: "มวยหย่งชุน · ฉางอันสิบสองชั่วยาม · หอระฆังและหอกลอง",
+    stay: "โรงแรม Tang West Market",
+    meals: { breakfast: true, lunch: true, dinner: true },
+  },
+  {
+    day: "Day 4",
+    route: "ลานสกีซีอาน · วัดต้าฉือเอินและ Joy City · ถนนคนเดินต้าถัง",
+    stay: "โรงแรม Tang West Market",
+    meals: { breakfast: true, lunch: true, dinner: true },
+  },
+  {
+    day: "Day 5",
+    route: "ศาลเจ้าพ่อหลักเมือง · ถนนคนเดินมุสลิม · ออนเซ็นสปา · เดินทางกลับ",
+    stay: "-",
+    meals: { breakfast: true, lunch: true, dinner: false },
   },
 ];
 
@@ -132,29 +185,38 @@ type PriceTier = {
 
 const priceTiers: PriceTier[] = [
   {
-    group: "4–5 ท่าน",
+    group: "3–4 ท่าน",
     vehicle: "รถ 7 ที่นั่ง",
     rows: [
-      { label: "ผู้ใหญ่ (พักห้องละ 2 ท่าน)", price: "20,900" },
-      { label: "เด็ก 2–12 ปี (มีเตียง / ไม่มีเตียง)", price: "20,900" },
+      { label: "ผู้ใหญ่ (พักห้องละ 2 ท่าน)", price: "28,900" },
+      { label: "เด็ก 2–12 ปี (มีเตียง / ไม่มีเตียง)", price: "28,900" },
       { label: "พักเดี่ยว จ่ายเพิ่ม", price: "5,000" },
     ],
   },
   {
-    group: "6–7 ท่าน",
-    vehicle: "รถ 9–14 ที่นั่ง",
+    group: "5–7 ท่าน",
+    vehicle: "รถ 14 ที่นั่ง",
     rows: [
-      { label: "ผู้ใหญ่ (พักห้องละ 2 ท่าน)", price: "17,900" },
-      { label: "เด็ก 2–12 ปี (มีเตียง / ไม่มีเตียง)", price: "17,900" },
+      { label: "ผู้ใหญ่ (พักห้องละ 2 ท่าน)", price: "25,900" },
+      { label: "เด็ก 2–12 ปี (มีเตียง / ไม่มีเตียง)", price: "25,900" },
       { label: "พักเดี่ยว จ่ายเพิ่ม", price: "5,000" },
     ],
   },
   {
     group: "8–10 ท่าน",
-    vehicle: "รถ 14–18 ที่นั่ง",
+    vehicle: "รถ 19 ที่นั่ง",
     rows: [
-      { label: "ผู้ใหญ่ (พักห้องละ 2 ท่าน)", price: "16,900" },
-      { label: "เด็ก 2–12 ปี (มีเตียง / ไม่มีเตียง)", price: "16,900" },
+      { label: "ผู้ใหญ่ (พักห้องละ 2 ท่าน)", price: "22,900" },
+      { label: "เด็ก 2–12 ปี (มีเตียง / ไม่มีเตียง)", price: "22,900" },
+      { label: "พักเดี่ยว จ่ายเพิ่ม", price: "5,000" },
+    ],
+  },
+  {
+    group: "10 ท่านขึ้นไป",
+    vehicle: "รถ 19 ที่นั่งขึ้นไป",
+    rows: [
+      { label: "ผู้ใหญ่ (พักห้องละ 2 ท่าน)", price: "20,900" },
+      { label: "เด็ก 2–12 ปี (มีเตียง / ไม่มีเตียง)", price: "20,900" },
       { label: "พักเดี่ยว จ่ายเพิ่ม", price: "5,000" },
     ],
   },
@@ -162,8 +224,8 @@ const priceTiers: PriceTier[] = [
 
 const included = [
   "รถยนต์ส่วนตัวพร้อมคนขับตลอดทริป",
-  "ริว (RyuGeGe) ดูแลภาษาและประสานงานตลอดการเดินทาง",
-  "ที่พัก 4 คืน (ตามระดับที่ตกลง)",
+  "ริว (Ryu Gege) ดูแลภาษาและประสานงานตลอดการเดินทาง",
+  "ที่พัก 4 คืน ในโรงแรม 5 ดาว Xi'an Datang West Market Hotel",
   "ค่าเข้าชมสถานที่ตามโปรแกรม",
   "วางแผนเส้นทางและจัดคิวเข้าชม",
 ];
@@ -173,7 +235,6 @@ const excluded = [
   "วีซ่าจีน (หากมี)",
   "ค่าใช้จ่ายส่วนตัวและช้อปปิ้ง",
   "อาหารบางมื้อนอกโปรแกรม",
-  "ประกันการเดินทางและทิป",
 ];
 
 function CtaLink({
@@ -184,10 +245,12 @@ function CtaLink({
 }: {
   href: string;
   children: ReactNode;
-  variant?: "line" | "outline" | "ghost";
+  variant?: "primary" | "line" | "outline" | "ghost";
   className?: string;
 }) {
   const styles = {
+    primary:
+      "bg-tour-red text-white shadow-[var(--shadow-cta)] hover:bg-tour-red-dark",
     line: "bg-line-green text-white shadow-[var(--shadow-line)] hover:bg-line-green-dark",
     outline:
       "border border-tour-red/40 bg-white text-tour-red hover:border-tour-red hover:bg-tour-red/5",
@@ -222,14 +285,18 @@ export default function XianPage() {
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-sand/70 bg-cream/85 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
-          <a href="../" className="flex min-w-0 items-center gap-3" aria-label="RyuGeGe Tour">
-            <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-[linear-gradient(140deg,#ef2f37,#8b1118)] text-center text-[10px] font-black uppercase leading-tight text-gold-light">
-              Ryu
-              <br />
-              Tour
+          <a href="../" className="flex min-w-0 items-center gap-3" aria-label="Ryu Gege Tour">
+            <span className="grid size-11 shrink-0 place-items-center overflow-hidden rounded-2xl bg-white p-1 shadow-[0_10px_24px_rgba(139,17,24,0.2)]">
+              <Image
+                src="/ryugege-logo.webp"
+                alt="Ryu Gege Tour"
+                width={44}
+                height={44}
+                className="size-full object-contain"
+              />
             </span>
             <span className="font-heading text-lg font-black leading-tight text-charcoal">
-              RyuGeGe Tour
+              Ryu Gege Tour
             </span>
           </a>
           <div className="flex items-center gap-2">
@@ -239,9 +306,13 @@ export default function XianPage() {
             >
               ← ทริปทั้งหมด
             </a>
-            <CtaLink href={LINE_URL} variant="line" className="!min-h-11 !px-5 !py-2.5">
-              <Icon name="chat" className="size-4" />
-              ปรึกษาทาง LINE
+            <CtaLink
+              href={CONTACT_HREF}
+              variant="line"
+              className="!min-h-11 !px-5 !py-2.5"
+            >
+              <Icon name={CONTACT_ICON} className="size-4" />
+              {CONTACT_LABEL}
             </CtaLink>
           </div>
         </div>
@@ -269,8 +340,8 @@ export default function XianPage() {
               <span className="text-gradient-gold block">วัฒนธรรมและประวัติศาสตร์จีนแท้</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-white/80">
-              เที่ยวซีอานแบบไม่เร่งรีบด้วยรถยนต์ส่วนตัว เฉพาะครอบครัวหรือกลุ่มเพื่อน
-              4–9 ท่าน มีริวดูแลภาษา เส้นทาง และจังหวะเดินทางตลอดทริป
+              เที่ยวซีอานแบบไม่เร่งรีบด้วยรถยนต์ส่วนตัว สำหรับครอบครัวหรือกลุ่มเพื่อน
+              ตั้งแต่ 2 ท่านขึ้นไป มีทีมดูแลภาษา เส้นทาง และจังหวะเดินทางตลอดทริป
             </p>
             <div className="mt-8 flex flex-wrap gap-2.5">
               {heroMeta.map((m) => (
@@ -284,8 +355,11 @@ export default function XianPage() {
               ))}
             </div>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <CtaLink href={LINE_URL} variant="line">
-                <Icon name="chat" className="size-4" />
+              <CtaLink
+                href={CONTACT_HREF}
+                variant="line"
+              >
+                <Icon name={CONTACT_ICON} className="size-4" />
                 จองหรือสอบถามทริปซีอาน
               </CtaLink>
               <CtaLink href="#price" variant="ghost">
@@ -306,18 +380,30 @@ export default function XianPage() {
               ไฮไลต์ที่ไม่ควรพลาดในซีอาน
             </h2>
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {highlights.map((h) => (
+              {highlights.map((h, index) => (
                 <article
                   key={h.title}
-                  className="rounded-3xl bg-white p-7 shadow-[var(--shadow-soft)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)]"
+                  className="group overflow-hidden rounded-[2rem] border border-sand/60 bg-white shadow-[var(--shadow-soft)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)]"
                 >
-                  <span className="grid size-14 place-items-center rounded-2xl bg-cream text-tour-red">
-                    <Icon name={h.icon} className="size-7" />
-                  </span>
-                  <h3 className="font-heading mt-6 text-xl font-bold leading-snug text-charcoal">
-                    {h.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-7 text-ink">{h.copy}</p>
+                  <div className={`relative h-24 overflow-hidden bg-gradient-to-br ${h.tone} px-7 py-5`}>
+                    <p className="font-heading text-[11px] font-black uppercase tracking-[0.16em] text-white/75">
+                      {h.eyebrow}
+                    </p>
+                    <span className="font-heading absolute -bottom-7 right-5 text-8xl font-black leading-none text-white/15">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <div className="relative px-7 pb-7">
+                    <span className="-mt-7 grid size-14 place-items-center rounded-2xl border-4 border-white bg-cream text-tour-red shadow-md shadow-espresso/10 transition duration-300 group-hover:-rotate-6 group-hover:scale-110">
+                      <Icon name={h.icon} className="size-7" />
+                    </span>
+                    <h3 className="font-heading mt-5 text-xl font-bold leading-snug text-charcoal">
+                      {h.title}
+                    </h3>
+                    <p className="mt-3 border-l-2 border-gold/70 pl-3 text-sm leading-7 text-ink">
+                      {h.copy}
+                    </p>
+                  </div>
                 </article>
               ))}
             </div>
@@ -332,7 +418,7 @@ export default function XianPage() {
               เดินทางด้วยรถยนต์ส่วนตัว เฉพาะกลุ่มของคุณ
             </h2>
             <p className="mt-4 max-w-2xl text-base leading-7 text-ink">
-              จัดรถให้เหมาะกับจำนวนผู้เดินทาง เดินทางเฉพาะครอบครัวหรือแก๊งเพื่อน
+              รับตั้งแต่ 2 ท่านขึ้นไป จัดรถให้เหมาะกับจำนวนผู้เดินทาง เดินทางเฉพาะครอบครัวหรือแก๊งเพื่อน
               ไม่รวมกับคนแปลกหน้า ปรับจุดแวะและจังหวะพักได้ตามใจ
             </p>
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -341,11 +427,12 @@ export default function XianPage() {
                   key={v.name}
                   className="group overflow-hidden rounded-3xl bg-white shadow-[var(--shadow-soft)]"
                 >
-                  <div className="relative flex h-40 items-center justify-center bg-[linear-gradient(140deg,#201a17,#8b1118)]">
-                    <Icon
-                      name={v.icon}
-                      className="size-20 text-gold-light/90 transition-transform duration-500 group-hover:scale-110"
-                    />
+                  <div
+                    className="relative h-40 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                    style={{
+                      backgroundImage: `linear-gradient(180deg, rgb(30 6 8 / 8%), rgb(30 6 8 / 55%)), url(${v.image})`,
+                    }}
+                  >
                     <span className="absolute right-3 top-3 rounded-full bg-black/30 px-3 py-1 text-xs font-bold text-gold-light backdrop-blur">
                       {v.seats}
                     </span>
@@ -357,7 +444,7 @@ export default function XianPage() {
               ))}
             </div>
             <p className="mt-6 text-sm text-ink-soft">
-              * ประเภทรถเป็นตัวอย่าง จัดจริงตามจำนวนผู้เดินทางและสัมภาระ — รูปรถจริงเพิ่มภายหลัง
+              * จัดรถให้เหมาะกับจำนวนผู้เดินทางและสัมภาระ รูปแบบรถจริงอาจต่างกันตามรอบให้บริการ
             </p>
           </div>
         </section>
@@ -415,20 +502,70 @@ export default function XianPage() {
               สรุปการเดินทาง
             </h2>
             <div className="mt-10 overflow-x-auto rounded-3xl bg-white shadow-[var(--shadow-soft)]">
-              <table className="w-full min-w-[520px] text-left text-sm">
+              <table className="w-full min-w-[680px] text-left text-sm">
                 <thead>
                   <tr className="border-b border-sand/70 text-xs font-black uppercase tracking-[0.1em] text-ink-soft">
-                    <th className="px-6 py-4">วัน</th>
-                    <th className="px-6 py-4">เส้นทางหลัก</th>
-                    <th className="px-6 py-4">ที่พัก</th>
+                    <th className="px-6 py-4 text-center">วัน</th>
+                    <th className="px-6 py-4 text-center">เส้นทางหลัก</th>
+                    <th className="w-[168px] px-6 py-4">
+                      <span className="grid w-[120px] grid-cols-3 text-center">
+                        <span className="col-start-2 justify-self-center text-xs tracking-normal">อาหาร</span>
+                        <span className="col-span-3 row-start-2 mt-2 grid grid-cols-3 gap-1.5 text-[10px] tracking-normal text-ink-soft/80">
+                          {['B', 'L', 'D'].map((label) => (
+                            <span
+                              key={label}
+                              className="grid size-8 justify-self-center place-items-center rounded-lg bg-cream-deep font-black"
+                            >
+                              {label}
+                            </span>
+                          ))}
+                        </span>
+                      </span>
+                    </th>
+                    <th className="px-6 py-4 text-center">ที่พัก</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {days.map((d) => (
-                    <tr key={d.day} className="border-b border-sand/40 last:border-0">
-                      <td className="px-6 py-4 font-heading font-bold text-tour-red">{d.day}</td>
-                      <td className="px-6 py-4 text-charcoal">{d.title}</td>
-                      <td className="px-6 py-4 text-ink">{d.stay}</td>
+                  {itinerarySummary.map((row) => (
+                    <tr key={row.day} className="border-b border-sand/40 last:border-0">
+                      <td className="px-6 py-4 font-heading font-bold text-tour-red">{row.day}</td>
+                      <td className="px-6 py-4 text-charcoal">{row.route}</td>
+                      <td className="w-[168px] px-6 py-4">
+                        <div className="grid w-[120px] grid-cols-3 gap-1.5" aria-label="อาหารที่รวมในวันนั้น">
+                          {[
+                            { label: "B", name: "อาหารเช้า", included: row.meals.breakfast },
+                            { label: "L", name: "อาหารกลางวัน", included: row.meals.lunch },
+                            { label: "D", name: "อาหารเย็น", included: row.meals.dinner },
+                          ].map((meal) => (
+                            <span
+                              key={meal.label}
+                              title={`${meal.name}${meal.included ? " รวมในแพ็กเกจ" : " ไม่รวม"}`}
+                              className={`grid size-8 justify-self-center place-items-center rounded-full text-sm font-black ${
+                                meal.included
+                                  ? "bg-emerald-600 text-white shadow-sm shadow-emerald-700/20"
+                                  : "border border-sand/50 bg-cream text-ink-soft/55"
+                              }`}
+                            >
+                              {meal.included ? "✓" : "–"}
+                            </span>
+                          ))}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 text-ink">
+                        {row.stay === "-" ? (
+                          "-"
+                        ) : (
+                          <div className="flex flex-col items-center gap-1 text-center">
+                            <span
+                              className="bg-gradient-to-b from-[#fff4bd] via-[#f7cc61] to-[#b97916] bg-clip-text text-[13px] font-black leading-none tracking-[0.18em] text-transparent drop-shadow-[0_2px_4px_rgba(175,107,13,0.55)]"
+                              aria-label="โรงแรมระดับ 5 ดาว"
+                            >
+                              ★★★★★
+                            </span>
+                            <span>{row.stay}</span>
+                          </div>
+                        )}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -445,12 +582,12 @@ export default function XianPage() {
               อัตราค่าบริการ
             </h2>
             <p className="mt-4 text-base leading-7 text-ink">
-              ช่วงเวลาเดินทาง: <span className="font-bold text-charcoal">วันนี้ – กันยายน 2569</span>{" "}
-              · สำหรับกลุ่มส่วนตัว 4–10 ท่าน ·{" "}
+              รับตั้งแต่ <span className="font-bold text-charcoal">2 ท่านขึ้นไป</span> ·
+              ราคาในตารางสำหรับกลุ่ม 3 ท่านขึ้นไป ·{" "}
               <span className="font-bold text-charcoal">ราคาไม่รวมตั๋วเครื่องบิน</span>
             </p>
 
-            <div className="mt-10 grid gap-6 lg:grid-cols-3">
+            <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
               {priceTiers.map((tier) => (
                 <div
                   key={tier.group}
@@ -486,8 +623,7 @@ export default function XianPage() {
             </div>
             <p className="mt-4 text-sm leading-6 text-ink-soft">
               * ราคาต่อท่าน <span className="font-bold text-charcoal">ไม่รวมตั๋วเครื่องบิน</span> ·
-              เด็กอายุต่ำกว่า 2 ปี สอบถามเพิ่มเติม · รายละเอียดที่พักและโปรแกรมปรับร่วมกันได้ —
-              สรุปราคาจริงหลังปรึกษา
+              รายละเอียดที่พักและโปรแกรมปรับร่วมกันได้ — สรุปราคาจริงหลังปรึกษา
             </p>
 
             <div className="mt-10 grid gap-6 md:grid-cols-2">
@@ -534,13 +670,16 @@ export default function XianPage() {
                 ทักมาบอกจำนวนคน ช่วงเวลา และสไตล์ที่ชอบ ริวจะช่วยจัดเส้นทางและประเมินราคาให้
               </p>
               <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-                <CtaLink href={LINE_URL} variant="line">
-                  <Icon name="chat" className="size-4" />
-                  ปรึกษาฟรีทาง LINE
+                <CtaLink
+                  href={CONTACT_HREF}
+                  variant="line"
+                >
+                  <Icon name={CONTACT_ICON} className="size-4" />
+                  {CONTACT_LABEL}
                 </CtaLink>
-                <CtaLink href={`tel:${PHONE.replace(/\s+/g, "")}`} variant="ghost">
-                  <Icon name="phone" className="size-4" />
-                  {PHONE}
+                <CtaLink href={LINE_URL} variant="ghost">
+                  <Icon name="chat" className="size-4" />
+                  สอบถามผ่าน LINE Official
                 </CtaLink>
               </div>
             </div>
@@ -550,7 +689,7 @@ export default function XianPage() {
 
       {/* Footer */}
       <footer className="bg-espresso py-12 text-center text-white">
-        <p className="font-heading text-lg font-black">RyuGeGe Tour</p>
+        <p className="font-heading text-lg font-black">Ryu Gege Tour</p>
         <a href="../" className="mt-3 inline-block text-sm text-white/70 transition hover:text-gold">
           ← กลับหน้าหลัก
         </a>
