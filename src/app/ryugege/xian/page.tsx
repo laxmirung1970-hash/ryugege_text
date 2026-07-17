@@ -5,6 +5,7 @@ import { Icon, type IconName } from "../icons";
 import { LINE_URL } from "../constants";
 import { siteMedia } from "../media";
 import { BrandMark } from "../BrandMark";
+import { XianHighlights } from "./XianHighlights";
 
 const CONTACT_HREF = LINE_URL;
 const CONTACT_LABEL = "ปรึกษาทาง LINE Official";
@@ -16,13 +17,6 @@ export const metadata: Metadata = {
     "ทริปซีอานส่วนตัวโดยรถยนต์ส่วนตัว สำหรับครอบครัวหรือกลุ่มเพื่อน 2 ท่านขึ้นไป เที่ยวกองทัพทหารดินเผา พระราชวังหัวชิง ฉางอันสิบสองชั่วยาม และลานสกีซีอาน โดย ริว (Ryu Gege) ล่ามไทย-จีน",
 };
 
-type Highlight = {
-  icon: IconName;
-  title: string;
-  copy: string;
-  eyebrow: string;
-  tone: string;
-};
 type Vehicle = { name: string; seats: string; image: StaticImageData };
 type Day = {
   day: string;
@@ -37,53 +31,6 @@ const heroMeta = [
   { icon: "car" as IconName, label: "รถยนต์ส่วนตัว" },
   { icon: "chat" as IconName, label: "ล่ามไทย-จีน ดูแลเอง" },
   { icon: "map-pin" as IconName, label: "2 ท่านขึ้นไป / กลุ่มส่วนตัว" },
-];
-
-const highlights: Highlight[] = [
-  {
-    icon: "sparkles",
-    title: "กองทัพทหารดินเผา",
-    eyebrow: "มรดกโลก",
-    tone: "from-[#40171a] via-[#7f2720] to-[#b45831]",
-    copy: "มรดกโลกและสุสานจิ๋นซีฮ่องเต้ หนึ่งในการค้นพบทางโบราณคดีที่ยิ่งใหญ่ที่สุดของโลก",
-  },
-  {
-    icon: "store",
-    title: "ฉางอันสิบสองชั่วยาม",
-    eyebrow: "ย้อนยุคราชวงศ์ถัง",
-    tone: "from-[#5b2518] via-[#a75128] to-[#d28b45]",
-    copy:
-      "ย่านจำลองเมืองฉางอันสุดอลังการ สวมชุดฮั่นฝูเดินถ่ายรูป สัมผัสวิถีชีวิต วัฒนธรรม และการแสดงยุคราชวงศ์ถังแบบสมจริง",
-  },
-  {
-    icon: "shield",
-    title: "ลานสกีซีอาน (Xi'an Ski)",
-    eyebrow: "กิจกรรมหิมะ",
-    tone: "from-[#12364c] via-[#246782] to-[#65a6bc]",
-    copy:
-      "สนุกกับกิจกรรมหิมะได้ตลอดทั้งปี ท้าทายความเร็วบนลานสกีขนาดใหญ่ มีบริการทั้งแบบในร่มและกลางแจ้งตามสภาพอากาศ พร้อมอุปกรณ์ครบครัน",
-  },
-  {
-    icon: "route",
-    title: "ต้าถังซีซื่อ ยามค่ำ",
-    eyebrow: "ค่ำคืนในเมืองถัง",
-    tone: "from-[#2c1832] via-[#713040] to-[#ad5849]",
-    copy: "เดินเล่นตลาดยามค่ำคืน สัมผัสบรรยากาศเมืองถังและร้านค้าท้องถิ่นในย่านต้าถังซีซื่อ",
-  },
-  {
-    icon: "languages",
-    title: "ย่านมุสลิมและถนนอาหาร",
-    eyebrow: "รสชาติท้องถิ่น",
-    tone: "from-[#3a2a15] via-[#806126] to-[#bd9641]",
-    copy: "หอระฆัง-หอกลอง ย่านตลาดเก่า และสตรีทฟู้ดขึ้นชื่อของซีอาน",
-  },
-  {
-    icon: "check",
-    title: "ส่วนตัวจริง ไม่รวมกรุ๊ป",
-    eyebrow: "เดินทางในแบบคุณ",
-    tone: "from-[#492018] via-[#8d3926] to-[#c46d37]",
-    copy: "เดินทางเฉพาะกลุ่มของคุณ ปรับแผนได้ตามใจ มีริวดูแลภาษาและจังหวะเดินทางเอง",
-  },
 ];
 
 const vehicles: Vehicle[] = [
@@ -373,43 +320,7 @@ export default function XianPage() {
       </section>
 
       <main>
-        {/* Highlights */}
-        <section className="py-20 sm:py-24">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <SectionLabel index="01" label="Trip Highlights" />
-            <h2 className="font-heading mt-5 max-w-2xl text-3xl font-black leading-[1.1] sm:text-4xl">
-              ไฮไลต์ที่ไม่ควรพลาดในซีอาน
-            </h2>
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {highlights.map((h, index) => (
-                <article
-                  key={h.title}
-                  className="group overflow-hidden rounded-[2rem] border border-sand/60 bg-white shadow-[var(--shadow-soft)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)]"
-                >
-                  <div className={`relative h-24 overflow-hidden bg-gradient-to-br ${h.tone} px-7 py-5`}>
-                    <p className="font-heading text-[11px] font-black uppercase tracking-[0.16em] text-white/75">
-                      {h.eyebrow}
-                    </p>
-                    <span className="font-heading absolute -bottom-7 right-5 text-8xl font-black leading-none text-white/15">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <div className="relative px-7 pb-7">
-                    <span className="-mt-7 grid size-14 place-items-center rounded-2xl border-4 border-white bg-cream text-tour-red shadow-md shadow-espresso/10 transition duration-300 group-hover:-rotate-6 group-hover:scale-110">
-                      <Icon name={h.icon} className="size-7" />
-                    </span>
-                    <h3 className="font-heading mt-5 text-xl font-bold leading-snug text-charcoal">
-                      {h.title}
-                    </h3>
-                    <p className="mt-3 border-l-2 border-gold/70 pl-3 text-sm leading-7 text-ink">
-                      {h.copy}
-                    </p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <XianHighlights />
 
         {/* Private car */}
         <section className="bg-cream-deep/50 py-20 sm:py-24">
