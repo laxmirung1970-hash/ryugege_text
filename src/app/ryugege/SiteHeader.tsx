@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "./icons";
+import { BrandMark } from "./BrandMark";
 
 export type NavLink = { label: string; href: string };
 export type NavItem = {
@@ -249,19 +249,5 @@ export function SiteHeader({
         </div>
       ) : null}
     </header>
-  );
-}
-
-function BrandMark() {
-  return (
-    <span className="grid size-12 shrink-0 place-items-center overflow-hidden rounded-2xl bg-white p-1 shadow-[0_10px_24px_rgba(139,17,24,0.2)]">
-      <Image
-        src="/ryugege-logo.webp"
-        alt="Ryu Gege Tour"
-        width={48}
-        height={48}
-        className="size-full object-contain"
-      />
-    </span>
   );
 }

@@ -1,9 +1,10 @@
 "use client";
 
+import Image, { type StaticImageData } from "next/image";
 import { type ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
 export type HeroSlide = {
-  image: string;
+  image: StaticImageData;
   kicker: string;
   title: string;
   caption: string;
@@ -68,11 +69,16 @@ export function HeroCarousel({
             index === active ? "opacity-100" : "opacity-0"
           }`}
         >
-          <div
-            className={`absolute inset-0 bg-cover bg-center ${
+          <Image
+            src={slide.image}
+            alt=""
+            fill
+            sizes="100vw"
+            fetchPriority={index === 0 ? "high" : "auto"}
+            placeholder="blur"
+            className={`object-cover object-center ${
               index === active ? "animate-kenburns" : ""
             }`}
-            style={{ backgroundImage: `url(${slide.image})` }}
           />
         </div>
       ))}
