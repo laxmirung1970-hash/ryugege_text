@@ -32,10 +32,6 @@ const initialState: FormState = {
 };
 
 function buildLineUrl(message: string) {
-  if (LINE_URL === "#") {
-    return "#";
-  }
-
   const separator = LINE_URL.includes("?") ? "&" : "?";
   return `${LINE_URL}${separator}text=${encodeURIComponent(message)}`;
 }
@@ -62,7 +58,7 @@ export function InquiryForm() {
 
   const lineMessage = useMemo(() => {
     return [
-      "สวัสดีครับริว สนใจปรึกษาทริปกับ RyuGeGe Tour",
+      "สวัสดีครับริว สนใจปรึกษาทริปกับ Ryu Gege Tour",
       `ชื่อ: ${form.fullName || "-"}`,
       `บริษัท/ธุรกิจ: ${form.company || "-"}`,
       `โทร: ${form.phone || "-"}`,
@@ -230,13 +226,13 @@ export function InquiryForm() {
         />
       </div>
       <p className="mt-4 text-sm leading-6 text-ink">
-        หากฟอร์มยังไม่พร้อมใช้งาน กรุณากดปุ่ม LINE เพื่อคุยกับริวโดยตรง
+        เมื่อส่งฟอร์ม ระบบจะเปิด LINE Official พร้อมข้อความที่กรอกไว้ให้ตรวจสอบก่อนส่ง
       </p>
       <button
         type="submit"
-        className="mt-5 w-full rounded-full bg-tour-red px-5 py-4 text-base font-bold text-white shadow-[var(--shadow-cta)] transition hover:bg-tour-red-dark focus:outline-none focus:ring-[3px] focus:ring-gold/45"
+        className="mt-5 w-full rounded-full bg-line-green px-5 py-4 text-base font-bold text-white shadow-[var(--shadow-line)] transition hover:bg-line-green-dark focus:outline-none focus:ring-[3px] focus:ring-gold/45"
       >
-        ส่งข้อมูลเพื่อประเมินทริป
+        ส่งข้อมูลผ่าน LINE Official
       </button>
     </form>
   );

@@ -8,7 +8,7 @@ Last updated: 2026-07-16 · Latest commit at writing: `52786fe`
 
 ## 1. What this is
 
-Static marketing site for **RyuGeGe Tour** — founder-led China private business/leisure tours + Thai-Chinese interpretation. Thai-language. **Pre-launch** (first trip Sept 2026). No backend; the only "action" is deep-linking to LINE with a prefilled message.
+Static marketing site for **RyuGeGe Tour** — founder-led China private business/leisure tours + Thai-Chinese interpretation. Thai-language. **Pre-launch** (first trip Sept 2026). No backend; every contact CTA and the inquiry form open the LINE Official account with a prefilled message.
 
 - Owner: **ริว (Ryu Puriwat)**, solo founder year 1. Advisor: Phoenix.
 - Live: https://laxmirung1970-hash.github.io/ryugege_text/ryugege/
@@ -48,7 +48,7 @@ Push to `master` → GitHub Actions (`.github/workflows/deploy-github-pages.yml`
 | `ryugege/SiteHeader.tsx` | `"use client"` — sticky header, dropdown nav, scroll-spy, mobile panel. |
 | `ryugege/PageEffects.tsx` | `"use client"` — scroll progress bar + IntersectionObserver scroll-reveal. Mounted once in `page.tsx`. |
 | `ryugege/icons.tsx` | Stroke icon set (`<Icon name=... />`). Add new icons to the `paths` map + `IconName` union. |
-| `ryugege/constants.ts` | `LINE_URL` (placeholder), inquiry dropdown options (trip types, cities, budgets). |
+| `ryugege/constants.ts` | LINE Official URL and inquiry dropdown options (trip types, cities, budgets). |
 
 ## 5. Design system
 
@@ -66,15 +66,15 @@ Push to `master` → GitHub Actions (`.github/workflows/deploy-github-pages.yml`
 - **Whole card is clickable** via a stretched overlay anchor (`<a className="absolute inset-0 z-10">`) — the CTA text is a `span`, not a nested anchor. `href` → detail page; no `href` → LINE (opens new tab).
 - `price` shows "เริ่มต้น <price> / ท่าน"; `null` shows "ราคาตามการออกแบบทริป".
 
-Current 6 cards: **Guangzhou** (Canton Fair + factory, ฿25,000–28,000) · **Xi'an** (culture, ฿16,900–20,900, `href:"./xian/"`) · **Yunnan** (hybrid, ฿18,000) · **Chaozhou/แต้จิ๋ว** (culture, price null, no detail page yet) · **Private** (null) · **Custom** (null).
+Current 6 cards: **Xi'an** (culture, ฿20,900, `href:"./xian/"`) · **Chaozhou/แต้จิ๋ว** (culture, price null, no detail page yet) · **Guangzhou** (Canton Fair + factory, price null) · **Yunnan** (hybrid, price null) · **Private Tour** (private leisure, price null) · **Business Tour** (custom business, price null).
 
 When you change destinations, **sync all of these**: trip cards, nav dropdown children (`navItems`), `marqueeWords`, footer "Service Areas", JSON-LD `areaServed`, and `constants.ts` `targetCities`/`tripTypes`.
 
 ## 7. Xi'an detail page — the template
 
-`ryugege/xian/page.tsx` sections: compact header → espresso hero (bg image + meta pills) → Trip Highlights → Private Car (vehicle cards) → Itinerary (5D4N day cards) → Summary table → **Rate** (3 tier cards) → Included/Excluded → CTA → footer.
+`ryugege/xian/page.tsx` sections: compact header → espresso hero (bg image + meta pills) → Trip Highlights → Private Car (vehicle cards) → Itinerary (5D4N day cards) → Summary table → **Rate** (4 tier cards) → Included/Excluded → CTA → footer.
 
-Rate tiers (from owner's real rate card): 4–5 pax / 7-seat → ฿20,900; 6–7 pax / 9–14-seat → ฿17,900; 8–10 pax / 14–18-seat → ฿16,900; single supplement +฿5,000. Adult = child 2–12. **Excludes airfare.** Travel window: today – Sep 2569 (2026).
+Current Xi'an specification (from `Untitled document.pdf`, 2026-07-16): accepts groups from **2 people**. Vehicle guide: 2 pax / 5 seats; 4 pax / 9 seats; 6 pax / 14 seats; 8–10 pax / 19 seats. Itinerary: D1 arrival + Tang West Market Hotel; D2 Terracotta Army + Huaqing Palace + Datang Xishi; D3 Yong Chun martial arts + Chang'an Twelve Hours + Bell/Drum Tower; D4 Xi'an Ski + Da Ci'en Temple/Joy City + Datang pedestrian street; D5 City God Temple + Muslim Street + onsen/spa + departure. Rate tiers: 3–4 pax / 7-seat → ฿28,900; 5–7 pax / 14-seat → ฿25,900; 8–10 pax / 19-seat → ฿22,900; 10+ pax / 19-seat+ → ฿20,900; single supplement +฿5,000. Adult = child 2–12. **Excludes airfare.** The PDF provides no 2-person rate; do not invent one.
 
 **To add a new destination detail page** (e.g. Chaozhou, Yunnan): copy `xian/page.tsx` to `ryugege/<city>/page.tsx`, swap copy/itinerary/images/rate data, then set that trip card's `href:"./<city>/"`. Route is generated automatically by static export.
 
@@ -82,17 +82,17 @@ Rate tiers (from owner's real rate card): 4–5 pax / 7-seat → ฿20,900; 6–
 
 From the owner's marketing plan (see `memory/marketing-plan-constraints.md`). These prevent overclaiming on a pre-launch site:
 
-- **Guide license (ใบมัคคุเทศก์ / บัตรบรอนซ์เงิน): NOT yet obtained** (Sept 2026 milestone). Phrase as "อยู่ระหว่างเตรียมสอบ". Never claim licensed.
+- **Guide license (ใบมัคคุเทศก์ / บัตรบรอนซ์เงิน): NOT yet obtained** (Sept 2026 milestone). Do not claim licensed; this status is intentionally not displayed in the current marketing copy.
 - **Pricing not finalized in general** (open decision pending COGS). Only Xi'an has a real rate card. For other cities, use "ราคาตามการออกแบบทริป" or the plan's MVP ranges (Business ฿25–28K, Leisure ฿15–18K) **with a disclaimer**. Don't invent confirmed prices.
 - **Testimonials / review clips are genuinely empty** (no trips run yet). Keep as slots. **Never fabricate reviews, ratings, or client counts.**
 - **Brand voice** — YES: โอกาสธุรกิจ, การประสานงาน (facilitation), เจาะลึก, ประสบการณ์ท้องถิ่น, Private Business Tour. NO: ทัวร์ราคาถูก, รับประกันกำไร, รับผิดชอบการจัดซื้อทั้งหมด.
-- Founder facts that ARE safe: ป.โท 2 ใบ (วิศวกรรมการบิน NWU ซีอาน + เทคโนโลยีสื่อสังคม ม.รังสิต), อยู่จีน 5+ ปี, จีนระดับเจ้าของภาษา + Guanxi, ล่ามจีน-ไทย-อังกฤษ.
+- Founder facts that ARE safe: ป.โท 2 ใบ (วิศวกรรมการบิน NWU ซีอาน + เทคโนโลยีสื่อสังคม ม.รังสิต), อยู่จีน 5+ ปี, มีประสบการณ์ติดต่อประสานงานกับจีน 10+ ปี, จีนระดับเจ้าของภาษา + Guanxi, ล่ามจีน-ไทย-อังกฤษ.
 - Geography focus: Xi'an (leisure), Guangzhou (business/Canton Fair), Yunnan (hybrid), plus Chaozhou (Teochew roots). Old Yiwu/Foshan/Shenzhen were removed on purpose — don't reintroduce.
 
 ## 9. Known placeholders / pending work
 
-1. **`LINE_URL` in `constants.ts` is a dummy** (`https://lin.ee/REPLACE_WITH_REAL_LINE_URL`). Every LINE CTA is dead until replaced. High priority.
-2. Images are Unsplash. Xi'an + Chaozhou cards use real city photos; hero/founder/other cards + Xi'an vehicle cards are placeholders → replace with real RyuGeGe/city photos.
+1. **LINE Official is live:** all contact CTAs use `https://lin.ee/nxKOKBTR` from `constants.ts`.
+2. Images are mostly Unsplash. Xi'an + Chaozhou cards use real city photos; hero/other cards + Xi'an vehicle cards are placeholders → replace with real Ryu Gege/city photos.
 3. **Chaozhou** has a trip card but **no detail page and no rate** yet.
 4. **Guangzhou / Yunnan** have no detail pages (build from the Xi'an template).
 5. Marketing plan wants **GA4 + Facebook Pixel** (retargeting) — not embedded yet (works with static export via inline script in `layout.tsx`).

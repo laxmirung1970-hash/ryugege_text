@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A single-page marketing landing page for **RyuGeGe Tour** — a founder-led China business-trip / factory-visit / Thai-Chinese interpretation service. Content is primarily in **Thai**. There is no backend, database, or auth: the page is fully static and the only "action" is deep-linking the user to LINE (chat) with a prefilled message.
+A single-page marketing landing page for **RyuGeGe Tour** — a founder-led China business-trip / factory-visit / Thai-Chinese interpretation service. Content is primarily in **Thai**. There is no backend, database, or auth: the page is fully static and every contact CTA opens the RyuGeGe LINE Official account with a prefilled message.
 
 ## Commands
 
@@ -34,4 +34,4 @@ There is **no test suite**. `npm start` is not meaningful here because the site 
 - **Brand palette (current):** tour red `#ef2f37` / dark `#8b1118`, gold `#f4c35f` / `#ffe09a`, charcoal `#171717`, paper `#fbfbfb`, line/border `#ead6a3`.
 - **Fonts** are loaded in `layout.tsx` via `next/font/google`: **Prompt** (headings, exposed as `.font-heading` / `--font-prompt`) and **Sarabun** (body). Both include the `thai` subset — keep that when changing fonts.
 - **Imports** use the `@/*` alias → `./src/*` (tsconfig).
-- **Known placeholders to wire up during redesign:** `LINE_URL` in `constants.ts` is a dummy (`REPLACE_WITH_REAL_LINE_URL`); testimonials and review clips are intentionally empty "slots"; trip/hero images are external Unsplash URLs.
+- **Contact channel:** every contact CTA uses the LINE Official URL in `ryugege/constants.ts`. Do not add phone or email contact CTAs. Testimonials and review clips are intentionally empty "slots"; trip/hero images are external Unsplash URLs.

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "./icons";
 
@@ -18,12 +19,10 @@ export type NavItem = {
  */
 export function SiteHeader({
   navItems,
-  lineUrl,
-  phone,
+  contactUrl,
 }: {
   navItems: NavItem[];
-  lineUrl: string;
-  phone: string;
+  contactUrl: string;
 }) {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -109,16 +108,16 @@ export function SiteHeader({
           : "border-b border-transparent bg-cream/40 backdrop-blur-sm"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
         <a
           href="#top"
           className="flex min-w-0 items-center gap-3"
-          aria-label="RyuGeGe Tour"
+          aria-label="Ryu Gege Tour"
         >
           <BrandMark />
           <span>
             <span className="font-heading block text-lg font-black leading-tight text-charcoal">
-              RyuGeGe Tour
+              Ryu Gege Tour
             </span>
             <span className="hidden text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-soft sm:block">
               Business Trip · Factory Visit · Interpretation
@@ -127,10 +126,10 @@ export function SiteHeader({
         </a>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden shrink-0 flex-nowrap items-center gap-0.5 xl:flex">
           {navItems.map((item) =>
             item.children ? (
-              <div key={item.label} className="relative">
+              <div key={item.label} className="relative shrink-0">
                 <button
                   type="button"
                   onClick={() =>
@@ -139,7 +138,7 @@ export function SiteHeader({
                     )
                   }
                   aria-expanded={openMenu === item.label}
-                  className={`flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-semibold transition hover:bg-cream-deep hover:text-tour-red ${
+                  className={`flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-2 text-[13px] font-semibold transition hover:bg-cream-deep hover:text-tour-red 2xl:px-3.5 2xl:text-sm ${
                     isActive(item) ? "text-tour-red" : "text-charcoal/80"
                   }`}
                 >
@@ -170,7 +169,7 @@ export function SiteHeader({
               <a
                 key={item.label}
                 href={item.href}
-                className={`rounded-full px-3.5 py-2 text-sm font-semibold transition hover:bg-cream-deep hover:text-tour-red ${
+                className={`shrink-0 whitespace-nowrap rounded-full px-2.5 py-2 text-[13px] font-semibold transition hover:bg-cream-deep hover:text-tour-red 2xl:px-3.5 2xl:text-sm ${
                   isActive(item) ? "text-tour-red" : "text-charcoal/80"
                 }`}
               >
@@ -180,20 +179,13 @@ export function SiteHeader({
           )}
         </nav>
 
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className="hidden shrink-0 items-center gap-1 xl:flex 2xl:gap-2">
           <a
-            href={`tel:${phone.replace(/\s+/g, "")}`}
-            className="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-bold text-charcoal transition hover:text-tour-red"
-          >
-            <Icon name="phone" className="size-4 text-tour-red" />
-            {phone}
-          </a>
-          <a
-            href={lineUrl}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-line-green px-5 py-2.5 text-sm font-bold text-white shadow-[var(--shadow-line)] transition hover:bg-line-green-dark"
+            href={contactUrl}
+            className="inline-flex min-h-11 items-center gap-2 whitespace-nowrap rounded-full bg-line-green px-3 py-2.5 text-[13px] font-bold text-white shadow-[var(--shadow-line)] transition hover:bg-line-green-dark 2xl:px-5 2xl:text-sm"
           >
             <Icon name="chat" className="size-4" />
-            ปรึกษาทาง LINE
+            ปรึกษาทาง LINE Official
           </a>
         </div>
 
@@ -203,7 +195,7 @@ export function SiteHeader({
           onClick={() => setMobileOpen((open) => !open)}
           aria-expanded={mobileOpen}
           aria-label="เปิดเมนู"
-          className="flex size-11 items-center justify-center rounded-full border border-sand bg-white/80 text-charcoal lg:hidden"
+          className="flex size-11 items-center justify-center rounded-full border border-sand bg-white/80 text-charcoal xl:hidden"
         >
           <span className="flex flex-col gap-1.5">
             <span className="block h-0.5 w-5 bg-current" />
@@ -215,7 +207,7 @@ export function SiteHeader({
 
       {/* Mobile panel */}
       {mobileOpen ? (
-        <div className="animate-fade-in border-t border-sand/70 bg-cream lg:hidden">
+        <div className="animate-fade-in border-t border-sand/70 bg-cream xl:hidden">
           <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6">
             {navItems.map((item) =>
               item.children ? (
@@ -246,12 +238,12 @@ export function SiteHeader({
               ),
             )}
             <a
-              href={lineUrl}
+              href={contactUrl}
               onClick={() => setMobileOpen(false)}
               className="mt-3 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-line-green px-5 py-3 text-sm font-bold text-white"
             >
               <Icon name="chat" className="size-4" />
-              ปรึกษาทาง LINE
+              ปรึกษาทาง LINE Official
             </a>
           </div>
         </div>
@@ -262,10 +254,14 @@ export function SiteHeader({
 
 function BrandMark() {
   return (
-    <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-[linear-gradient(140deg,#ef2f37,#8b1118)] text-center text-[10px] font-black uppercase leading-tight text-gold-light shadow-[0_10px_24px_rgba(139,17,24,0.28)]">
-      Ryu
-      <br />
-      Tour
+    <span className="grid size-12 shrink-0 place-items-center overflow-hidden rounded-2xl bg-white p-1 shadow-[0_10px_24px_rgba(139,17,24,0.2)]">
+      <Image
+        src="/ryugege-logo.webp"
+        alt="Ryu Gege Tour"
+        width={48}
+        height={48}
+        className="size-full object-contain"
+      />
     </span>
   );
 }

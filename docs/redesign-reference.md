@@ -14,7 +14,7 @@
 2. **Container กว้าง** ~1200-1400px, เว้นระยะระหว่าง section 40-60px
 3. **เมนู dropdown ตามหมวด** (เมือง / งานแฟร์) แทนเมนูแบน
 4. **Hero carousel** auto-play หลายสไลด์ แทนภาพนิ่ง
-5. **Sticky header + floating CTA (LINE/โทร)**
+5. **Sticky header + floating LINE Official CTA**
 6. **FAQ accordion** + social proof เด่น (รูป/คลิปลูกค้าจริง)
 7. **Flow:** ปัญหา → ทางออก → พิสูจน์ (proof) → ปิดการขาย (CTA)
 
@@ -26,7 +26,7 @@
 |---|---------|-----------------------------------|--------------------|----------------|
 | 0 | **Top bar** | social icons + เวลาทำการ + TEL + Line ID | ✅ มี (แถบแดง) | เพิ่มไอคอน social จริง + เวลาทำการให้ชัด |
 | 1 | **Header (sticky)** | โลโก้ + เมนู **dropdown ตามเมือง/งานแฟร์** + ปุ่ม LINE | ⚠️ เมนูแบน (`navItems`) | เพิ่ม dropdown จัดกลุ่มเมือง/บริการ |
-| 2 | **Hero** | **carousel 4-5 สไลด์** + headline + จุดขายความน่าเชื่อถือ + ปุ่ม LINE/โทร | ⚠️ ภาพนิ่ง (`HeroVisual`) | ทำ carousel client component (static export ได้) |
+| 2 | **Hero** | **carousel 4-5 สไลด์** + headline + จุดขายความน่าเชื่อถือ + ปุ่ม LINE Official | ⚠️ ภาพนิ่ง (`HeroVisual`) | ทำ carousel client component (static export ได้) |
 | 3 | **Value Prop / ทำไมต้องเรา** | ข้อความ + ไอคอนจุดขาย 6-8 อัน | ✅ `shortcutBenefits` (4) | เพิ่มไอคอน + ขยายเป็น 6-8 จุด |
 | 4 | **ทริปตามเมือง** | **การ์ด grid 4-5 ใบ** (รูปเมือง + ชื่อ + ปุ่มดูรายละเอียด) | ✅ `tripCards` (`TripCardView`) | ปรับสไตล์การ์ดให้ image-first ขึ้น |
 | 5 | **บริการหลัก** | การ์ด/carousel ไอคอน + ชื่อ + คำอธิบายสั้น | ✅ `serviceCards` (5) | เพิ่มไอคอนต่อบริการ |
@@ -35,7 +35,7 @@
 | 8 | **Process / ขั้นตอน** | (ของเราเสริมเข้ามา) 5 สเต็ป | ✅ `processSteps` | คงไว้ |
 | 9 | **Inquiry form** | (ของเราเสริม) ฟอร์ม → LINE | ✅ `InquiryForm.tsx` | คงไว้ |
 | 10 | **Footer** | grid 4-5 คอลัมน์ พื้นเข้ม + ลิงก์ตามหมวด + social | ✅ มี | ปรับ grid/ลิงก์ |
-| — | **Floating buttons** | LINE/โทร ลอยติดจอ | ✅ มี | คงไว้ |
+| — | **Floating buttons** | LINE Official ลอยติดจอ | ✅ มี | คงไว้ |
 
 ---
 

@@ -16,8 +16,8 @@ const sarabun = Sarabun({
 
 export const metadata: Metadata = {
   title: {
-    default: "RyuGeGe Tour",
-    template: "%s | RyuGeGe Tour",
+    default: "Ryu Gege Tour",
+    template: "%s | Ryu Gege Tour",
   },
   description:
     "Founder-led business trips, China sourcing tours, factory visits, and Thai-Chinese facilitation for SME owners, importers, and purchasing teams.",
