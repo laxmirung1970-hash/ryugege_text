@@ -5,13 +5,14 @@ import "./globals.css";
 const prompt = Prompt({
   variable: "--font-prompt",
   subsets: ["latin", "thai"],
-  weight: ["500", "600", "700"],
+  weight: ["600", "700"],
+  preload: false,
 });
 
 const sarabun = Sarabun({
   variable: "--font-sarabun",
   subsets: ["latin", "thai"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600", "700"],
 });
 
 export const metadata: Metadata = {
