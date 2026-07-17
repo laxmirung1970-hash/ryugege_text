@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import type { ReactNode } from "react";
 import { InquiryForm } from "./InquiryForm";
 import { HeroCarousel, type HeroSlide } from "./HeroCarousel";
@@ -7,6 +7,9 @@ import { SiteHeader, type NavItem } from "./SiteHeader";
 import { PageEffects } from "./PageEffects";
 import { Icon, type IconName } from "./icons";
 import { LINE_URL } from "./constants";
+import { TikTokClipGallery } from "./TikTokClipGallery";
+import { BrandMark } from "./BrandMark";
+import { siteMedia } from "./media";
 
 const CONTACT_HREF = LINE_URL;
 const CONTACT_LABEL = "ปรึกษาฟรีทาง LINE Official";
@@ -26,7 +29,7 @@ type TripCard = {
   subtitle: string;
   description: string;
   tags: string[];
-  image: string;
+  image: StaticImageData;
   price: string | null;
   href?: string;
 };
@@ -44,7 +47,7 @@ type ReviewClip = {
   platform: string;
   href: string;
   embedUrl?: string;
-  thumbnail?: string;
+  thumbnail: StaticImageData;
 };
 
 type Testimonial = {
@@ -156,31 +159,27 @@ const problemCards: { icon: IconName; title: string; copy: string }[] = [
 
 const heroSlides: HeroSlide[] = [
   {
-    image:
-      "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?auto=format&fit=crop&w=1600&q=80",
+    image: siteMedia.hero.fair,
     kicker: "Canton Fair / Factory",
     title: "พาเดินงานแฟร์และดูโรงงานจีน",
     caption:
       "เตรียมคำถาม สรุปดีลหน้างาน และช่วยคุยกับซัพพลายเออร์ให้ทีมไทยเข้าใจตรงกัน",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&w=1600&q=80",
+    image: siteMedia.hero.market,
     kicker: "Sourcing Market",
     title: "ลงตลาดค้าส่งของจริง",
     caption:
       "เห็นสินค้าหลากหลายหมวดในพื้นที่เดียว เหมาะกับผู้เริ่มนำเข้าและร้านค้าออนไลน์",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1600&q=80",
+    image: siteMedia.hero.interpreter,
     kicker: "Interpretation",
     title: "มีล่ามธุรกิจเดินไปกับคุณ",
     caption: "แปลโดยดูบริบทธุรกิจและการต่อรอง ไม่ใช่แค่แปลคำต่อคำ",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1600&q=80",
+    image: siteMedia.hero.privateTour,
     kicker: "Private Tour / Leisure",
     title: "ทริปส่วนตัวในแบบที่คุณเลือก",
     caption: "เที่ยวจีนแบบไม่ต้องมีเป้าหมายธุรกิจ พร้อมดูแลภาษา เส้นทาง และจังหวะการเดินทาง",
@@ -264,8 +263,7 @@ const tripCards: TripCard[] = [
     description:
       "เหมาะกับเจ้าของแบรนด์ ผู้นำเข้า และทีมจัดซื้อ เดินงานแฟร์แบบมีเป้าหมาย พร้อมเจาะลึกโรงงานและคุยซัพพลายเออร์โดยตรง ช่วยเตรียมคำถามและสรุปดีลหน้างาน",
     tags: ["Canton Fair", "Factory Visit", "Supplier Meeting"],
-    image:
-      "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=80",
+    image: siteMedia.trips.guangzhou,
     price: null,
   },
   {
@@ -276,8 +274,7 @@ const tripCards: TripCard[] = [
     description:
       "ทริปส่วนตัวแบบพรีเมียมสำหรับครอบครัวหรือกลุ่มเพื่อน สัมผัสจีนแท้ ๆ แบบไม่เร่งรีบ พร้อมคนดูแลภาษา เส้นทาง และจังหวะเดินทาง",
     tags: ["Culture", "Family", "Private"],
-    image:
-      "https://images.unsplash.com/photo-1547253807-593ee708edab?auto=format&fit=crop&w=1200&q=80",
+    image: siteMedia.trips.xian,
     price: "฿20,900",
     href: "./xian/",
   },
@@ -289,8 +286,7 @@ const tripCards: TripCard[] = [
     description:
       "เหมาะกับผู้ที่อยากดูโอกาสธุรกิจใหม่ ๆ พร้อมสัมผัสธรรมชาติและวัฒนธรรมของจีนตอนใต้ ปรับสัดส่วนธุรกิจ-ท่องเที่ยวได้ตามเป้าหมาย",
     tags: ["Hybrid", "Nature", "Opportunity"],
-    image:
-      "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1200&q=80",
+    image: siteMedia.trips.yunnan,
     price: null,
   },
   {
@@ -301,8 +297,7 @@ const tripCards: TripCard[] = [
     description:
       "ทริปส่วนตัวเยือนเมืองแต้จิ๋ว บ้านเกิดชาวไทยเชื้อสายจีนแต้จิ๋ว ชมเมืองเก่า สะพานโบราณเซียงจื่อ วัดไคหยวน และลิ้มรสอาหารแต้จิ๋วต้นตำรับ",
     tags: ["Teochew", "Heritage", "Food"],
-    image:
-      "https://images.unsplash.com/photo-1660120470355-58b72442426a?auto=format&fit=crop&w=1200&q=80",
+    image: siteMedia.trips.chaozhou,
     price: null,
   },
   {
@@ -313,8 +308,7 @@ const tripCards: TripCard[] = [
     description:
       "ออกแบบทริปเฉพาะสำหรับครอบครัวหรือกลุ่มเพื่อน เลือกเมือง ที่พัก ร้านอาหาร และจังหวะการเดินทางให้ตรงกับสไตล์ของคุณ",
     tags: ["Family & Friends", "Private", "Flexible"],
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+    image: siteMedia.trips.privateTour,
     price: null,
   },
   {
@@ -325,8 +319,7 @@ const tripCards: TripCard[] = [
     description:
       "ออกแบบเส้นทางตามสินค้า ตลาด งานแฟร์ โรงงาน หรือคู่ค้าที่ต้องการพบ พร้อมวางจำนวนวันและลำดับการเดินทางให้คุ้มค่า",
     tags: ["Market Visit", "Factory Visit", "Custom Route"],
-    image:
-      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80",
+    image: siteMedia.trips.businessTour,
     price: null,
   },
 ];
@@ -389,25 +382,25 @@ const reviewClips: ReviewClip[] = [
     title: "ล่ามธุรกิจ ช่วยเจรจาและคุมต้นทุนนำเข้า",
     platform: "TikTok",
     href: "https://www.tiktok.com/@ryuchinesegege/video/7660610235119291655",
-    thumbnail: "/clips/business-interpreter-import.png",
+    thumbnail: siteMedia.clips.businessInterpreter,
   },
   {
     title: "นำเข้าเสื้อผ้ากว่างโจว: ราคา ขนส่ง และสร้างแบรนด์",
     platform: "TikTok",
     href: "https://www.tiktok.com/@ryuchinesegege/video/7660609775029292295",
-    thumbnail: "/clips/guangzhou-clothing-import.png",
+    thumbnail: siteMedia.clips.guangzhouClothing,
   },
   {
     title: "พบซัพพลายเออร์ตัวจริง อุ่นใจก่อนตัดสินใจ",
     platform: "TikTok",
     href: "https://www.tiktok.com/@ryuchinesegege/video/7660611888828484872",
-    thumbnail: "/clips/supplier-factory-visit.png",
+    thumbnail: siteMedia.clips.supplierVisit,
   },
   {
     title: "พาดูงาน Kunming South Asia Expo เพื่อหาซัพพลายเออร์",
     platform: "TikTok",
     href: "https://www.tiktok.com/@ryuchinesegege/video/7660611267031321864",
-    thumbnail: "/clips/kunming-south-asia-expo.png",
+    thumbnail: siteMedia.clips.kunmingExpo,
   },
 ];
 
@@ -661,27 +654,17 @@ function CheckList({ items, light = false }: { items: string[]; light?: boolean 
   );
 }
 
-function BrandMark() {
-  return (
-    <span className="grid size-12 shrink-0 place-items-center overflow-hidden rounded-2xl bg-white p-1 shadow-[0_10px_24px_rgba(139,17,24,0.2)]">
-      <Image
-        src="/ryugege-logo.webp"
-        alt="Ryu Gege Tour"
-        width={48}
-        height={48}
-        className="size-full object-contain"
-      />
-    </span>
-  );
-}
-
 function TripCardView({ trip }: { trip: TripCard }) {
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-3xl bg-white shadow-[var(--shadow-soft)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)]">
       <div className="relative aspect-[4/3] overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-[1.07]"
-          style={{ backgroundImage: `url(${trip.image})` }}
+        <Image
+          src={trip.image}
+          alt=""
+          fill
+          sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+          placeholder="blur"
+          className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.07]"
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_38%,rgba(20,6,7,0.82)_100%)]" />
         <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1.5 text-xs font-black uppercase tracking-[0.12em] text-maroon backdrop-blur">
@@ -742,55 +725,6 @@ function TripCardView({ trip }: { trip: TripCard }) {
         className="absolute inset-0 z-10 rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-tour-red"
         {...(trip.href ? {} : { target: "_blank", rel: "noopener noreferrer" })}
       />
-    </article>
-  );
-}
-
-function ReviewClipCard({ clip, index }: { clip: ReviewClip; index: number }) {
-  return (
-    <article className="w-[260px] shrink-0 snap-start sm:w-[280px]">
-      <a href={clip.href} className="group block" aria-label={clip.title}>
-        <div className="relative aspect-[9/16] overflow-hidden rounded-3xl bg-[#151515] shadow-[var(--shadow-soft)]">
-          {clip.embedUrl ? (
-            <iframe
-              src={clip.embedUrl}
-              title={clip.title}
-              className="absolute inset-0 size-full"
-              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-              allowFullScreen
-            />
-          ) : (
-            <>
-              <div
-                className="absolute inset-0 bg-cover bg-center opacity-75 transition-transform duration-700 group-hover:scale-105"
-                style={{
-                  backgroundImage: `url(${
-                    clip.thumbnail ?? tripCards[index % tripCards.length].image
-                  })`,
-                }}
-              />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,10,0.05),rgba(139,17,24,0.72),rgba(0,0,0,0.92))]" />
-              <div className="absolute left-4 top-4 rounded-full bg-white/90 px-2.5 py-1 text-xs font-black text-maroon">
-                9:16
-              </div>
-              <div className="absolute inset-0 grid place-items-center">
-                <span className="grid size-16 place-items-center rounded-full border border-white/70 bg-white/15 text-xl text-white backdrop-blur transition group-hover:scale-110">
-                  ▶
-                </span>
-              </div>
-              <div className="absolute inset-x-0 bottom-0 p-5 text-white">
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-gold-light">
-                  {clip.platform}
-                </p>
-                <h3 className="font-heading mt-1.5 text-lg font-bold leading-tight">
-                  {clip.title}
-                </h3>
-                <p className="mt-2 text-xs font-semibold text-white/72">ดูคลิปบน TikTok</p>
-              </div>
-            </>
-          )}
-        </div>
-      </a>
     </article>
   );
 }
@@ -1051,13 +985,9 @@ export default function RyuGegePage() {
                 index="05"
                 label="Social Proof Clips"
                 title="คลิปรีวิวทริปธุรกิจที่พา CEO และเจ้าของแบรนด์ไปจริง"
-                copy="คลิปแนวตั้ง 9:16 จาก TikTok — กดการ์ดเพื่อเปิดดูวิดีโอเต็ม"
+                copy="คลิปแนวตั้ง 9:16 จาก TikTok — กดปุ่มเล่นเพื่อรับชมได้ทันทีในหน้านี้"
               />
-              <div className="reveal-stagger no-scrollbar mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4">
-                {reviewClips.map((clip, index) => (
-                  <ReviewClipCard key={clip.title} clip={clip} index={index} />
-                ))}
-              </div>
+              <TikTokClipGallery clips={reviewClips} />
               <div className="mt-6 flex flex-wrap gap-3">
                 {socialLinks.slice(0, 3).map((link) => (
                   <CtaLink key={link.label} href={link.href} variant="outline">
@@ -1110,14 +1040,16 @@ export default function RyuGegePage() {
           {/* Founder — second intentional dark moment */}
           <section id="founder" className="scroll-mt-24 bg-espresso py-20 text-white sm:py-28">
             <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:px-8">
-              <div className="reveal relative aspect-[4/5] overflow-hidden rounded-[2rem] ring-1 ring-white/10">
-                <div
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{
-                    backgroundImage: "url(/ryu-graduation.webp)",
-                  }}
+              <div className="reveal relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-[#30231f] ring-1 ring-white/15 shadow-[0_28px_70px_rgba(0,0,0,0.28)]">
+                <Image
+                  src={siteMedia.founder}
+                  alt="Ryu Puriwat ในวันสำเร็จการศึกษา"
+                  fill
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  placeholder="blur"
+                  className="object-cover object-[50%_35%]"
                 />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,6,7,0.1),rgba(20,6,7,0.9))]" />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_42%,rgba(20,6,7,0.22)_60%,rgba(20,6,7,0.96)_100%)]" />
                 <div className="absolute inset-x-0 bottom-0 p-7">
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold-light">
                     Founder-led

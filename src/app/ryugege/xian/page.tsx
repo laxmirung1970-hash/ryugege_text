@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import type { ReactNode } from "react";
 import { Icon, type IconName } from "../icons";
 import { LINE_URL } from "../constants";
+import { siteMedia } from "../media";
+import { BrandMark } from "../BrandMark";
 
 const CONTACT_HREF = LINE_URL;
 const CONTACT_LABEL = "ปรึกษาทาง LINE Official";
@@ -21,8 +23,14 @@ type Highlight = {
   eyebrow: string;
   tone: string;
 };
-type Vehicle = { name: string; seats: string; image: string };
-type Day = { day: string; title: string; places: string[]; stay: string; image: string };
+type Vehicle = { name: string; seats: string; image: StaticImageData };
+type Day = {
+  day: string;
+  title: string;
+  places: string[];
+  stay: string;
+  image: StaticImageData;
+};
 
 const heroMeta = [
   { icon: "clock" as IconName, label: "5 วัน 4 คืน" },
@@ -79,10 +87,10 @@ const highlights: Highlight[] = [
 ];
 
 const vehicles: Vehicle[] = [
-  { name: "รถ 5 ที่นั่ง", seats: "2 ท่าน", image: "/xian/vehicles/vehicle-5-seat-sedan.png" },
-  { name: "รถ 9 ที่นั่ง", seats: "4 ท่าน", image: "/xian/vehicles/vehicle-9-seat-van.png" },
-  { name: "รถ 14 ที่นั่ง", seats: "6 ท่าน", image: "/xian/vehicles/vehicle-14-seat-minibus.png" },
-  { name: "รถ 19 ที่นั่ง", seats: "8–10 ท่าน", image: "/xian/vehicles/vehicle-19-seat-coach.png" },
+  { name: "รถ 5 ที่นั่ง", seats: "2 ท่าน", image: siteMedia.xian.vehicles.sedan },
+  { name: "รถ 9 ที่นั่ง", seats: "4 ท่าน", image: siteMedia.xian.vehicles.van },
+  { name: "รถ 14 ที่นั่ง", seats: "6 ท่าน", image: siteMedia.xian.vehicles.minibus },
+  { name: "รถ 19 ที่นั่ง", seats: "8–10 ท่าน", image: siteMedia.xian.vehicles.coach },
 ];
 
 const days: Day[] = [
@@ -94,7 +102,7 @@ const days: Day[] = [
       "เดินทางเข้าสู่ที่พักและพักผ่อนตามอัธยาศัย",
     ],
     stay: "Tang West Market Hotel",
-    image: "/xian/day-1-tang-west-market-hotel.jfif",
+    image: siteMedia.xian.days.one,
   },
   {
     day: "Day 2",
@@ -105,7 +113,7 @@ const days: Day[] = [
       "เดินเล่นตลาดยามค่ำคืนต้าถังซีซื่อ",
     ],
     stay: "Tang West Market Hotel",
-    image: "/xian/day-2-terracotta-warriors.webp",
+    image: siteMedia.xian.days.two,
   },
   {
     day: "Day 3",
@@ -116,8 +124,7 @@ const days: Day[] = [
       "ถ่ายรูปเช็กอินที่หอระฆังและหอกลอง",
     ],
     stay: "Tang West Market Hotel",
-    image:
-      "https://images.unsplash.com/photo-1760419855307-3d43fd202b42?auto=format&fit=crop&w=1000&q=80",
+    image: siteMedia.xian.days.three,
   },
   {
     day: "Day 4",
@@ -128,7 +135,7 @@ const days: Day[] = [
       "ชมแสงสียามค่ำคืนที่ถนนคนเดินต้าถังและบริเวณเจดีย์ห่านป่าใหญ่",
     ],
     stay: "Tang West Market Hotel",
-    image: "/xian/day-4-xian-ski.webp",
+    image: siteMedia.xian.days.four,
   },
   {
     day: "Day 5",
@@ -140,7 +147,7 @@ const days: Day[] = [
       "เดินทางสู่สนามบินซีอาน (XIY)",
     ],
     stay: "-",
-    image: "/xian/day-5-muslim-street.webp",
+    image: siteMedia.xian.days.five,
   },
 ];
 
@@ -286,15 +293,7 @@ export default function XianPage() {
       <header className="sticky top-0 z-50 border-b border-sand/70 bg-cream/85 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
           <a href="../" className="flex min-w-0 items-center gap-3" aria-label="Ryu Gege Tour">
-            <span className="grid size-11 shrink-0 place-items-center overflow-hidden rounded-2xl bg-white p-1 shadow-[0_10px_24px_rgba(139,17,24,0.2)]">
-              <Image
-                src="/ryugege-logo.webp"
-                alt="Ryu Gege Tour"
-                width={44}
-                height={44}
-                className="size-full object-contain"
-              />
-            </span>
+            <BrandMark />
             <span className="font-heading text-lg font-black leading-tight text-charcoal">
               Ryu Gege Tour
             </span>
@@ -320,12 +319,14 @@ export default function XianPage() {
 
       {/* Hero */}
       <section className="relative isolate overflow-hidden bg-espresso text-white">
-        <div
-          className="absolute inset-0 -z-10 bg-cover bg-center"
-          style={{
-            backgroundImage:
-              "url(https://images.unsplash.com/photo-1547253807-593ee708edab?auto=format&fit=crop&w=1600&q=80)",
-          }}
+        <Image
+          src={siteMedia.trips.xian}
+          alt="ทิวทัศน์เมืองซีอาน"
+          fill
+          sizes="100vw"
+          fetchPriority="high"
+          placeholder="blur"
+          className="-z-10 object-cover object-center"
         />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(20,6,7,0.94),rgba(27,17,14,0.82)_45%,rgba(27,17,14,0.5))]" />
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_82%_18%,rgba(244,195,95,0.22),transparent_42%)]" />
@@ -427,12 +428,16 @@ export default function XianPage() {
                   key={v.name}
                   className="group overflow-hidden rounded-3xl bg-white shadow-[var(--shadow-soft)]"
                 >
-                  <div
-                    className="relative h-40 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                    style={{
-                      backgroundImage: `linear-gradient(180deg, rgb(30 6 8 / 8%), rgb(30 6 8 / 55%)), url(${v.image})`,
-                    }}
-                  >
+                  <div className="relative h-40 overflow-hidden">
+                    <Image
+                      src={v.image}
+                      alt={v.name}
+                      fill
+                      sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                      placeholder="blur"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(30,6,8,0.04),rgba(30,6,8,0.58))]" />
                     <span className="absolute right-3 top-3 rounded-full bg-black/30 px-3 py-1 text-xs font-bold text-gold-light backdrop-blur">
                       {v.seats}
                     </span>
@@ -462,12 +467,16 @@ export default function XianPage() {
                   key={d.day}
                   className="grid gap-5 overflow-hidden rounded-3xl bg-white shadow-[var(--shadow-soft)] md:grid-cols-[280px_1fr]"
                 >
-                  <div
-                    className="relative min-h-[180px] bg-cover bg-center"
-                    style={{
-                      backgroundImage: `linear-gradient(180deg,rgba(0,0,0,0.05),rgba(20,6,7,0.6)), url(${d.image})`,
-                    }}
-                  >
+                  <div className="relative min-h-[180px] overflow-hidden">
+                    <Image
+                      src={d.image}
+                      alt={d.title}
+                      fill
+                      sizes="(min-width: 768px) 280px, 100vw"
+                      placeholder="blur"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.04),rgba(20,6,7,0.58))]" />
                     <span className="absolute left-4 top-4 rounded-full bg-tour-red px-3 py-1.5 text-xs font-black uppercase tracking-[0.12em] text-white">
                       {d.day}
                     </span>
