@@ -28,11 +28,28 @@ export function HeroCarousel({
 }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [primaryLoaded, setPrimaryLoaded] = useState(false);
+  const [loadedSlides, setLoadedSlides] = useState<Set<number>>(
+    () => new Set([0]),
+  );
   const count = slides.length;
 
+  const ensureLoaded = useCallback((index: number) => {
+    setLoadedSlides((current) => {
+      if (current.has(index)) return current;
+      const next = new Set(current);
+      next.add(index);
+      return next;
+    });
+  }, []);
+
   const go = useCallback(
-    (next: number) => setActive((next + count) % count),
-    [count],
+    (next: number) => {
+      const normalized = (next + count) % count;
+      ensureLoaded(normalized);
+      setActive(normalized);
+    },
+    [count, ensureLoaded],
   );
 
   const reducedMotion = useRef(false);
@@ -41,6 +58,26 @@ export function HeroCarousel({
       "(prefers-reduced-motion: reduce)",
     ).matches;
   }, []);
+
+  // Load the remaining backgrounds only after the LCP image is ready. A
+  // fallback handles browsers that finish the cached image before hydration.
+  useEffect(() => {
+    const fallback = window.setTimeout(() => setPrimaryLoaded(true), 5000);
+    return () => window.clearTimeout(fallback);
+  }, []);
+
+  useEffect(() => {
+    if (!primaryLoaded || count <= 1) return;
+
+    const timers = Array.from({ length: count - 1 }, (_, offset) =>
+      window.setTimeout(
+        () => ensureLoaded(offset + 1),
+        600 + offset * 900,
+      ),
+    );
+
+    return () => timers.forEach((timer) => window.clearTimeout(timer));
+  }, [count, ensureLoaded, primaryLoaded]);
 
   useEffect(() => {
     if (paused || count <= 1 || reducedMotion.current) return;
@@ -61,27 +98,34 @@ export function HeroCarousel({
       aria-roledescription="carousel"
     >
       {/* Backgrounds */}
-      {slides.map((slide, index) => (
-        <div
-          key={slide.title}
-          aria-hidden
-          className={`absolute inset-0 -z-10 transition-opacity duration-1000 ease-out ${
-            index === active ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          <Image
-            src={slide.image}
-            alt=""
-            fill
-            sizes="100vw"
-            fetchPriority={index === 0 ? "high" : "auto"}
-            placeholder="blur"
-            className={`object-cover object-center ${
-              index === active ? "animate-kenburns" : ""
+      {slides.map((slide, index) => {
+        if (!loadedSlides.has(index)) return null;
+
+        return (
+          <div
+            key={slide.title}
+            aria-hidden
+            className={`absolute inset-0 -z-10 transition-opacity duration-1000 ease-out ${
+              index === active ? "opacity-100" : "opacity-0"
             }`}
-          />
-        </div>
-      ))}
+          >
+            <Image
+              src={slide.image}
+              alt=""
+              fill
+              sizes="100vw"
+              {...(index === 0
+                ? { preload: true }
+                : { loading: "lazy" as const })}
+              placeholder="blur"
+              onLoad={index === 0 ? () => setPrimaryLoaded(true) : undefined}
+              className={`object-cover object-center ${
+                index === active ? "animate-kenburns" : ""
+              }`}
+            />
+          </div>
+        );
+      })}
 
       {/* Scrim: dark on the left for text legibility + warm glow top-right */}
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(20,6,7,0.94)_0%,rgba(27,17,14,0.82)_40%,rgba(27,17,14,0.45)_72%,rgba(27,17,14,0.35)_100%)]" />

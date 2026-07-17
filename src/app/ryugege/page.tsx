@@ -1275,7 +1275,7 @@ export default function RyuGegePage() {
                 <br />
                 โทร: <a href="tel:0928422121">092 842 2121</a>
                 <br />
-                ติดต่อผ่าน LINE Official เท่านั้น
+                สอบถามและจองทริปผ่าน LINE Official
                 <br />
                 <a
                   href={LINE_URL}

@@ -271,7 +271,7 @@ export default function XianPage() {
           alt="ทิวทัศน์เมืองซีอาน"
           fill
           sizes="100vw"
-          fetchPriority="high"
+          preload
           placeholder="blur"
           className="-z-10 object-cover object-center"
         />
@@ -597,9 +597,9 @@ export default function XianPage() {
                   <Icon name={CONTACT_ICON} className="size-4" />
                   {CONTACT_LABEL}
                 </CtaLink>
-                <CtaLink href={LINE_URL} variant="ghost">
-                  <Icon name="chat" className="size-4" />
-                  สอบถามผ่าน LINE Official
+                <CtaLink href="#price" variant="ghost">
+                  <Icon name="clipboard" className="size-4" />
+                  ดูราคาและโปรแกรม
                 </CtaLink>
               </div>
             </div>

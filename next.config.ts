@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
   images: {
+    // GitHub Pages has no runtime image optimizer. Source assets are resized
+    // and encoded as WebP before they are committed to the static export.
     unoptimized: true,
   },
   ...(isGithubPages
