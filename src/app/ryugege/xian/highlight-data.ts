@@ -1,8 +1,11 @@
 import type { StaticImageData } from "next/image";
 import type { IconName } from "../icons";
 import { siteMedia } from "../media";
-import wingChun from "../../../assets/xian/highlights/wing-chun.webp";
-import huaqingPool from "../../../assets/xian/highlights/huaqing-pool.webp";
+import privateTour from "../../../assets/xian/highlights/private-tour-2-16.webp";
+import changanTwelveHours from "../../../assets/xian/highlights/changan-12-hours.png";
+import wingChunClass from "../../../assets/xian/highlights/wing-chun-class.webp";
+import changanDaPaiDang from "../../../assets/xian/highlights/changan-da-pai-dang.webp";
+import qingshuiwanSpa from "../../../assets/xian/highlights/qingshuiwan-spa.webp";
 
 export type TripHighlight = {
   number: string;
@@ -22,7 +25,7 @@ export const tripHighlights: TripHighlight[] = [
     description:
       "สัมผัสอิสระแห่งการเดินทางเหนือระดับแบบไพรเวทกรุ๊ป ออกแบบมาเพื่อ 2–16 ท่าน ให้คุณพักผ่อนอย่างเต็มอิ่ม ไม่ต้องตื่นเช้าตรู่ ไม่ต้องรีบเร่งเดินตามธงทัวร์ พร้อมรถปรับอากาศส่วนตัวและไกด์ท้องถิ่นที่คอยดูแลกรุ๊ปของคุณโดยเฉพาะ ประดุจบุคคลสำคัญแห่งราชสำนัก",
     icon: "car",
-    image: siteMedia.xian.vehicles.sedan,
+    image: privateTour,
   },
   {
     number: "02",
@@ -40,7 +43,7 @@ export const tripHighlights: TripHighlight[] = [
     description:
       "ทะลุมิติเวลาสู่ยุครุ่งเรืองที่สุดของราชวงศ์ถังที่ธีมพาร์คฉางอัน 12 ชั่วยาม (Chang'an 12 Hours) พร้อมโอกาสสวมบทบาทเป็นชนชั้นสูงชาวฉางอันในชุดฮั่นฝูเต็มยศ และเก็บภาพพอร์ทเทรตที่งดงามสง่าราวกับกษัตริย์หรือราชินีจากซีรีส์ฟอร์มยักษ์",
     icon: "sparkles",
-    image: siteMedia.xian.days.three,
+    image: changanTwelveHours,
   },
   {
     number: "04",
@@ -49,8 +52,7 @@ export const tripHighlights: TripHighlight[] = [
     description:
       "เปิดประสบการณ์สุดยูนีคที่นำพาคุณก้าวเข้าสู่โลกแห่งยุทธภพที่หาไม่ได้จากทัวร์ทั่วไป สัมผัสวิถีจอมยุทธ์ด้วยคลาสเรียนศิลปะการต่อสู้มวยหย่งชุน (Wing Chun) ขนานแท้ถึงถิ่น ซึมซับทั้งปรัชญาและศาสตร์แห่งกำลังภายในของจีนอย่างลึกซึ้ง",
     icon: "route",
-    image: wingChun,
-    imagePosition: "object-[50%_68%]",
+    image: wingChunClass,
   },
   {
     number: "05",
@@ -77,7 +79,7 @@ export const tripHighlights: TripHighlight[] = [
     description:
       "อิสระเต็มที่กับมื้ออาหารดั่งงานเลี้ยงเฉลิมฉลอง ลืมภาพอาหารโต๊ะจีนจืดชืดแบบเดิม ๆ แล้วเลือกลิ้มลองรสชาติพื้นเมืองแท้ด้วยตัวเอง ทั้งร้านปิ้งย่างสูตรเด็ด ภัตตาคารระดับตำนานอย่าง Chang'an Da Pai Dang และสตรีทฟู้ดละลานตาที่ถนนคนเดินมุสลิม (Muslim Quarter)",
     icon: "store",
-    image: siteMedia.xian.days.five,
+    image: changanDaPaiDang,
   },
   {
     number: "08",
@@ -86,7 +88,7 @@ export const tripHighlights: TripHighlight[] = [
     description:
       "ปิดท้ายทริปอย่างสมบูรณ์แบบดั่งจักรพรรดิ ทิ้งความเมื่อยล้าทั้งหมดไว้ที่ Qingshuiwan Spa ปรนนิบัติตัวเองและผ่อนคลายกับการแช่ออนเซ็นพร้อมทำสปาระดับพรีเมียม เพื่อฟื้นฟูพลังกายและจิตใจก่อนเดินทางกลับด้วยความสดชื่นอย่างขีดสุด",
     icon: "sparkles",
-    image: huaqingPool,
+    image: qingshuiwanSpa,
   },
   {
     number: "09",
