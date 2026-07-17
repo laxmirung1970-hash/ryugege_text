@@ -45,7 +45,7 @@ export function XianHighlightExplorer({ highlights }: XianHighlightExplorerProps
 
   return (
     <>
-      <div className="mt-11 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-11 grid gap-5 sm:grid-cols-2 2xl:grid-cols-3">
         {highlights.map((highlight) => (
           <button
             key={highlight.number}
@@ -53,7 +53,7 @@ export function XianHighlightExplorer({ highlights }: XianHighlightExplorerProps
             aria-haspopup="dialog"
             aria-controls="xian-highlight-dialog"
             aria-label={`อ่านรายละเอียด: ${highlight.thaiTitle}`}
-            className="group relative aspect-[4/5] w-full overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#2a1c17] text-left shadow-[0_20px_50px_rgba(0,0,0,0.22)] transition duration-300 hover:border-gold/45 hover:shadow-[0_28px_60px_rgba(0,0,0,0.32)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+            className="group relative aspect-[4/3] w-full overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#2a1c17] text-left shadow-[0_20px_50px_rgba(0,0,0,0.22)] transition duration-300 hover:border-gold/45 hover:shadow-[0_28px_60px_rgba(0,0,0,0.32)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
             onClick={(event) => {
               triggerRef.current = event.currentTarget;
               setActiveHighlight(highlight);
@@ -63,7 +63,7 @@ export function XianHighlightExplorer({ highlights }: XianHighlightExplorerProps
               src={highlight.image}
               alt={highlight.thaiTitle}
               fill
-              sizes="(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 33vw"
+              sizes="(max-width: 639px) 100vw, (max-width: 1535px) 50vw, 33vw"
               placeholder="blur"
               className={`object-cover transition duration-700 group-hover:scale-105 ${highlight.imagePosition ?? ""}`}
             />
