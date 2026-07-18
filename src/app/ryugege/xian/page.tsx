@@ -6,6 +6,7 @@ import { LINE_URL } from "../constants";
 import { siteMedia } from "../media";
 import { BrandMark } from "../BrandMark";
 import { XianHighlights } from "./XianHighlights";
+import { XianCustomerStories } from "./XianCustomerStories";
 
 const CONTACT_HREF = LINE_URL;
 const CONTACT_LABEL = "ปรึกษาทาง LINE Official";
@@ -188,7 +189,7 @@ const excluded = [
   "ตั๋วเครื่องบินไป-กลับ",
   "วีซ่าจีน (หากมี)",
   "ค่าใช้จ่ายส่วนตัวและช้อปปิ้ง",
-  "ค่าใช้จ่ายสำหรับกิจกรรมทางเลือก (เช่น สปา, สกี, เช่าชุดฮั่นฝูที่ฉางอันสือเอ้อร์สือเฉิน และช่างภาพส่วนตัว)",
+  "กิจกรรมทางเลือก (เช่น สปา, สกี, เช่าชุดฮั่นฝู และช่างภาพส่วนตัว)",
   "อาหารบางมื้อนอกโปรแกรม",
 ];
 
@@ -576,8 +577,10 @@ export default function XianPage() {
           </div>
         </section>
 
+        <XianCustomerStories />
+
         {/* CTA */}
-        <section className="px-4 pb-24 sm:px-6 lg:px-8">
+        <section className="px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
           <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[2.5rem] bg-espresso px-6 py-16 text-center text-white shadow-[var(--shadow-lift)] sm:px-12">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(244,195,95,0.18),transparent_55%),radial-gradient(circle_at_85%_90%,rgba(239,47,55,0.22),transparent_45%)]" />
             <div className="relative">
