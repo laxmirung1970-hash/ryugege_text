@@ -14,6 +14,9 @@ import { siteMedia } from "./media";
 const CONTACT_HREF = LINE_URL;
 const CONTACT_LABEL = "ปรึกษาฟรีทาง LINE Official";
 const CONTACT_ICON: IconName = "chat";
+const siteBasePath =
+  process.env.GITHUB_PAGES === "true" ? "/ryugege_text" : "";
+const routeHref = (route: string) => `${siteBasePath}/ryugege/${route}/`;
 
 type SocialLink = {
   label: string;
@@ -74,10 +77,10 @@ const navItems: NavItem[] = [
   {
     label: "ทริปแนะนำ",
     children: [
-      { label: "ซีอาน / วัฒนธรรม (Leisure)", href: "./xian/" },
-      { label: "แต้จิ๋ว / Chaozhou", href: "#trips" },
-      { label: "กวางโจว / Canton Fair + โรงงาน", href: "#trips" },
-      { label: "ยูนนาน / Business + Leisure", href: "#trips" },
+      { label: "ซีอาน / วัฒนธรรม (Leisure)", href: routeHref("xian") },
+      { label: "แต้จิ๋ว / Chaozhou", href: routeHref("chaozhou") },
+      { label: "กวางโจว / Canton Fair + โรงงาน", href: routeHref("guangzhou") },
+      { label: "ยูนนาน / Business + Leisure", href: routeHref("yunnan") },
       { label: "ทริปส่วนตัวผู้บริหาร", href: "#trips" },
       { label: "Custom Business Trip", href: "#trips" },
     ],
@@ -265,7 +268,7 @@ const tripCards: TripCard[] = [
     tags: ["Canton Fair", "Factory Visit", "Supplier Meeting"],
     image: siteMedia.trips.guangzhou,
     price: null,
-    href: "./guangzhou/",
+    href: routeHref("guangzhou"),
   },
   {
     city: "Xi'an",
@@ -277,7 +280,7 @@ const tripCards: TripCard[] = [
     tags: ["Culture", "Family", "Private"],
     image: siteMedia.trips.xian,
     price: "฿20,900",
-    href: "./xian/",
+    href: routeHref("xian"),
   },
   {
     city: "Yunnan",
@@ -289,7 +292,7 @@ const tripCards: TripCard[] = [
     tags: ["Hybrid", "Nature", "Opportunity"],
     image: siteMedia.trips.yunnan,
     price: null,
-    href: "./yunnan/",
+    href: routeHref("yunnan"),
   },
   {
     city: "Chaozhou",
@@ -301,7 +304,7 @@ const tripCards: TripCard[] = [
     tags: ["Teochew", "Heritage", "Food"],
     image: siteMedia.trips.chaozhou,
     price: null,
-    href: "./chaozhou/",
+    href: routeHref("chaozhou"),
   },
   {
     city: "Private Tour",
