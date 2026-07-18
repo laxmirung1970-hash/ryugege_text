@@ -206,7 +206,7 @@ const contactCards = [
   },
   {
     title: "เริ่มปรึกษาทริป",
-    value: "LINE Official",
+    value: "แจ้งเป้าหมายของคุณ",
     copy: "ส่งเป้าหมายและช่วงเวลาเดินทาง แล้วรับคำแนะนำเบื้องต้นผ่าน LINE",
     href: CONTACT_HREF,
     icon: "chat" as IconName,
