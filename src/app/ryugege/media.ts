@@ -19,6 +19,7 @@ import heroPrivateTour from "../../assets/site/hero-private-tour.webp";
 import tripGuangzhou from "../../assets/site/trip-guangzhou.webp";
 import tripXian from "../../assets/site/trip-xian.webp";
 import tripChaozhou from "../../assets/site/trip-chaozhou.webp";
+import tripYunnan from "../../assets/site/trip-yunnan.webp";
 import tripPrivate from "../../assets/site/trip-private.webp";
 import tripBusiness from "../../assets/site/trip-business.webp";
 import xianDayThree from "../../assets/xian/days/xian-day-3.webp";
@@ -39,7 +40,7 @@ export const siteMedia = {
   trips: {
     guangzhou: tripGuangzhou,
     xian: tripXian,
-    yunnan: heroPrivateTour,
+    yunnan: tripYunnan,
     chaozhou: tripChaozhou,
     privateTour: tripPrivate,
     businessTour: tripBusiness,

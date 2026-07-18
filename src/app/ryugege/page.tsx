@@ -265,6 +265,7 @@ const tripCards: TripCard[] = [
     tags: ["Canton Fair", "Factory Visit", "Supplier Meeting"],
     image: siteMedia.trips.guangzhou,
     price: null,
+    href: "./guangzhou/",
   },
   {
     city: "Xi'an",
@@ -288,6 +289,7 @@ const tripCards: TripCard[] = [
     tags: ["Hybrid", "Nature", "Opportunity"],
     image: siteMedia.trips.yunnan,
     price: null,
+    href: "./yunnan/",
   },
   {
     city: "Chaozhou",
@@ -299,6 +301,7 @@ const tripCards: TripCard[] = [
     tags: ["Teochew", "Heritage", "Food"],
     image: siteMedia.trips.chaozhou,
     price: null,
+    href: "./chaozhou/",
   },
   {
     city: "Private Tour",
