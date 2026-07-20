@@ -13,9 +13,17 @@ import xianVan from "../../assets/xian/vehicles/vehicle-9-seat-van.webp";
 import xianMinibus from "../../assets/xian/vehicles/vehicle-14-seat-minibus.webp";
 import xianCoach from "../../assets/xian/vehicles/vehicle-19-seat-coach.webp";
 import heroFair from "../../assets/site/hero-fair.webp";
+import heroFairMobile from "../../assets/site/hero-fair-mobile.webp";
+import heroFairTablet from "../../assets/site/hero-fair-tablet.webp";
 import heroMarket from "../../assets/site/hero-market.webp";
+import heroMarketMobile from "../../assets/site/hero-market-mobile.webp";
+import heroMarketTablet from "../../assets/site/hero-market-tablet.webp";
 import heroInterpreter from "../../assets/site/hero-interpreter.webp";
+import heroInterpreterMobile from "../../assets/site/hero-interpreter-mobile.webp";
+import heroInterpreterTablet from "../../assets/site/hero-interpreter-tablet.webp";
 import heroPrivateTour from "../../assets/site/hero-private-tour.webp";
+import heroPrivateTourMobile from "../../assets/site/hero-private-tour-mobile.webp";
+import heroPrivateTourTablet from "../../assets/site/hero-private-tour-tablet.webp";
 import tripGuangzhou from "../../assets/site/trip-guangzhou.webp";
 import tripXian from "../../assets/site/trip-xian.webp";
 import tripChaozhou from "../../assets/site/trip-chaozhou.webp";
@@ -32,10 +40,26 @@ export const siteMedia = {
   logo,
   founder,
   hero: {
-    fair: heroFair,
-    market: heroMarket,
-    interpreter: heroInterpreter,
-    privateTour: heroPrivateTour,
+    fair: {
+      desktop: heroFair,
+      tablet: heroFairTablet,
+      mobile: heroFairMobile,
+    },
+    market: {
+      desktop: heroMarket,
+      tablet: heroMarketTablet,
+      mobile: heroMarketMobile,
+    },
+    interpreter: {
+      desktop: heroInterpreter,
+      tablet: heroInterpreterTablet,
+      mobile: heroInterpreterMobile,
+    },
+    privateTour: {
+      desktop: heroPrivateTour,
+      tablet: heroPrivateTourTablet,
+      mobile: heroPrivateTourMobile,
+    },
   },
   trips: {
     guangzhou: tripGuangzhou,

@@ -2,7 +2,7 @@ import type { StaticImageData } from "next/image";
 import type { IconName } from "../icons";
 import { siteMedia } from "../media";
 import privateTour from "../../../assets/xian/highlights/private-tour-2-16.webp";
-import changanTwelveHours from "../../../assets/xian/highlights/changan-12-hours.png";
+import changanTwelveHours from "../../../assets/xian/highlights/changan-12-hours.webp";
 import wingChunClass from "../../../assets/xian/highlights/wing-chun-class.webp";
 import changanDaPaiDang from "../../../assets/xian/highlights/changan-da-pai-dang.webp";
 import qingshuiwanSpa from "../../../assets/xian/highlights/qingshuiwan-spa.webp";

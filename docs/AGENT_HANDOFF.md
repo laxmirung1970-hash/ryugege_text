@@ -1,107 +1,102 @@
-# RyuGeGe Tour — Agent Handoff
+# Agent Handoff — Ryu Gege Tour
 
-Everything an AI agent needs to continue this project. Read `CLAUDE.md` and `AGENTS.md` first (framework rules), then this file (current state + decisions).
+เอกสารนี้คือจุดเริ่มต้นสำหรับเอเจนต์หรือผู้พัฒนาที่มารับช่วงโปรเจกต์
 
-Last updated: 2026-07-16 · Latest commit at writing: `52786fe`
+**Last verified:** 2026-07-20
 
----
+**Repository:** <https://github.com/laxmirung1970-hash/ryugege_text>
 
-## 1. What this is
+**Production:** <https://laxmirung1970-hash.github.io/ryugege_text/ryugege/>
 
-Static marketing site for **RyuGeGe Tour** — founder-led China private business/leisure tours + Thai-Chinese interpretation. Thai-language. **Pre-launch** (first trip Sept 2026). No backend; every contact CTA and the inquiry form open the LINE Official account with a prefilled message.
+## 1. Reading order
 
-- Owner: **ริว (Ryu Puriwat)**, solo founder year 1. Advisor: Phoenix.
-- Live: https://laxmirung1970-hash.github.io/ryugege_text/ryugege/
-- Repo: https://github.com/laxmirung1970-hash/ryugege_text
+1. อ่าน `AGENTS.md` ก่อนทุกครั้ง
+2. ก่อนแก้ Next.js ให้อ่านคู่มือที่เกี่ยวข้องใน `node_modules/next/dist/docs/` เพราะโปรเจกต์ใช้ Next.js 16
+3. อ่าน `PROJECT_OVERVIEW.md`, `ARCHITECTURE.md`, `CONTENT_MODEL.md` และ `DEVELOPMENT_AND_DEPLOYMENT.md`
+4. ตรวจ `git status -sb` และ diff ก่อนเขียนไฟล์ เพื่อไม่ทับงานของผู้ใช้
 
-## 2. Stack & commands
+หากเอกสารขัดกับโค้ด ให้ถือโค้ดใน branch ล่าสุดเป็นแหล่งข้อมูลจริง แล้วแก้เอกสารให้ตรงใน commit เดียวกัน
 
-Next.js 16 (App Router, Turbopack) · React 19 · Tailwind v4 (no config file; tokens in `globals.css`) · TypeScript · static export.
+## 2. Current product state
 
-```bash
-npm run dev     # dev server :3000
-npm run build   # static export -> ./out
-npm run lint    # eslint
-```
+- Landing page หลักพร้อมใช้งานที่ `/ryugege/`
+- หน้า Xi'an พร้อมข้อมูล Highlights, รถ, โปรแกรม 5 วัน 4 คืน, ตารางอาหาร/ที่พัก, ราคา, สิ่งที่รวม/ไม่รวม และภาพลูกค้าจริง
+- Chaozhou, Guangzhou และ Yunnan ใช้หน้า Under Construction ร่วมกัน
+- Hero หน้าแรกเป็น carousel 4 ภาพ มีไฟล์ Desktop, Tablet และ Mobile แยกกัน
+- คลิปหน้าแรกใช้ภาพ preview และเปิด TikTok ต้นทาง
+- ฟอร์มสอบถามไม่มี backend; สร้างข้อความแล้วเปิด LINE Official
+- GitHub Pages deployment ทำงานอัตโนมัติจาก `master`
 
-No test suite. Verify by build + browsing `./out` or the preview browser.
+## 3. Work completed in the latest local change set
 
-## 3. Deploy
+### P0/P1 — correctness and lead flow
 
-Push to `master` → GitHub Actions (`.github/workflows/deploy-github-pages.yml`) builds with `GITHUB_PAGES=true` and publishes `./out` to GitHub Pages.
+- ปรับข้อมูลและ validation ของ Inquiry Form และข้อความที่ส่งเข้า LINE
+- ยืนยันว่ารับลูกค้าซีอานตั้งแต่ 2 ท่าน แต่การเลือกรถต้องนับไกด์เพิ่มอีก 1 ท่านพร้อมพื้นที่สัมภาระ
+- แยกความหมายระหว่างจำนวนลูกค้าและจำนวนที่นั่งของรถให้ชัดเจน
+- ปรับข้อความ Contact/CTA และข้อมูลที่ผู้ใช้ร้องขอในรอบก่อนหน้า
 
-- `next.config.ts`: `output:"export"`, `trailingSlash:true`, `images.unoptimized:true`. Under `GITHUB_PAGES=true` it sets `basePath`/`assetPrefix` = `/ryugege_text`.
-- **Internal links must be relative** (e.g. `./xian/`, `../`, `#trips`) or they break under the base path.
-- GitHub Pages has a CDN cache (~minutes). After deploy, hard-refresh (`Ctrl+Shift+R`) or add `?v=` to bust. "Old page still showing" is almost always this cache, not a build failure — confirm with the Actions run status / the GitHub API (`/repos/<owner>/<repo>/actions/runs`).
+### P2 — performance and code cleanliness
 
-## 4. File map (`src/app/`)
+- Scroll progress ใช้ ref และ `requestAnimationFrame` ไม่ set React state ทุก scroll event
+- แยก static data ออกจาก UI เป็น `home-data.ts` และ `xian/xian-page-data.ts`
+- แยก component ที่ใช้ร่วมกันเป็น `CtaLink.tsx` และ `SectionLabel.tsx`
+- รวมการสร้าง base path ไว้ใน `site-paths.ts`
+- Hero มี responsive WebP variants; slide แรกโหลด eager/high priority และ slide ถัดไปโหลดภายหลัง
+- ลดวิดีโอ Under Construction จากประมาณ 5.52 MB เหลือ 1.32 MB พร้อม poster
+- ลดโลโก้จากประมาณ 34 KB เหลือ 5.4 KB
+- Static server รองรับ ETag, Last-Modified, cache policy ที่ปลอดภัย และ MP4 range requests
+- ลบ starter SVG และ media ที่ยืนยันแล้วว่าไม่ได้ใช้งาน
+- เปลี่ยนไฟล์ `changan-12-hours.png` ที่เนื้อแท้เป็น WebP ให้ใช้นามสกุลถูกต้อง
 
-| File | Role |
-|---|---|
-| `page.tsx` | Root splash — redirects/links to `./ryugege/`. |
-| `layout.tsx` | Fonts (Prompt heading, Sarabun body, both `thai` subset), metadata. |
-| `globals.css` | **Design tokens** in `@theme` + micro-interaction CSS. Edit here to change theme colors globally. |
-| `ryugege/page.tsx` | **Main landing page** (server component). All sections + copy data arrays. Edit this for most content/UX work. |
-| `ryugege/xian/page.tsx` | Xi'an detail page (server). Template for other destination detail pages. |
-| `ryugege/InquiryForm.tsx` | `"use client"` — lead form → opens LINE with `?text=` (no network). |
-| `ryugege/HeroCarousel.tsx` | `"use client"` — full-bleed hero carousel, renders `children` overlay. |
-| `ryugege/SiteHeader.tsx` | `"use client"` — sticky header, dropdown nav, scroll-spy, mobile panel. |
-| `ryugege/PageEffects.tsx` | `"use client"` — scroll progress bar + IntersectionObserver scroll-reveal. Mounted once in `page.tsx`. |
-| `ryugege/icons.tsx` | Stroke icon set (`<Icon name=... />`). Add new icons to the `paths` map + `IconName` union. |
-| `ryugege/constants.ts` | LINE Official URL and inquiry dropdown options (trip types, cities, budgets). |
+## 4. Critical business/content rules
 
-## 5. Design system
+- สะกดแบรนด์เป็น **Ryu Gege** เท่านั้น ไม่ใช้ `RyuGeGe` หรือ `Ryu GeGe` ในข้อความใหม่
+- ช่องทางหลักสำหรับสอบถามและจองคือ LINE Official: `https://lin.ee/nxKOKBTR`
+- เบอร์โทรที่แสดงคือ `092 842 2121`
+- ห้ามรับประกันว่าจะปิดดีล ได้ซัพพลายเออร์ หรือได้กำไร
+- ห้ามสร้างรีวิว ชื่อลูกค้า สถิติ หรือใบอนุญาตที่ไม่มีหลักฐาน
+- หน้า Xi'an แสดงราคาเริ่มต้น ฿20,900 แต่ตารางราคาเริ่มที่กลุ่ม 3–4 ท่าน ขณะที่ลูกค้า 2 ท่านสามารถสอบถามราคาออกแบบเฉพาะกลุ่มได้ ห้ามประดิษฐ์ราคา 2 ท่าน
+- `vehicles[].seats` หมายถึง **จำนวนลูกค้า** ไม่ใช่จำนวนผู้โดยสารทั้งหมด ไกด์เพิ่มอีก 1 คน
+- กิจกรรมสปา สกี ชุดฮั่นฝู และช่างภาพส่วนตัวเป็นกิจกรรมทางเลือกและอยู่ในรายการราคาไม่รวม
+- การแก้ข้อมูลทริปต้องตรวจทั้ง `home-data.ts`, `constants.ts`, navigation, footer, JSON-LD และ route detail ที่เกี่ยวข้อง
 
-- **One warm cream canvas** for the whole page; brand red + gold as accents; **three intentional dark ("espresso") moments only**: hero, founder, final CTA card. Do not reintroduce stacked full-width color bands (reads as old WordPress).
-- Tokens (in `globals.css @theme`): `tour-red #ef2f37`, `maroon #8b1118`, `gold #f4c35f`/`gold-light #ffe09a`, `espresso #1b1512`, `charcoal`, `ink`/`ink-soft`, `cream #faf6ef`/`cream-deep`, `sand`, `line-green #06c755`. Shadows `--shadow-soft/-lift/-cta/-line`. Use utilities (`bg-tour-red`, `text-gold`, `border-sand`, …) — avoid new hardcoded hex.
-- Radii: `rounded-2xl`/`rounded-3xl`. Cards: soft shadow, hover `-translate-y-1.5`.
-- Section headers: editorial `SectionLabel`/`SplitHeading`/`CenteredHeading` with a numeric index. **If you add/remove a section on the main page, renumber the `index=` props** (currently 01 Problem → 10 FAQ).
-- Fonts: keep `thai` subset when changing.
-- Micro-interactions: scroll progress bar, `.reveal`/`.reveal-stagger` classes (progressive enhancement — content stays visible if JS off), destination marquee, `.text-gradient-gold`, CTA hover-lift. All respect `prefers-reduced-motion`.
+## 5. Deliberate technical decisions
 
-## 6. Trips model (main page)
+- Static export only: ห้ามเพิ่ม Server Actions, Route Handlers หรือ feature ที่ต้องมี runtime server
+- `images.unoptimized: true` จำเป็นสำหรับ GitHub Pages; ประสิทธิภาพได้จากการเตรียม WebP ให้ตรงขนาดก่อน commit
+- Prompt ใช้เฉพาะ 600/700 และปิด preload; Sarabun ใช้ 400/600/700
+- Client Component ต้องเล็กและจำกัดเฉพาะ interaction เช่น carousel, header, form, TikTok gallery และ Xi'an highlight explorer
+- Content arrays และ metadata ควรอยู่ใน data files ไม่เขียนซ้ำใน component
+- ใช้ `withSiteBasePath` สำหรับไฟล์ใน `public/` และ `tripRouteHref` สำหรับ destination routes
+- `tmp/`, `.next/`, `out/`, log และไฟล์ audit เป็นของชั่วคราว ห้าม commit
 
-`tripCards: TripCard[]` in `page.tsx`. Type: `{ city, kind, title, subtitle, description, tags[], image, price: string|null, href? }`.
+## 6. Deferred or open work
 
-- **Whole card is clickable** via a stretched overlay anchor (`<a className="absolute inset-0 z-10">`) — the CTA text is a `span`, not a nested anchor. `href` → detail page; no `href` → LINE (opens new tab).
-- `price` shows "เริ่มต้น <price> / ท่าน"; `null` shows "ราคาตามการออกแบบทริป".
+- ยังไม่กำหนด production domain/canonical ที่แน่นอน ห้ามเพิ่ม canonical จนเจ้าของยืนยันโดเมนหลัก
+- Photo credits แบบรายภาพยังควรตรวจสิทธิ์และ attribution ให้ครบหากใช้ภาพจากภายนอก
+- Chaozhou, Guangzhou และ Yunnan ยังไม่มีโปรแกรม ราคา และหน้า detail จริง
+- ยังไม่มี GA4/Meta Pixel หรือ consent strategy
+- ยังไม่มี automated unit/E2E test suite; ใช้ lint, typecheck, build และ browser smoke test
+- ควรตรวจ Core Web Vitals บน production หลัง deploy ทุกครั้งที่เปลี่ยน Hero, font หรือ client component ขนาดใหญ่
 
-Current 6 cards: **Xi'an** (culture, ฿20,900, `href:"./xian/"`) · **Chaozhou/แต้จิ๋ว** (culture, price null, no detail page yet) · **Guangzhou** (Canton Fair + factory, price null) · **Yunnan** (hybrid, price null) · **Private Tour** (private leisure, price null) · **Business Tour** (custom business, price null).
+## 7. Definition of done
 
-When you change destinations, **sync all of these**: trip cards, nav dropdown children (`navItems`), `marqueeWords`, footer "Service Areas", JSON-LD `areaServed`, and `constants.ts` `targetCities`/`tripTypes`.
+งานถือว่าเสร็จเมื่อ:
 
-## 7. Xi'an detail page — the template
+1. ข้อความและภาพตรงกับคำขอและ source ที่ยืนยันได้
+2. Responsive บน mobile/tablet/desktop
+3. Keyboard focus, modal close, alt text และ contrast ไม่ถดถอย
+4. Internal links ใช้งานได้ทั้ง local และ GitHub Pages base path
+5. `npm run check` ผ่าน
+6. `GITHUB_PAGES=true npm run build` ผ่าน
+7. `git diff --check` ผ่าน
+8. เอกสารที่เกี่ยวข้องอัปเดตพร้อมโค้ด
+9. ไม่มี `tmp/`, `out/`, `.next/`, log หรือไฟล์ดาวน์โหลดส่วนตัวใน commit
 
-`ryugege/xian/page.tsx` sections: compact header → espresso hero (bg image + meta pills) → Trip Highlights → Private Car (vehicle cards) → Itinerary (5D4N day cards) → Summary table → **Rate** (4 tier cards) → Included/Excluded → CTA → footer.
+## 8. Safe next steps
 
-Current Xi'an specification (from `Untitled document.pdf`, 2026-07-16): accepts groups from **2 people**. Vehicle guide: 2 pax / 5 seats; 4 pax / 9 seats; 6 pax / 14 seats; 8–10 pax / 19 seats. Itinerary: D1 arrival + Tang West Market Hotel; D2 Terracotta Army + Huaqing Palace + Datang Xishi; D3 Yong Chun martial arts + Chang'an Twelve Hours + Bell/Drum Tower; D4 Xi'an Ski + Da Ci'en Temple/Joy City + Datang pedestrian street; D5 City God Temple + Muslim Street + onsen/spa + departure. Rate tiers: 3–4 pax / 7-seat → ฿28,900; 5–7 pax / 14-seat → ฿25,900; 8–10 pax / 19-seat → ฿22,900; 10+ pax / 19-seat+ → ฿20,900; single supplement +฿5,000. Adult = child 2–12. **Excludes airfare.** The PDF provides no 2-person rate; do not invent one.
-
-**To add a new destination detail page** (e.g. Chaozhou, Yunnan): copy `xian/page.tsx` to `ryugege/<city>/page.tsx`, swap copy/itinerary/images/rate data, then set that trip card's `href:"./<city>/"`. Route is generated automatically by static export.
-
-## 8. Decisions & constraints — HANDLE WITH CARE
-
-From the owner's marketing plan (see `memory/marketing-plan-constraints.md`). These prevent overclaiming on a pre-launch site:
-
-- **Guide license (ใบมัคคุเทศก์ / บัตรบรอนซ์เงิน): NOT yet obtained** (Sept 2026 milestone). Do not claim licensed; this status is intentionally not displayed in the current marketing copy.
-- **Pricing not finalized in general** (open decision pending COGS). Only Xi'an has a real rate card. For other cities, use "ราคาตามการออกแบบทริป" or the plan's MVP ranges (Business ฿25–28K, Leisure ฿15–18K) **with a disclaimer**. Don't invent confirmed prices.
-- **Testimonials / review clips are genuinely empty** (no trips run yet). Keep as slots. **Never fabricate reviews, ratings, or client counts.**
-- **Brand voice** — YES: โอกาสธุรกิจ, การประสานงาน (facilitation), เจาะลึก, ประสบการณ์ท้องถิ่น, Private Business Tour. NO: ทัวร์ราคาถูก, รับประกันกำไร, รับผิดชอบการจัดซื้อทั้งหมด.
-- Founder facts that ARE safe: ป.โท 2 ใบ (วิศวกรรมการบิน NWU ซีอาน + เทคโนโลยีสื่อสังคม ม.รังสิต), อยู่จีน 5+ ปี, มีประสบการณ์ติดต่อประสานงานกับจีน 10+ ปี, จีนระดับเจ้าของภาษา + Guanxi, ล่ามจีน-ไทย-อังกฤษ.
-- Geography focus: Xi'an (leisure), Guangzhou (business/Canton Fair), Yunnan (hybrid), plus Chaozhou (Teochew roots). Old Yiwu/Foshan/Shenzhen were removed on purpose — don't reintroduce.
-
-## 9. Known placeholders / pending work
-
-1. **LINE Official is live:** all contact CTAs use `https://lin.ee/nxKOKBTR` from `constants.ts`.
-2. Images are mostly Unsplash. Xi'an + Chaozhou cards use real city photos; hero/other cards + Xi'an vehicle cards are placeholders → replace with real Ryu Gege/city photos.
-3. **Chaozhou** has a trip card but **no detail page and no rate** yet.
-4. **Guangzhou / Yunnan** have no detail pages (build from the Xi'an template).
-5. Marketing plan wants **GA4 + Facebook Pixel** (retargeting) — not embedded yet (works with static export via inline script in `layout.tsx`).
-6. Real testimonials/clips once the first trip runs (Sept 2026).
-
-## 10. Gotchas
-
-- Static export: no server actions/route handlers/API. Client interactivity only.
-- Adding/removing a main-page section → renumber `index=` props.
-- New destination → sync the 6 places listed in §6.
-- Preview screenshots often time out because external Unsplash images stall the load event — verify via DOM/`get_page_text`/`javascript_exec` instead; the page itself is fine.
-- Commit style: Conventional Commits; end body with the `Co-Authored-By: Claude ...` trailer.
+- หากเพิ่ม destination detail page ให้สร้าง route ใหม่ภายใต้ `src/app/ryugege/<route>/page.tsx`, เพิ่มข้อมูล/รูปที่ตรวจแล้ว และเปลี่ยน trip card จาก Under Construction
+- หากเปลี่ยน Hero ให้เตรียมภาพ 16:9 สามระดับ: Desktop 2560×1440, Tablet 1536×864, Mobile 768×432
+- หากเปลี่ยนรูป trip card ให้ใช้สัดส่วนที่ทนต่อ `object-cover` และตรวจ subject-safe area บนจอแคบ
+- หลัง merge เข้า `master` ให้รอ GitHub Actions สำเร็จและตรวจ production URL พร้อม cache-busting query ถ้าจำเป็น

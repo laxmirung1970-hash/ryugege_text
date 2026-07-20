@@ -1,13 +1,11 @@
 import Image, { type StaticImageData } from "next/image";
+import { withSiteBasePath } from "./site-paths";
 
 type UnderConstructionPageProps = {
   cityEnglish: string;
   cityThai: string;
   background: StaticImageData;
 };
-
-const githubPagesBasePath =
-  process.env.GITHUB_PAGES === "true" ? "/ryugege_text" : "";
 
 export function UnderConstructionPage({
   cityEnglish,
@@ -30,11 +28,12 @@ export function UnderConstructionPage({
         muted
         loop
         playsInline
+        poster={withSiteBasePath("/videos/under-construction-poster.webp")}
         preload="metadata"
         aria-hidden="true"
       >
         <source
-          src={`${githubPagesBasePath}/videos/under-construction.mp4`}
+          src={withSiteBasePath("/videos/under-construction.mp4")}
           type="video/mp4"
         />
       </video>
@@ -46,7 +45,7 @@ export function UnderConstructionPage({
       <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-5 py-7 sm:px-8 sm:py-9 lg:px-12 lg:py-10">
         <header className="flex items-center justify-between">
           <a
-            href={`${githubPagesBasePath}/ryugege/`}
+            href={withSiteBasePath("/ryugege/")}
             className="group inline-flex items-center gap-3 text-sm font-bold tracking-[0.16em] text-white/80 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
             <span className="grid size-10 place-items-center rounded-full border border-white/20 bg-black/20 backdrop-blur-sm transition group-hover:border-gold/60 group-hover:text-gold">

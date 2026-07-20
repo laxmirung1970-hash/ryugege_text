@@ -1,12 +1,22 @@
 import type { Metadata } from "next";
-import Image, { type StaticImageData } from "next/image";
-import type { ReactNode } from "react";
+import Image from "next/image";
 import { Icon, type IconName } from "../icons";
 import { LINE_URL } from "../constants";
 import { siteMedia } from "../media";
 import { BrandMark } from "../BrandMark";
 import { XianHighlights } from "./XianHighlights";
 import { XianCustomerStories } from "./XianCustomerStories";
+import { CtaLink } from "../CtaLink";
+import { SectionLabel } from "../SectionLabel";
+import {
+  days,
+  excluded,
+  heroMeta,
+  included,
+  itinerarySummary,
+  priceTiers,
+  vehicles,
+} from "./xian-page-data";
 
 const CONTACT_HREF = LINE_URL;
 const CONTACT_LABEL = "ปรึกษาทาง LINE Official";
@@ -17,223 +27,6 @@ export const metadata: Metadata = {
   description:
     "ทริปซีอานส่วนตัวโดยรถยนต์ส่วนตัว สำหรับครอบครัวหรือกลุ่มเพื่อน 2 ท่านขึ้นไป เที่ยวกองทัพทหารดินเผา พระราชวังหัวชิง ฉางอันสิบสองชั่วยาม และลานสกีซีอาน โดย ริว (Ryu Gege) ล่ามไทย-จีน",
 };
-
-type Vehicle = { name: string; seats: string; image: StaticImageData };
-type Day = {
-  day: string;
-  title: string;
-  places: string[];
-  stay: string;
-  image: StaticImageData;
-};
-
-const heroMeta = [
-  { icon: "clock" as IconName, label: "5 วัน 4 คืน" },
-  { icon: "car" as IconName, label: "รถยนต์ส่วนตัว" },
-  { icon: "chat" as IconName, label: "ล่ามไทย-จีน ดูแลเอง" },
-  { icon: "map-pin" as IconName, label: "2 ท่านขึ้นไป / กลุ่มส่วนตัว" },
-];
-
-const vehicles: Vehicle[] = [
-  { name: "รถ 5 ที่นั่ง", seats: "2 ท่าน", image: siteMedia.xian.vehicles.sedan },
-  { name: "รถ 9 ที่นั่ง", seats: "4 ท่าน", image: siteMedia.xian.vehicles.van },
-  { name: "รถ 14 ที่นั่ง", seats: "6 ท่าน", image: siteMedia.xian.vehicles.minibus },
-  { name: "รถ 19 ที่นั่ง", seats: "8–10 ท่าน", image: siteMedia.xian.vehicles.coach },
-];
-
-const days: Day[] = [
-  {
-    day: "Day 1",
-    title: "The Imperial Arrival · เดินทางถึงซีอาน",
-    places: [
-      "เดินทางถึงสนามบินซีอาน (XIY) และรับสัมภาระ",
-      "เดินทางเข้าสู่ที่พักและพักผ่อนตามอัธยาศัย",
-    ],
-    stay: "Tang West Market Hotel",
-    image: siteMedia.xian.days.one,
-  },
-  {
-    day: "Day 2",
-    title: "The Eighth Wonder · ทหารดินเผาและพระราชวังหัวชิง",
-    places: [
-      "กองทัพทหารดินเผา (มรดกโลก)",
-      "เที่ยวชมพระราชวังหัวชิง",
-      "เดินเล่นตลาดยามค่ำคืนต้าถังซีซื่อ",
-    ],
-    stay: "Tang West Market Hotel",
-    image: siteMedia.xian.days.two,
-  },
-  {
-    day: "Day 3",
-    title: "Time Traveler · ย้อนเวลาสู่ฉางอัน",
-    places: [
-      "เรียนรู้ศิลปะการต่อสู้หย่งชุน",
-      "เที่ยวชมย่านฉางอันสิบสองชั่วยาม",
-      "ถ่ายรูปเช็กอินที่หอระฆังและหอกลอง",
-    ],
-    stay: "Tang West Market Hotel",
-    image: siteMedia.xian.days.three,
-  },
-  {
-    day: "Day 4",
-    title: "Winter Illusion · ลานสกีและถนนคนเดินต้าถัง",
-    places: [
-      "สนุกกับกิจกรรมที่ลานสกีซีอาน",
-      "สักการะวัดต้าฉือเอิน และเดินเล่น Joy City",
-      "ชมแสงสียามค่ำคืนที่ถนนคนเดินต้าถังและบริเวณเจดีย์ห่านป่าใหญ่",
-    ],
-    stay: "Tang West Market Hotel",
-    image: siteMedia.xian.days.four,
-  },
-  {
-    day: "Day 5",
-    title: "The Grand Departure · ช้อปปิ้งและสปา",
-    places: [
-      "เที่ยวชมศาลเจ้าพ่อหลักเมืองซีอาน",
-      "เดินเล่นและหาอาหารอร่อยที่ย่านถนนคนเดินมุสลิม",
-      "ผ่อนคลายด้วยการแช่ออนเซ็นและสปา",
-      "เดินทางสู่สนามบินซีอาน (XIY)",
-    ],
-    stay: "-",
-    image: siteMedia.xian.days.five,
-  },
-];
-
-const itinerarySummary = [
-  {
-    day: "Day 1",
-    route: "เดินทางถึงซีอาน · เข้าที่พักพักผ่อนตามอัธยาศัย",
-    stay: "โรงแรม Tang West Market",
-    meals: { breakfast: false, lunch: false, dinner: false },
-  },
-  {
-    day: "Day 2",
-    route: "ทหารดินเผา · พระราชวังหัวชิง · ตลาดยามค่ำคืนต้าถังซีซื่อ",
-    stay: "โรงแรม Tang West Market",
-    meals: { breakfast: true, lunch: true, dinner: true },
-  },
-  {
-    day: "Day 3",
-    route: "มวยหย่งชุน · ฉางอันสิบสองชั่วยาม · หอระฆังและหอกลอง",
-    stay: "โรงแรม Tang West Market",
-    meals: { breakfast: true, lunch: true, dinner: true },
-  },
-  {
-    day: "Day 4",
-    route: "ลานสกีซีอาน · วัดต้าฉือเอินและ Joy City · ถนนคนเดินต้าถัง",
-    stay: "โรงแรม Tang West Market",
-    meals: { breakfast: true, lunch: true, dinner: true },
-  },
-  {
-    day: "Day 5",
-    route: "ศาลเจ้าพ่อหลักเมือง · ถนนคนเดินมุสลิม · ออนเซ็นสปา · เดินทางกลับ",
-    stay: "-",
-    meals: { breakfast: true, lunch: true, dinner: false },
-  },
-];
-
-type PriceTier = {
-  group: string;
-  vehicle: string;
-  rows: { label: string; price: string }[];
-};
-
-const priceTiers: PriceTier[] = [
-  {
-    group: "3–4 ท่าน",
-    vehicle: "รถ 7 ที่นั่ง",
-    rows: [
-      { label: "ผู้ใหญ่ (พักห้องละ 2 ท่าน)", price: "28,900" },
-      { label: "เด็ก 2–12 ปี (มีเตียง / ไม่มีเตียง)", price: "28,900" },
-      { label: "พักเดี่ยว จ่ายเพิ่ม", price: "5,000" },
-    ],
-  },
-  {
-    group: "5–7 ท่าน",
-    vehicle: "รถ 14 ที่นั่ง",
-    rows: [
-      { label: "ผู้ใหญ่ (พักห้องละ 2 ท่าน)", price: "25,900" },
-      { label: "เด็ก 2–12 ปี (มีเตียง / ไม่มีเตียง)", price: "25,900" },
-      { label: "พักเดี่ยว จ่ายเพิ่ม", price: "5,000" },
-    ],
-  },
-  {
-    group: "8–10 ท่าน",
-    vehicle: "รถ 19 ที่นั่ง",
-    rows: [
-      { label: "ผู้ใหญ่ (พักห้องละ 2 ท่าน)", price: "22,900" },
-      { label: "เด็ก 2–12 ปี (มีเตียง / ไม่มีเตียง)", price: "22,900" },
-      { label: "พักเดี่ยว จ่ายเพิ่ม", price: "5,000" },
-    ],
-  },
-  {
-    group: "10 ท่านขึ้นไป",
-    vehicle: "รถ 19 ที่นั่งขึ้นไป",
-    rows: [
-      { label: "ผู้ใหญ่ (พักห้องละ 2 ท่าน)", price: "20,900" },
-      { label: "เด็ก 2–12 ปี (มีเตียง / ไม่มีเตียง)", price: "20,900" },
-      { label: "พักเดี่ยว จ่ายเพิ่ม", price: "5,000" },
-    ],
-  },
-];
-
-const included = [
-  "รถยนต์ส่วนตัวพร้อมคนขับตลอดทริป",
-  "ริว (Ryu Gege) ดูแลภาษาและประสานงานตลอดการเดินทาง",
-  "ที่พัก 4 คืน ในโรงแรม 5 ดาว Xi'an Datang West Market Hotel",
-  "ค่าเข้าชมสถานที่ตามโปรแกรม",
-  "วางแผนเส้นทางและจัดคิวเข้าชม",
-];
-
-const excluded = [
-  "ตั๋วเครื่องบินไป-กลับ",
-  "วีซ่าจีน (หากมี)",
-  "ค่าใช้จ่ายส่วนตัวและช้อปปิ้ง",
-  "กิจกรรมทางเลือก (เช่น สปา, สกี, เช่าชุดฮั่นฝู และช่างภาพส่วนตัว)",
-  "อาหารบางมื้อนอกโปรแกรม",
-];
-
-function CtaLink({
-  href,
-  children,
-  variant = "line",
-  className = "",
-}: {
-  href: string;
-  children: ReactNode;
-  variant?: "primary" | "line" | "outline" | "ghost";
-  className?: string;
-}) {
-  const styles = {
-    primary:
-      "bg-tour-red text-white shadow-[var(--shadow-cta)] hover:bg-tour-red-dark",
-    line: "bg-line-green text-white shadow-[var(--shadow-line)] hover:bg-line-green-dark",
-    outline:
-      "border border-tour-red/40 bg-white text-tour-red hover:border-tour-red hover:bg-tour-red/5",
-    ghost:
-      "border border-white/30 bg-white/5 text-white backdrop-blur hover:bg-white/15",
-  };
-  return (
-    <a
-      href={href}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-3 text-center text-sm font-bold transition duration-200 hover:-translate-y-0.5 active:translate-y-0 ${styles[variant]} ${className}`}
-    >
-      {children}
-    </a>
-  );
-}
-
-function SectionLabel({ index, label }: { index: string; label: string }) {
-  return (
-    <div className="flex items-center gap-3">
-      <span className="font-heading text-sm font-black text-tour-red">{index}</span>
-      <span className="h-px w-8 bg-tour-red/40" />
-      <span className="text-xs font-bold uppercase tracking-[0.22em] text-ink-soft">
-        {label}
-      </span>
-    </div>
-  );
-}
 
 export default function XianPage() {
   return (
@@ -332,8 +125,10 @@ export default function XianPage() {
               เดินทางด้วยรถยนต์ส่วนตัว เฉพาะกลุ่มของคุณ
             </h2>
             <p className="mt-4 max-w-2xl text-base leading-7 text-ink">
-              รับตั้งแต่ 2 ท่านขึ้นไป จัดรถให้เหมาะกับจำนวนผู้เดินทาง เดินทางเฉพาะครอบครัวหรือแก๊งเพื่อน
-              ไม่รวมกับคนแปลกหน้า ปรับจุดแวะและจังหวะพักได้ตามใจ
+              รับลูกค้าตั้งแต่ 2 ท่านขึ้นไป โดยมีไกด์ร่วมเดินทางด้วยทุกกรุ๊ป
+              จึงจัดขนาดรถจากจำนวนลูกค้า รวมไกด์อีก 1 ท่านและพื้นที่สัมภาระ
+              เดินทางเฉพาะครอบครัวหรือแก๊งเพื่อน ไม่รวมกับคนแปลกหน้า
+              ปรับจุดแวะและจังหวะพักได้ตามใจ
             </p>
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {vehicles.map((v) => (
@@ -362,7 +157,9 @@ export default function XianPage() {
               ))}
             </div>
             <p className="mt-6 text-sm text-ink-soft">
-              * จัดรถให้เหมาะกับจำนวนผู้เดินทางและสัมภาระ รูปแบบรถจริงอาจต่างกันตามรอบให้บริการ
+              * ป้ายจำนวนท่านหมายถึงจำนวนลูกค้า และมีไกด์ร่วมเดินทางเพิ่มอีก 1 ท่าน เช่น
+              ลูกค้า 2 ท่าน จะจัดรถที่รองรับผู้โดยสารอย่างน้อย 3 ท่านพร้อมพื้นที่สัมภาระ
+              รูปแบบรถจริงอาจต่างกันตามรอบให้บริการ
             </p>
           </div>
         </section>
@@ -504,8 +301,9 @@ export default function XianPage() {
               อัตราค่าบริการ
             </h2>
             <p className="mt-4 text-base leading-7 text-ink">
-              รับตั้งแต่ <span className="font-bold text-charcoal">2 ท่านขึ้นไป</span> ·
-              ราคาในตารางสำหรับกลุ่ม 3 ท่านขึ้นไป ·{" "}
+              รับตั้งแต่ <span className="font-bold text-charcoal">2 ท่านขึ้นไป</span>
+              (กลุ่ม 2 ท่านสอบถามราคาเฉพาะกรุ๊ป) ·
+              ราคาในตารางสำหรับจำนวนลูกค้า 3 ท่านขึ้นไป ·{" "}
               <span className="font-bold text-charcoal">ราคาไม่รวมตั๋วเครื่องบิน</span>
             </p>
 

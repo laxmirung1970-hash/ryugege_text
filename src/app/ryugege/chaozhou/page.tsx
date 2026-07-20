@@ -3,7 +3,7 @@ import { siteMedia } from "../media";
 import { UnderConstructionPage } from "../UnderConstructionPage";
 
 export const metadata: Metadata = {
-  title: "เส้นทางแต้จิ๋ว — อยู่ระหว่างจัดทำ | Ryu Gege Tour",
+  title: "เส้นทางแต้จิ๋ว — อยู่ระหว่างจัดทำ",
   description: "เส้นทางท่องเที่ยวแต้จิ๋วโดย Ryu Gege Tour กำลังอยู่ระหว่างจัดทำ",
   robots: { index: false, follow: true },
 };
