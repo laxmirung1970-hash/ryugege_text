@@ -4,7 +4,9 @@ import Image, { type StaticImageData } from "next/image";
 import { type ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
 export type HeroSlide = {
-  image: StaticImageData;
+  desktopImage: StaticImageData;
+  tabletImage: StaticImageData;
+  mobileImage: StaticImageData;
   kicker: string;
   title: string;
   caption: string;
@@ -109,20 +111,35 @@ export function HeroCarousel({
               index === active ? "opacity-100" : "opacity-0"
             }`}
           >
-            <Image
-              src={slide.image}
-              alt=""
-              fill
-              sizes="100vw"
-              {...(index === 0
-                ? { preload: true }
-                : { loading: "lazy" as const })}
-              placeholder="blur"
-              onLoad={index === 0 ? () => setPrimaryLoaded(true) : undefined}
-              className={`object-cover object-center ${
-                index === active ? "animate-kenburns" : ""
-              }`}
-            />
+            <picture>
+              <source
+                media="(max-width: 767px)"
+                srcSet={slide.mobileImage.src}
+                type="image/webp"
+              />
+              <source
+                media="(max-width: 1535px)"
+                srcSet={slide.tabletImage.src}
+                type="image/webp"
+              />
+              <Image
+                src={slide.desktopImage}
+                alt=""
+                fill
+                sizes="100vw"
+                {...(index === 0
+                  ? {
+                      loading: "eager" as const,
+                      fetchPriority: "high" as const,
+                    }
+                  : { loading: "lazy" as const })}
+                placeholder="blur"
+                onLoad={index === 0 ? () => setPrimaryLoaded(true) : undefined}
+                className={`object-cover object-center ${
+                  index === active ? "animate-kenburns" : ""
+                }`}
+              />
+            </picture>
           </div>
         );
       })}

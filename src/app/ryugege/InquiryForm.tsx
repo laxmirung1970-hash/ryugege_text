@@ -1,7 +1,10 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
-import { inquiryDefaults, LINE_URL } from "./constants";
+import {
+  inquiryDefaults,
+  LINE_OFFICIAL_ACCOUNT_ID,
+} from "./constants";
 
 type FormState = {
   fullName: string;
@@ -31,9 +34,19 @@ const initialState: FormState = {
   message: "",
 };
 
-function buildLineUrl(message: string) {
-  const separator = LINE_URL.includes("?") ? "&" : "?";
-  return `${LINE_URL}${separator}text=${encodeURIComponent(message)}`;
+function buildLineMessageUrl(message: string) {
+  const encodedAccountId = encodeURIComponent(LINE_OFFICIAL_ACCOUNT_ID);
+  const encodedMessage = encodeURIComponent(message);
+
+  return `https://line.me/R/oaMessage/${encodedAccountId}/?${encodedMessage}`;
+}
+
+async function copyText(text: string) {
+  if (!navigator.clipboard?.writeText) {
+    throw new Error("Clipboard copy was not available.");
+  }
+
+  await navigator.clipboard.writeText(text);
 }
 
 function FieldLabel({
@@ -55,6 +68,9 @@ const inputClass =
 
 export function InquiryForm() {
   const [form, setForm] = useState<FormState>(initialState);
+  const [copyStatus, setCopyStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
 
   const lineMessage = useMemo(() => {
     return [
@@ -75,11 +91,25 @@ export function InquiryForm() {
 
   function updateField<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((current) => ({ ...current, [key]: value }));
+    setCopyStatus("idle");
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    window.open(buildLineUrl(lineMessage), "_blank", "noopener,noreferrer");
+    window.open(
+      buildLineMessageUrl(lineMessage),
+      "_blank",
+      "noopener,noreferrer",
+    );
+  }
+
+  async function handleCopy() {
+    try {
+      await copyText(lineMessage);
+      setCopyStatus("success");
+    } catch {
+      setCopyStatus("error");
+    }
   }
 
   return (
@@ -228,12 +258,49 @@ export function InquiryForm() {
       <p className="mt-4 text-sm leading-6 text-ink">
         เมื่อส่งฟอร์ม ระบบจะเปิด LINE Official พร้อมข้อความที่กรอกไว้ให้ตรวจสอบก่อนส่ง
       </p>
-      <button
-        type="submit"
-        className="mt-5 w-full rounded-full bg-line-green px-5 py-4 text-base font-bold text-white shadow-[var(--shadow-line)] transition hover:bg-line-green-dark focus:outline-none focus:ring-[3px] focus:ring-gold/45"
+      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+        <button
+          type="submit"
+          className="rounded-full bg-line-green px-5 py-4 text-base font-bold text-white shadow-[var(--shadow-line)] transition hover:bg-line-green-dark focus:outline-none focus:ring-[3px] focus:ring-gold/45"
+        >
+          ส่งข้อมูลผ่าน LINE Official
+        </button>
+        <button
+          type="button"
+          onClick={handleCopy}
+          className="rounded-full border border-line-green px-5 py-4 text-base font-bold text-line-green-dark transition hover:bg-line-green/10 focus:outline-none focus:ring-[3px] focus:ring-gold/45"
+        >
+          คัดลอกข้อความสำหรับ LINE บนคอม
+        </button>
+      </div>
+      <div
+        className="mt-3 text-sm leading-6 text-ink"
+        role="status"
+        aria-live="polite"
       >
-        ส่งข้อมูลผ่าน LINE Official
-      </button>
+        {copyStatus === "success" && (
+          <p>คัดลอกข้อความแล้ว เปิด LINE และวางข้อความได้ทันที</p>
+        )}
+        {copyStatus === "error" && (
+          <div>
+            <p>
+              เบราว์เซอร์ไม่อนุญาตให้คัดลอกอัตโนมัติ
+              กรุณาคัดลอกข้อความด้านล่าง
+            </p>
+            <label htmlFor="lineMessageFallback" className="sr-only">
+              ข้อความสำหรับส่งผ่าน LINE
+            </label>
+            <textarea
+              id="lineMessageFallback"
+              readOnly
+              rows={8}
+              value={lineMessage}
+              onFocus={(event) => event.currentTarget.select()}
+              className={`${inputClass} font-mono text-sm`}
+            />
+          </div>
+        )}
+      </div>
     </form>
   );
 }

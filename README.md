@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ryu Gege Tour Website
 
-## Getting Started
+เว็บไซต์การตลาดภาษาไทยสำหรับ **Ryu Gege Tour** ครอบคลุมทริปธุรกิจจีน งานแฟร์ โรงงาน ซัพพลายเออร์ ล่ามธุรกิจ และ Private Tour โดยออกแบบเป็นเว็บไซต์ Static ที่ Deploy บน GitHub Pages
 
-First, run the development server:
+- Production: <https://laxmirung1970-hash.github.io/ryugege_text/ryugege/>
+- Repository: <https://github.com/laxmirung1970-hash/ryugege_text>
+- Contact: LINE Official <https://lin.ee/nxKOKBTR>
+
+## Technology
+
+- Next.js 16.2.9 App Router
+- React 19.2.4
+- TypeScript
+- Tailwind CSS 4
+- Static export (`output: "export"`)
+- GitHub Actions + GitHub Pages
+
+โปรเจกต์นี้ไม่มี backend, database, authentication หรือ API route ฟอร์มสอบถามจะสร้างข้อความแล้วเปิด LINE Official จากฝั่ง browser
+
+## Commands
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run lint
+npm run typecheck
+npm run build
+npm run check
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- `npm run dev` เปิด Next.js development server
+- `npm run check` รัน ESLint, สร้าง route types, TypeScript และ production build
+- `npm start` ให้บริการไฟล์จาก `out/` ผ่าน static server ที่รองรับ cache validation และ MP4 byte ranges
+- ทดสอบ GitHub Pages build ด้วย PowerShell:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```powershell
+$env:GITHUB_PAGES='true'
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Routes
 
-## Learn More
+| Route | สถานะ |
+| --- | --- |
+| `/` | หน้าเข้าสู่เว็บไซต์ |
+| `/ryugege/` | Landing page หลัก |
+| `/ryugege/xian/` | หน้ารายละเอียดทริปซีอาน 5 วัน 4 คืน |
+| `/ryugege/chaozhou/` | Under Construction |
+| `/ryugege/guangzhou/` | Under Construction |
+| `/ryugege/yunnan/` | Under Construction |
 
-To learn more about Next.js, take a look at the following resources:
+## Documentation for agents
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+อ่านตามลำดับนี้ก่อนแก้โค้ด:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. [`AGENTS.md`](./AGENTS.md) — กฎ Next.js 16 ของ workspace
+2. [`docs/AGENT_HANDOFF.md`](./docs/AGENT_HANDOFF.md) — สถานะล่าสุด การตัดสินใจ และวิธีรับช่วงงาน
+3. [`docs/PROJECT_OVERVIEW.md`](./docs/PROJECT_OVERVIEW.md) — เป้าหมาย ผู้ใช้ เนื้อหา และ route map
+4. [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) — โครงสร้างระบบ ขอบเขต client และ media pipeline
+5. [`docs/CONTENT_MODEL.md`](./docs/CONTENT_MODEL.md) — ข้อมูลหน้าหลักและซีอานที่ใช้งานจริง
+6. [`docs/DEVELOPMENT_AND_DEPLOYMENT.md`](./docs/DEVELOPMENT_AND_DEPLOYMENT.md) — การพัฒนา ตรวจสอบ และ Deploy
 
-## Deploy on Vercel
+`docs/redesign-reference.md` เป็นเอกสารประวัติของช่วง redesign ไม่ใช่สถานะปัจจุบัน
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Workflow `.github/workflows/deploy-github-pages.yml` ทำงานเมื่อมีการ Push เข้า `master` โดยรัน `npm ci` และ `npm run check` ภายใต้ `GITHUB_PAGES=true` ก่อนเผยแพร่ `out/`
+
+GitHub Pages ใช้ base path `/ryugege_text` ห้ามสร้าง URL ของไฟล์ใน `public/` หรือ route แบบ hardcode โดยไม่ผ่าน helper ที่กำหนดไว้ ดูรายละเอียดใน `docs/ARCHITECTURE.md`

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 /**
  * Page-level micro-interactions, mounted once:
@@ -12,10 +12,11 @@ import { useEffect, useState } from "react";
  * absent and all content stays fully visible.
  */
 export function PageEffects() {
-  const [progress, setProgress] = useState(0);
+  const progressBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const root = document.documentElement;
+    const progressBar = progressBarRef.current;
 
     // Scroll progress
     let frame = 0;
@@ -24,7 +25,12 @@ export function PageEffects() {
       frame = window.requestAnimationFrame(() => {
         frame = 0;
         const scrollable = root.scrollHeight - window.innerHeight;
-        setProgress(scrollable > 0 ? window.scrollY / scrollable : 0);
+        const progress = scrollable > 0 ? window.scrollY / scrollable : 0;
+        const clampedProgress = Math.max(0, Math.min(1, progress));
+        progressBar?.style.setProperty(
+          "transform",
+          `scaleX(${clampedProgress})`,
+        );
       });
     }
     onScroll();
@@ -69,8 +75,9 @@ export function PageEffects() {
       className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-1 bg-transparent"
     >
       <div
-        className="h-full origin-left bg-[linear-gradient(90deg,#ef2f37,#f4c35f)] transition-[width] duration-150 ease-out"
-        style={{ width: `${Math.max(0, Math.min(1, progress)) * 100}%` }}
+        ref={progressBarRef}
+        className="h-full origin-left bg-[linear-gradient(90deg,#ef2f37,#f4c35f)] transition-transform duration-150 ease-out motion-reduce:transition-none"
+        style={{ transform: "scaleX(0)" }}
       />
     </div>
   );

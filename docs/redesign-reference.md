@@ -1,5 +1,7 @@
 # RyuGeGe Tour — Redesign Reference (Blueprint)
 
+> **Historical reference only.** Blueprint นี้จัดทำก่อน implementation ปัจจุบัน หลายรายการเสร็จหรือเปลี่ยนโครงสร้างแล้ว ห้ามใช้ตารางสถานะด้านล่างเป็น current source of truth ให้ดู `AGENT_HANDOFF.md`, `ARCHITECTURE.md` และโค้ดล่าสุดแทน
+
 > เอกสารอ้างอิงสำหรับงานรื้อ UX/UI ของหน้า Landing (`src/app/ryugege/page.tsx`)
 > **ที่มาโครงสร้าง:** วิเคราะห์หน้าแรกของ https://china4trip.com/ (ดูเฉพาะหน้าแรก)
 > **ขอบเขต:** เอาเฉพาะ *โครงสร้าง / เลย์เอาต์ / แพทเทิร์น UI* — ไม่คัดลอกเนื้อหา รูปภาพ หรือ asset ของเขา

@@ -1,4 +1,5 @@
 export const LINE_URL = "https://lin.ee/nxKOKBTR";
+export const LINE_OFFICIAL_ACCOUNT_ID = "@732blhtf";
 
 export const inquiryDefaults = {
   tripTypes: [
